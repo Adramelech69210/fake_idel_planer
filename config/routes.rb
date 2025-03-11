@@ -21,4 +21,5 @@ Rails.application.routes.draw do
     end
     # ... autres routes ..
 
+  resources :patients
 end
