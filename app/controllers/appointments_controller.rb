@@ -1,4 +1,6 @@
 class AppointmentsController < ApplicationController
+  before_action :set_appointment, only: [:edit, :update, :destroy]
+
   def index
     @appointments = Appointment.all
   end
@@ -12,16 +14,14 @@ class AppointmentsController < ApplicationController
     if @appointment.save
       redirect_to appointments_path, notice: "Rendez-vous crée!"
     else
-      render :new status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-    @appointment = Appointment.find(params[:id])
   end
 
   def update
-    @appointment = Appointment.find(params[:id])
     if @appointment.update(appointment_params)
       redirect_to appointments_path, notice: "Rendez-vous modifié!"
     else
@@ -30,14 +30,17 @@ class AppointmentsController < ApplicationController
   end
 
   def destroy
-    @appointment = Appointment.find(params[:id])
     @appointment.destroy
     redirect_to appointments_path, notice: "Rendez-vous supprimé!"
   end
-end
 
-private
+  private
 
-def appointment_params
-  params.require(:appointment).permit(:start_date, :end_date, :summary, :user_id, :patient_id,)
+  def set_appointment
+    @appointment = Appointment.find(params[:id])
+  end
+
+  def appointment_params
+    params.require(:appointment).permit(:start_date, :end_date, :summary)
+  end
 end
