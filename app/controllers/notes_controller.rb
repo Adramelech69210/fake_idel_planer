@@ -36,11 +36,12 @@ class NotesController < ApplicationController
 
   end
 
-  def update
-    if @note.update(note_params)
-      redirect_to patient_notes_path(@patient), notice: 'Note mise à jour avec succès.'
+  def create                                #/patients/:patient_id/notes(.:format)
+    @note = @patient.notes.new(note_params)
+    if @note.save
+      redirect_to @patient, notice: 'Note was successfully created.'
     else
-      render :edit
+      render 'patients/show', status: :unprocessable_entity
     end
   end
 
@@ -56,11 +57,8 @@ class NotesController < ApplicationController
     @patient = Patient.find(params[:patient_id])
   end
 
-  def set_note
-    @note = @patient.notes.find(params[:id])
-  end
-
   def note_params
     params.require(:note).permit(:text)
   end
+
 end

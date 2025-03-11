@@ -34,7 +34,7 @@ end
 
 
   def show
-    @pathologies = @patient.pathologies.find(params[:id])
+    @pathology = @patient.pathologies.find(params[:id])
   end
   def create
     @pathology = @patient.pathologies.new(pathology_params)
