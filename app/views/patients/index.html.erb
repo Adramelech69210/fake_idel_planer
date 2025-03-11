@@ -1,2 +1,11 @@
-<h1>Vos patients :</h1>
-
+<div class="container">
+  <h1>Liste des Patients</h1>
+  <% @patients.each do |patient| %>
+    <div class="card mb-3">
+      <%= link_to patient_path(patient), class: "card-body text-decoration-none" do %>
+        <h5 class="card-title"><%= patient.first_name %> <%= patient.last_name %></h5>
+        <p class="card-text"><%= patient.address %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
