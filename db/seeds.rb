@@ -44,3 +44,27 @@ Patient.create!(first_name: "Claire", last_name:"Tanguy", address: "25 Route de 
 Patient.create!(first_name: "Jérome", last_name:"Pires", address: "26 Route de Lyon 69280 Sainte-Consorce", date_of_birth: "24/11/1964", social_security_number: "1 69 00 00 000 000 00", mutual: "MGEN",referring_doctor:"Dr. David Girard", group: group_1)
 
 puts "finsished"
+
+users = User.all.to_a
+patients = Patient.all.to_a
+
+summaries = [
+  "Prise de sang",
+  "Bas de contentions",
+  "Vaccin covid",
+  "Chimio",
+  "Sinusite chronique",
+  "Préparation de pilulier",
+  "Bandages"
+]
+
+50.times do
+  start_datetime = rand(Time.now..(Time.now + 3.months))
+  start_datetime = start_datetime.change(min: (start_datetime.min / 10) * 10)
+
+  duration = [20, 30, 40, 50, 60].sample.minutes
+
+  final_datetime = start_datetime + duration
+
+  Appointment.create!(start_date: start_datetime, end_date: final_datetime, user_id: users.sample.id, patient_id: patients.sample.id, summary: summaries.sample)
+end
