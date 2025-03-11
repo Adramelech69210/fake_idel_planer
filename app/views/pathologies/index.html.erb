@@ -1,0 +1,18 @@
+<h1>Pathologies#index</h1>
+<p>Find me in app/views/pathologies/index.html.erb</p>
+
+<ul>
+  <% @pathology.each do |pathologie| %>
+    <li>
+      <%= pathologie.text %>
+      <%= link_to 'Afficher', patient_pathologie_path(@patient, pathologie) %> |
+      <%= link_to 'Modifier', edit_patient_pathologie_path(@patient, pathologie) %> |
+      <%= link_to 'Supprimer', patient_pathologie_path(@patient, pathologie), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+    </li>
+  <% end %>
+</ul>
+
+<br>
+
+<%= link_to 'Nouvelle pathologie', new_patient_pathologies_path(@patient) %> |
+<%= link_to 'Retour au patient', patient_path(@patient) %>

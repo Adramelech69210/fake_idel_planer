@@ -1,2 +1,14 @@
-<h1>Notes#create</h1>
-<p>Find me in app/views/notes/create.html.erb</p>
+<h1>Notes#show</h1>
+<p>Find me in app/views/notes/show.html.erb</p>
+
+
+<h2>Notes</h2>
+
+<ul>
+  <% @patient.notes.each do |note| %>
+    <li>
+      <%= note.text %>
+      <%= link_to 'Supprimer', patient_note_path(@patient, note), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+    </li>
+  <% end %>
+</ul>

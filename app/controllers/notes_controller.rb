@@ -1,11 +1,19 @@
 class NotesController < ApplicationController
+  before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
+  def index        
+    @@note = Note.all
+  end
+
+  def new
+    @note = Note.new
+  end
   def show
     @note = @patient.notes.find(params[:id])
   end
 
-  def create
-    @note = @patient.notes.new(note_params)     #patients/:patient_id/notes/new(.:format)
+  def create                                #/patients/:patient_id/notes(.:format)
+    @note = @patient.notes.new(note_params)
     if @note.save
       redirect_to @patient, notice: 'Note was successfully created.'
     else

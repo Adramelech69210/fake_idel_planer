@@ -1,0 +1,19 @@
+<h1>Notes#index</h1>
+<p>Find me in app/views/notes/index.html.erb</p>
+
+
+<ul>
+  <% @notes.each do |note| %>
+    <li>
+      <%= note.text %>
+      <%= link_to 'Afficher', patient_note_path(@patient, note) %> |
+      <%= link_to 'Modifier', edit_patient_note_path(@patient, note) %> |
+      <%= link_to 'Supprimer', patient_note_path(@patient, note), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+    </li>
+  <% end %>
+</ul>
+
+<br>
+
+<%= link_to 'Nouvelle note', new_patient_note_path(@patient) %> |
+<%= link_to 'Retour au patient', patient_path(@patient) %>
