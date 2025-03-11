@@ -1,5 +1,37 @@
 class PathologiesController < ApplicationController
 before_action :set_patient
+before_action :set_pathology, only: [:show, :edit, :update, :destroy]
+
+def index
+  @pathologies = @patient.pathologies
+end
+
+def new
+  @note = @patient.pathologies.build
+end
+
+def create
+  @note = @patient.pathologies.build(note_params)
+  if @note.save
+    redirect_to patient_pathologies_path(@patient), notice: 'Note créée avec succès.'
+  else
+    render :new
+  end
+end
+
+def update
+  if @note.update(pathology_params)
+    redirect_to patient_pathologies_path(@patient), notice: 'Note mise à jour avec succès.'
+  else
+    puts @note.errors.full_messages
+    render :edit
+  end
+end
+
+
+
+
+
 
   def show
     @pathologies = @patient.pathologies.find(params[:id])

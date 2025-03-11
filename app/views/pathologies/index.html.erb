@@ -1,18 +1,29 @@
 <h1>Pathologies#index</h1>
 <p>Find me in app/views/pathologies/index.html.erb</p>
 
+
+
+
 <ul>
-  <% @pathology.each do |pathologie| %>
+  <% @notes.each do |note| %>
     <li>
-      <%= pathologie.text %>
-      <%= link_to 'Afficher', patient_pathologie_path(@patient, pathologie) %> |
-      <%= link_to 'Modifier', edit_patient_pathologie_path(@patient, pathologie) %> |
-      <%= link_to 'Supprimer', patient_pathologie_path(@patient, pathologie), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+      <%= note.text %>
+      <%= form_with url: edit_patient_note_path(@patient, note), method: :get, class: "d-inline" do |form| %>
+        <%= form.submit "Modifier" %>
+      <% end %>
+      <%= form_with url: patient_note_path(@patient, note), method: :post, class: "d-inline" do |form| %>
+        <%= form.hidden_field :_method, value: :delete %>
+        <%= form.submit "Supprimer" %>
+      <% end %>
     </li>
   <% end %>
 </ul>
+
+
+
 
 <br>
 
 <%= link_to 'Nouvelle pathologie', new_patient_pathologies_path(@patient) %> |
 <%= link_to 'Retour au patient', patient_path(@patient) %>
+

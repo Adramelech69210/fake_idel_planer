@@ -2,13 +2,18 @@
 <p>Find me in app/views/notes/index.html.erb</p>
 
 
+
 <ul>
   <% @notes.each do |note| %>
     <li>
       <%= note.text %>
-      <%= link_to 'Afficher', patient_note_path(@patient, note) %> |
-      <%= link_to 'Modifier', patient_note_path(@patient, note) %> |
-      <%= link_to 'Supprimer', patient_note_path(@patient, note), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+      <%= form_with url: edit_patient_note_path(@patient, note), method: :get, class: "d-inline" do |form| %>
+        <%= form.submit "Modifier" %>
+      <% end %>
+      <%= form_with url: patient_note_path(@patient, note), method: :post, class: "d-inline" do |form| %>
+        <%= form.hidden_field :_method, value: :delete %>
+        <%= form.submit "Supprimer" %>
+      <% end %>
     </li>
   <% end %>
 </ul>
