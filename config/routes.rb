@@ -9,11 +9,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
         sessions: 'users/sessions'
       }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> parent of e7d970e (bkp avant push heroku)
     resources :patients do
       resources :notes do
         resources :pathologies
