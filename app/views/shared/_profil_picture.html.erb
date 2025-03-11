@@ -1,0 +1,6 @@
+
+<% if current_user.photo.attached? %>
+  <%= cl_image_tag "#{current_user.photo.key}", class: "avatar", alt: "dropdown menu" %>
+<% else %>
+  <%= image_tag "default_picture.jpg", class: "avatar", alt: "dropdown menu" %>
+<% end %>
