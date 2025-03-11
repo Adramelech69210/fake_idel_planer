@@ -12,7 +12,6 @@ Rails.application.routes.draw do
         sessions: 'users/sessions'
       }
 
-
     resources :patients do
       resources :notes, only: [:index, :new, :show, :create, :destroy]
       resources :pathologies, only: [:new, :show, :create, :destroy]

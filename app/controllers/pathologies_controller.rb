@@ -2,7 +2,7 @@ class PathologiesController < ApplicationController
 before_action :set_patient
 
   def show
-    @pathology = @patient.pathologies.find(params[:id])
+    @pathologies = @patient.pathologies.find(params[:id])
   end
   def create
     @pathology = @patient.pathologies.new(pathology_params)

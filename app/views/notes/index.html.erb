@@ -7,8 +7,8 @@
     <li>
       <%= note.text %>
       <%= link_to 'Afficher', patient_note_path(@patient, note) %> |
-      <%= link_to 'Modifier', edit_patient_note_path(@patient, note) %> |
-      <%= link_to 'Supprimer', patient_note_path(@patient, note), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+      <%= link_to 'Modifier', patient_note_path(@patient, note) %> |
+      <%= link_to 'Supprimer', patient_note_path(@patient, note), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
     </li>
   <% end %>
 </ul>
