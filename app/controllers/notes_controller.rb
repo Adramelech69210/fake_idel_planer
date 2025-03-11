@@ -5,7 +5,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = @patient.notes.new     #patients/:patient_id/notes/new(.:format)
+    @note = @patient.notes.new(note_params)     #patients/:patient_id/notes/new(.:format)
     if @note.save
       redirect_to @patient, notice: 'Note was successfully created.'
     else
@@ -25,5 +25,8 @@ class NotesController < ApplicationController
     @patient = Patient.find(params[:patient_id])
   end
 
+  def note_params
+    params.require(:note).permit(:text)
+  end
 
 end
