@@ -3,16 +3,16 @@
 		<div class="col-2">
       <% @appointments.each do |appointment| %>
     <div class="special_padding">
-      <p>08:00</p>
+      <p class="text-center"><strong>08:00</strong></p>
     </div>
       <% end %>
 		</div>
 		<div class="col-10 special">
       <% @appointments.each do |appointment| %>
         <div class="brdr">
-          <p><%="#{appointment.patient.first_name} #{appointment.patient.last_name}" %></p>
+          <p class=""><%="#{appointment.patient.first_name} #{appointment.patient.last_name}" %></p>
 
-          <p><strong><%= appointment.reason %></strong></p>
+          <p class=""><strong><%= appointment.reason %></strong></p>
         </div>
       <% end %>
 		</div>
