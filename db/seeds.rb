@@ -13,12 +13,12 @@ puts "cleaning database"
 User.destroy_all
 Patient.destroy_all
 
-group_1 = Group.create
+group_1 = Group.create!
 
 puts "creating user"
-User.create!(first_name: "Léo", last_name: "Martin",  email: "leo@gmail.com", password: "password", group: group_1)
-User.create!(first_name: "Clara", last_name: "Dupont",  email: "clara@gmail.com", password: "password", group: group_1)
-User.create!(first_name: "Hugo", last_name: "Lefevre",  email: "hugo@gmail.com", password: "password", group: group_1)
+User.create!(first_name: "Léo", last_name: "Martin",  email: "leo@gmail.com", password: "password", group_id: group_1.id)
+User.create!(first_name: "Clara", last_name: "Dupont",  email: "clara@gmail.com", password: "password", group_id: group_1.id)
+User.create!(first_name: "Hugo", last_name: "Lefevre",  email: "hugo@gmail.com", password: "password", group_id: group_1.id)
 
 
 puts "creating patient"
