@@ -1,8 +1,28 @@
-.appointment_box {
-  background: $blue-400;
-  margin: 10px;
-}
+// .appointment_box {
+//   margin: 10px;
+// }
 
 .special_padding {
-  padding-bottom: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: $blue-800;
+  color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.special {
+  background-color: $blue-800;
+  color: white;
+}
+
+.pad {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.brdr {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
 }
