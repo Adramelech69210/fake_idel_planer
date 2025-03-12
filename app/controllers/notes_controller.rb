@@ -20,15 +20,6 @@ class NotesController < ApplicationController
     end
   end
 
-  def update
-    if @note.update(note_params)
-      redirect_to patient_notes_path(@patient), notice: 'Note mise à jour avec succès.'
-    else
-      puts @note.errors.full_messages
-      render :edit
-    end
-  end
-
   def show
   end
 

@@ -23,14 +23,9 @@ def update
   if @note.update(pathology_params)
     redirect_to patient_pathologies_path(@patient), notice: 'Note mise à jour avec succès.'
   else
-    puts @note.errors.full_messages
     render :edit
   end
 end
-
-
-
-
 
 
   def show

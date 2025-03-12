@@ -10,6 +10,10 @@ class PatientsController < ApplicationController
   end
 
   def show
+    @appointments = @patient.appointments
+    @past_appointments = @appointments.where('end_date < ?', Time.current).order(end_date: :desc)
+    @notes = @patient.notes.order(created_at: :desc)
+    @pathologies = @patient.pathologies
   end
 
   def create

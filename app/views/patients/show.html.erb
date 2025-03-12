@@ -13,10 +13,10 @@
         <%= @patient.first_name %>
       </p>
       <p class="mb-1">
-        <%= @patient.social_security_number %>
+        <%= @patient.social_security_number || "Numéro SS non renseigné" %>
       </p>
       <p class="mb-1">
-        <%= @patient.mutual %>
+        <%= @patient.mutual || "Mutuelle non renseignée" %>
       </p>
     </div>
   </div>
@@ -46,20 +46,33 @@
         </button>
         <div class="collapse" id="pathologieDropdown">
           <div class="card card-body">
-            <p class="mb-0">• Grippe A (à dynamiser)</p>
+            <% if @patient.pathologies.present? %>
+              <% @patient.pathologies.each do |pathology| %>
+                <p class="mb-0">• <%= pathology.description %></p>
+              <% end %>
+            <% else %>
+              <p class="text-muted">Aucune pathologie enregistrée.</p>
+            <% end %>
           </div>
         </div>
       </div>
-      <div class="dropdown mb-2">
-        <button class="btn btn-primary w-100 text-start dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#historiqueDropdown" aria-expanded="false">
-          Historique du patient
-        </button>
-        <div class="collapse" id="historiqueDropdown">
-          <div class="card card-body">
-            <p class="mb-0">• 15/02 changement des pansements (à dynamiser)</p>
-          </div>
-        </div>
-      </div>
+<div class="dropdown mb-2">
+  <button class="btn btn-primary w-100 text-start dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#historiqueDropdown" aria-expanded="false">
+    Historique des anciens rendez-vous
+  </button>
+  <div class="collapse" id="historiqueDropdown">
+    <div class="card card-body">
+      <% if @past_appointments.any? %>
+        <% @past_appointments.each do |appointment| %>
+          <p class="mb-2"><%= appointment.start_date.strftime('%d/%m/%Y') %> : <%= appointment.reason %></p>
+        <% end %>
+      <% else %>
+        <p class="text-muted">Aucun rendez-vous passé enregistré.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
       <div class="dropdown">
         <button class="btn btn-primary w-100 text-start dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#ordonnancesDropdown" aria-expanded="false">
           Ordonnances
