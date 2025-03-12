@@ -1,54 +1,44 @@
 class PathologiesController < ApplicationController
-before_action :set_patient
-before_action :set_pathology, only: [:show, :edit, :update, :destroy]
+  before_action :set_patient
+  before_action :set_pathology, only: [:show, :edit, :update, :destroy]
 
-def index
-  @pathologies = @patient.pathologies
-end
 
-def new
-  @note = @patient.pathologies.build
-end
-
-def create
-  @note = @patient.pathologies.build(note_params)
-  if @note.save
-    redirect_to patient_pathologies_path(@patient), notice: 'Note créée avec succès.'
-  else
-    render :new
+  def index
+    @pathologies = @patient.pathologies
   end
-end
 
-def update
-  if @note.update(pathology_params)
-    redirect_to patient_pathologies_path(@patient), notice: 'Note mise à jour avec succès.'
-  else
-    puts @note.errors.full_messages
-    render :edit
+  def new
+    @pathology = @patient.pathologies.new
   end
-end
 
 
-
-
-
-
-  def show
-    @pathologies = @patient.pathologies.find(params[:id])
-  end
   def create
     @pathology = @patient.pathologies.new(pathology_params)
     if @pathology.save
-      redirect_to @patient, notice: 'Pathology was successfully created.'
+      redirect_to patient_pathologies_path(@patient), notice: 'Pathologie créée avec succès.'
     else
-      render 'patients/show', status: :unprocessable_entity
+      render :new
+    end
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @pathology.update(pathology_params)
+      redirect_to patient_pathologies_path(@patient), notice: 'Pathologie mise à jour avec succès.'
+    else
+      puts @pathology.errors.full_messages
+      render :edit
     end
   end
 
   def destroy
-    @pathology = @patient.pathologies.find(params[:id])
-    @pathology.destroy
-    redirect_to @patient, notice: 'Pathology was successfully destroyed.'
+    @pathology.destroy!
+    redirect_to patient_pathologies_path(@patient), notice: 'Pathologie supprimée avec succès.'
   end
 
   private
@@ -57,6 +47,11 @@ end
     @patient = Patient.find(params[:patient_id])
   end
 
+  def set_pathology
+    @pathology = @patient.pathologies.find(params[:id])
+  end
+
   def pathology_params
     params.require(:pathology).permit(:description)
   end
+end

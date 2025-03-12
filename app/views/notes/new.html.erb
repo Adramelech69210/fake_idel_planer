@@ -1,9 +1,8 @@
 <h1>Nouvelle note pour <%= @patient.last_name %> <%= @patient.first_name %></h1>
-<p>Find me in app/views/notes/new.html.erb</p>
 
 
 <%= simple_form_for([@patient, @note], url: patient_notes_path(@patient)) do |f| %>
-  <%= f.input :text, label: "Texte de la note" %>
+  <%= f.input :text, label: "Texte de la note:" %>
   <%= f.button :submit, "Créer la note" %>
 <% end %>
 

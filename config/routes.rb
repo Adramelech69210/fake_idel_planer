@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "pages#home"
+  root to: "appointments#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :appointments
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -11,10 +11,8 @@ Rails.application.routes.draw do
         sessions: 'users/sessions',
         registrations: 'users/registrations'
       }
-    resources :patients do
-      resources :notes do
-        resources :pathologies
-      end
-    end
-  resources :patients
+  resources :patients do
+    resources :notes
+    resources :pathologies
+  end
 end
