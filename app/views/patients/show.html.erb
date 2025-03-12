@@ -1,1 +1,4 @@
-<h1>SHOW</h1>
+<h1>Patient: <%= @patient.last_name %> <%= @patient.first_name%></h1>
+
+<%= link_to 'Voir les pathologies', patient_pathologies_path(@patient) %> |
+<%= link_to 'Voir les notes', patient_notes_path(@patient) %>

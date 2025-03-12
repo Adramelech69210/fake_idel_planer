@@ -1,12 +1,9 @@
-<h1>Pathologies#index</h1>
-
-<p>Find me in app/views/pathologies/index.html.erb</p>
-<h1>Pathologies</h1>
+<h1><%= @patient.last_name %> <%= @patient.first_name%>: Pathologies</h1>
 
 <ul>
   <% @pathologies.each do |pathology| %>
     <li>
-      <%= pathology.description %>: <%= pathology.description %>
+      <%= pathology.description %>
       <%= link_to 'Modifier', edit_patient_pathology_path(@patient, pathology) %> |
       <%= link_to 'Supprimer', patient_pathology_path(@patient, pathology), data: {turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr?'} %>
     </li>
@@ -16,4 +13,4 @@
 <br>
 
 <%= link_to 'Nouvelle pathologie', new_patient_pathology_path(@patient) %> |
-<%= link_to 'Retour au patient', patient_path(@patient) %>
+<%= link_to 'Retour à la page patient', patient_path(@patient) %>

@@ -1,4 +1,4 @@
-<p>Find me in app/views/pathologies/new.html.erb</p><h1>Nouvelle pathologie pour <%= @patient.last_name %> <%= @patient.first_name %></h1>
+<h1>Nouvelle pathologie pour <%= @patient.last_name %> <%= @patient.first_name %></h1>
 <p>Ajouter une nouvelle pathologie pour le patient.</p>
 
 <%= simple_form_for([@patient, @pathology], url: patient_pathologies_path(@patient)) do |f| %>
