@@ -43,7 +43,6 @@ class PatientsController < ApplicationController
   end
 
   def upload_ordonnance
-    puts params.inspect
     if params[:patient].present? && params[:patient][:ordonnances].present?
       @patient.ordonnances.attach(params[:patient][:ordonnances])
       redirect_to @patient, notice: "Ordonnance(s) uploadée(s) avec succès !"
