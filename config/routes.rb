@@ -11,10 +11,8 @@ Rails.application.routes.draw do
         sessions: 'users/sessions',
         registrations: 'users/registrations'
       }
-    resources :patients do
-      resources :notes do
-        resources :pathologies
-      end
-    end
-  resources :patients
+  resources :patients do
+    resources :notes
+    resources :pathologies 
+  end
 end

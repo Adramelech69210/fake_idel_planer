@@ -1,19 +1,11 @@
-<h1>Notes#index</h1>
-<p>Find me in app/views/notes/index.html.erb</p>
-
-
+<h1><%= @patient.last_name %> <%= @patient.first_name%>: Notes</h1>
 
 <ul>
   <% @notes.each do |note| %>
     <li>
       <%= note.text %>
-      <%= form_with url: edit_patient_note_path(@patient, note), method: :get, class: "d-inline" do |form| %>
-        <%= form.submit "Modifier" %>
-      <% end %>
-      <%= form_with url: patient_note_path(@patient, note), method: :post, class: "d-inline" do |form| %>
-        <%= form.hidden_field :_method, value: :delete %>
-        <%= form.submit "Supprimer" %>
-      <% end %>
+      <%= link_to 'Modifier', edit_patient_note_path(@patient, note) %> |
+      <%= link_to 'Supprimer', patient_note_path(@patient, note), data: {turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr?'} %>
     </li>
   <% end %>
 </ul>
@@ -21,4 +13,4 @@
 <br>
 
 <%= link_to 'Nouvelle note', new_patient_note_path(@patient) %> |
-<%= link_to 'Retour au patient', patient_path(@patient) %>
+<%= link_to 'Retour à la page patient', patient_path(@patient) %>
