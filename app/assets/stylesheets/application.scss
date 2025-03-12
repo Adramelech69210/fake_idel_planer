@@ -48,3 +48,14 @@ $noir-950: #262626;
 @import "components/index";
 @import "pages/index";
 @import "components/patients_cards";
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.main-content {
+  flex: 1;
+}
