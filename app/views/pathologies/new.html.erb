@@ -1,10 +1,9 @@
-<h1>Pathologies#new</h1>
-<p>Find me in app/views/pathologies/new.html.erb</p>
+<h1>Nouvelle pathologie pour <%= @patient.last_name %> <%= @patient.first_name %></h1>
+<p>Ajouter une nouvelle pathologie pour le patient.</p>
 
-
-<%= simple_form_for([@patient, @note], url: patient_notes_path(@patient)) do |f| %>
-  <%= f.input :text, label: "Texte de la note" %>
-  <%= f.button :submit, "Créer la note" %>
+<%= simple_form_for([@patient, @pathology], url: patient_pathologies_path(@patient)) do |f| %>
+  <%= f.input :description, label: "Description de la pathologie" %>
+  <%= f.button :submit, "Créer la pathologie" %>
 <% end %>
 
 <%= link_to 'Retour au patient', patient_path(@patient) %>

@@ -104,5 +104,11 @@
       <span>Oui..</span>
     </div>
   </div>
-  <button class="btn btn-secondary w-100 mt-3 rounded-pill fw-bold">Nouvelle note (à dynamiser)</button>
+  <%# <button class="btn btn-secondary w-100 mt-3 rounded-pill fw-bold">Nouvelle note (à dynamiser)</button> %>
+  <%= link_to patient_notes_path(@patient), class: "btn btn-secondary w-100 mt-3 rounded-pill fw-bold" do %>
+    Nouvelle note
+  <% end %>
+  <%= link_to patient_pathologies_path(@patient), class: "btn btn-secondary w-100 mt-3 rounded-pill fw-bold" do %>
+    Nouvelle pathologie
+  <% end %>
 </div>
