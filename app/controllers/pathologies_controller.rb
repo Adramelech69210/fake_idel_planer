@@ -1,4 +1,3 @@
-pathologies_controller :
 class PathologiesController < ApplicationController
   before_action :set_patient
   before_action :set_pathology, only: [:show, :edit, :update, :destroy]
