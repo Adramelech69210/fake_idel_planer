@@ -1,3 +1,40 @@
+$bleu-50: #f1f9fe;
+$bleu-100: #e3f1fb;
+$bleu-200: #c0e4f7;
+$bleu-300: #89cff0;
+$bleu-400: #2091c5;
+$bleu-500: #147db5;
+$bleu-600: #147db5;
+$bleu-700: #126492;
+$bleu-800: #135579;
+$bleu-900: #154865;
+$bleu-950: #0e2e43;
+
+$vert-50: #f2fbf3;
+$vert-100: #e1f7e4;
+$vert-200: #c5edcb;
+$vert-300: #98dda3;
+$vert-400: #63c573;
+$vert-500: #40b052;
+$vert-600: #2e8b3d;
+$vert-700: #276e33;
+$vert-800: #23582c;
+$vert-900: #1f4826;
+$vert-950: #0c2711;
+
+$blanc-50: #f6f6f6;
+$blanc-100: #e7e7e7;
+$blanc-200: #d1d1d1;
+$blanc-300: #b0b0b0;
+$blanc-400: #7c7c7c;
+
+$noir-500: #6d6d6d;
+$noir-600: #5d5d5d;
+$noir-700: #4f4f4f;
+$noir-800: #454545;
+$noir-900: #3d3d3d;
+$noir-950: #262626;
+
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
@@ -11,40 +48,3 @@
 @import "components/index";
 @import "pages/index";
 @import "components/patients_cards";
-
-$blue-50: #f1f9fe;
-$blue-100: #e3f1fb;
-$blue-200: #c0e4f7;
-$blue-300: #89cff0;
-$blue-400: #2091c5;
-$blue-500: #147db5;
-$blue-600: #147db5;
-$blue-700: #126492;
-$blue-800: #135579;
-$blue-900: #154865;
-$blue-950: #0e2e43;
-
-$green-50: #f2fbf3;
-$green-100: #e1f7e4;
-$green-200: #c5edcb;
-$green-300: #98dda3;
-$green-400: #63c573;
-$green-500: #40b052;
-$green-600: #2e8b3d;
-$green-700: #276e33;
-$green-800: #23582c;
-$green-900: #1f4826;
-$green-950: #0c2711;
-
-$light-50: #f6f6f6;
-$light-100: #e7e7e7;
-$light-200: #d1d1d1;
-$light-300: #b0b0b0;
-$light-400: #7c7c7c;
-
-$dark-500: #6d6d6d;
-$dark-600: #5d5d5d;
-$dark-700: #4f4f4f;
-$dark-800: #454545;
-$dark-900: #3d3d3d;
-$dark-950: #262626;
