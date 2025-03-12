@@ -1,53 +1,55 @@
 class PathologiesController < ApplicationController
-  before_action :set_patient
-  before_action :set_pathology, only: [:show, :edit, :update, :destroy]
+before_action :set_patient
+before_action :set_pathology, only: [:show, :edit, :update, :destroy]
 
+def index
+  @pathologies = @patient.pathologies
+end
 
-  def index
-    @pathologies = @patient.pathologies
+def new
+  @note = @patient.pathologies.build
+end
+
+def create
+  @note = @patient.pathologies.build(note_params)
+  if @note.save
+    redirect_to patient_pathologies_path(@patient), notice: 'Note créée avec succès.'
+  else
+    render :new
   end
+end
 
-  def new
-    @pathology = @patient.pathologies.new
+def update
+  if @note.update(pathology_params)
+    redirect_to patient_pathologies_path(@patient), notice: 'Note mise à jour avec succès.'
+  else
+    render :edit
   end
+end
 
 
+  def show
+    @pathologies = @patient.pathologies.find(params[:id])
+  end
   def create
     @pathology = @patient.pathologies.new(pathology_params)
     if @pathology.save
-      redirect_to patient_pathologies_path(@patient), notice: 'Pathologie créée avec succès.'
+      redirect_to @patient, notice: 'Pathology was successfully created.'
     else
-      render :new
-    end
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def update
-    if @pathology.update(pathology_params)
-      redirect_to patient_pathologies_path(@patient), notice: 'Pathologie mise à jour avec succès.'
-	@@ -35,22 +27,17 @@ def update
-      render :edit
+      render 'patients/show', status: :unprocessable_entity
     end
   end
 
   def destroy
-    @pathology.destroy!
-    redirect_to patient_pathologies_path(@patient), notice: 'Pathologie supprimée avec succès.'
+    @pathology = @patient.pathologies.find(params[:id])
+    @pathology.destroy
+    redirect_to @patient, notice: 'Pathology was successfully destroyed.'
   end
 
   private
 
   def set_patient
     @patient = Patient.find(params[:patient_id])
-  end
-
-  def set_pathology
-    @pathology = @patient.pathologies.find(params[:id])
   end
 
   def pathology_params
