@@ -2,7 +2,7 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:edit, :update, :destroy]
 
   def index
-    @appointments = Appointment.all
+    @appointments = Appointment.where(user: current_user, start_date: Date.today.all_day)
   end
 
   def new
