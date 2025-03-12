@@ -43,13 +43,17 @@ class PatientsController < ApplicationController
   end
 
   def upload_ordonnance
-    if params[:patient].present? && params[:patient][:ordonnances].present?
+    if params[:patient].present? && params[:patient][:ordonnances].present? && params[:patient][:ordonnances]!=[""]
       @patient.ordonnances.attach(params[:patient][:ordonnances])
       redirect_to @patient, notice: "Ordonnance(s) uploadée(s) avec succès !"
     else
       redirect_to @patient, alert: "Aucune ordonnance à uploader."
     end
   end
+
+
+
+
 
 
 
