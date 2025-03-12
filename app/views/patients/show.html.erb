@@ -1,1 +1,95 @@
-<h1>SHOW</h1>
+<div class="container">
+  <div class="row d-flex align-items-center">
+    <div class="col-8 col-md-9">
+      <div class="d-flex justify-content-between mb-1">
+        <p class="fw-bold" style="font-size: 1.2rem; margin-bottom: 0;">
+          <%= @patient.last_name %>
+        </p>
+        <p style="font-size: 1rem; margin-bottom: 0;">
+          <%= @patient.date_of_birth %>
+        </p>
+      </div>
+      <p class="fw-bold" style="font-size: 1.2rem; margin-bottom: 0;">
+        <%= @patient.first_name %>
+      </p>
+      <p class="mb-1">
+        <%= @patient.social_security_number %>
+      </p>
+      <p class="mb-1">
+        <%= @patient.mutual %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container p-3">
+  <p style="font-size: 0.9rem"><%= @patient.address %></p>
+  <div class="bg-primary text-white pt-5 pb-5 mt-3 w-100 rounded-5">
+    Map à venir (à dynamiser)
+  </div>
+</div>
+
+<div class="container p-3">
+  <div class="mt-4">
+    <h5 class="fw-bold">Informations complémentaires</h5>
+    <textarea class="form-control" rows="6" placeholder="résumé du patient (à dynamiser)"></textarea>
+  </div>
+</div>
+
+<div class="container p-3">
+  <div class="mt-4">
+    <h5 class="fw-bold">Informations du patient</h5>
+    <div class="container p-3">
+      <div class="dropdown mb-2">
+        <button class="btn btn-primary w-100 text-start dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#pathologieDropdown" aria-expanded="false">
+          Pathologie
+        </button>
+        <div class="collapse" id="pathologieDropdown">
+          <div class="card card-body">
+            <p class="mb-0">• Grippe A (à dynamiser)</p>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown mb-2">
+        <button class="btn btn-primary w-100 text-start dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#historiqueDropdown" aria-expanded="false">
+          Historique du patient
+        </button>
+        <div class="collapse" id="historiqueDropdown">
+          <div class="card card-body">
+            <p class="mb-0">• 15/02 changement des pansements (à dynamiser)</p>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-primary w-100 text-start dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#ordonnancesDropdown" aria-expanded="false">
+          Ordonnances
+        </button>
+        <div class="collapse" id="ordonnancesDropdown">
+          <div class="card card-body">
+            <p class="mb-0">• fichier PDF (à dynamiser)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="container p-3">
+  <h5 class="fw-bold">Notes</h5>
+  <div class="list-group">
+    <div class="list-group-item d-flex align-items-center p-3 rounded-pill border">
+      <img src="..." class="rounded-circle me-3" alt="IDEL">
+      <span>RAS</span>
+    </div>
+    <div class="list-group-item d-flex align-items-center p-3 mt-2 rounded-pill border">
+      <img src="..." class="rounded-circle me-3" alt="IDEL">
+      <span>Elle est folle mais sinon ça va mieux</span>
+    </div>
+    <div class="list-group-item d-flex align-items-center p-3 mt-2 rounded-pill border">
+      <img src="..." class="rounded-circle me-3" alt="IDEL">
+      <span>Oui..</span>
+    </div>
+  </div>
+  <button class="btn btn-secondary w-100 mt-3 rounded-pill fw-bold">Nouvelle note (à dynamiser)</button>
+</div>
