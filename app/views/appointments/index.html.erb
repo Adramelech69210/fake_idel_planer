@@ -1,2 +1,20 @@
-<h1>Appointments#index</h1>
-<p>Find me in app/views/appointments/index.html.erb</p>
+<div>
+ 	<div class="row">
+		<div class="col-2">
+      <% @appointments.each do |appointment| %>
+    <div class="special_padding">
+      <p class="text-center"><strong>08:00</strong></p>
+    </div>
+      <% end %>
+		</div>
+		<div class="col-10 special">
+      <% @appointments.each do |appointment| %>
+        <div class="brdr">
+          <p class=""><%="#{appointment.patient.first_name} #{appointment.patient.last_name}" %></p>
+
+          <p class=""><strong><%= appointment.reason %></strong></p>
+        </div>
+      <% end %>
+		</div>
+	</div>
+</div>
