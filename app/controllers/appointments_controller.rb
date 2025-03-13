@@ -2,6 +2,12 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:edit, :update, :destroy]
 
   def index
+    if params[:display] == 'month'
+      year = (params[:year].to_i if params[:year].to_i > 0) || Date.today.year
+      month = (params[:month].to_i if (1..12).include?(params[:month].to_i)) || Date.today.month
+      @current_month = Date.new(year, month, 1)
+    end
+
     case params[:display]
     when 'month'
     when 'week'
