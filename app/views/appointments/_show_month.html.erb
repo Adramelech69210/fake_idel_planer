@@ -9,25 +9,23 @@
   </div>
 
   <div class="calendar-days">
-    <div class="day-name">Dim</div>
-    <div class="day-name">Lun</div>
-    <div class="day-name">Mar</div>
-    <div class="day-name">Mer</div>
-    <div class="day-name">Jeu</div>
-    <div class="day-name">Ven</div>
-    <div class="day-name">Sam</div>
+    <% # Obtenir les jours dans l'ordre Lundi à Dimanche %>
+    <% days_order = I18n.t("date.abbr_day_names", locale: :fr).rotate %>
+    <% days_order.each do |day_name| %>
+      <div class="day-name"><%= day_name.capitalize %></div>
+    <% end %>
 
     <%# Calcul du premier et dernier jour du mois %>
     <% @current_month ||= Date.new(params[:year].to_i || Date.today.year, params[:month].to_i || Date.today.month, 1) %>
     <% days_in_month = @current_month.end_of_month.day %>
-    <% first_day_of_week = @current_month.beginning_of_month.wday %>
+    <% first_day_of_week_adjusted = (@current_month.beginning_of_month.wday - 1) % 7 %>
 
-    <%# les cases vides debut du mois%>
-    <% first_day_of_week.times do %>
+    <%# Ajout des cases vides avant le premier jour %>
+    <% first_day_of_week_adjusted.times do %>
       <div class="day empty"></div>
     <% end %>
 
-    <%# les jours dans le callendrier %>
+    <%# Ajout des jours du mois %>
     <% (1..days_in_month).each do |day| %>
       <% date = @current_month.beginning_of_month + (day - 1).days %>
       <div class="day <%= 'today' if date == Date.today %>">
@@ -35,8 +33,9 @@
       </div>
     <% end %>
 
-    <%# les cases vides fin du mois%>
-    <% (7 - ((days_in_month + first_day_of_week) % 7)).times do %>
+    <%# Ajout des cases vides après le dernier jour %>
+    <% remaining_days_in_week = (7 - ((days_in_month + first_day_of_week_adjusted) % 7)) % 7 %>
+    <% remaining_days_in_week.times do %>
       <div class="day empty"></div>
     <% end %>
   </div>

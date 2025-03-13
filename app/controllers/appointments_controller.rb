@@ -10,7 +10,6 @@ class AppointmentsController < ApplicationController
 
     case params[:display]
     when 'month'
-      @appointments = Appointment.where(user: current_user, start_date: @current_month.beginning_of_month..@current_month.end_of_month)
     when 'week'
       @appointments = Appointment.where(user: current_user, start_date: Date.today.beginning_of_week(:monday)..Date.today.end_of_week(:monday))
     when 'day'
