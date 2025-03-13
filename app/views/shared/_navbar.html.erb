@@ -4,7 +4,7 @@
             <%= render "shared/profil_picture" %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Éditer mon profil", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to "Mon profil", profile_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
 </div>

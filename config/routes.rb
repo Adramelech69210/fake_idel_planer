@@ -21,4 +21,6 @@ Rails.application.routes.draw do
       delete :destroy_ordonnance
     end
   end
+
+  get "profile" => "users#profile"
 end
