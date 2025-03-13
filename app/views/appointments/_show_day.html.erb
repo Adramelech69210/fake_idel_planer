@@ -1,3 +1,4 @@
+<h2><%= @day %></h2>
 <div class="calendar">
   <% 14.times do |hour| %>
     <%= render "appointments/hour", hour: (hour + 6) %>
