@@ -47,13 +47,13 @@ $noir-950: #262626;
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-@import "components/patients_cards";
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   padding-bottom: 60px;
+  padding-top: 60px;
 }
 
 .main-content {
