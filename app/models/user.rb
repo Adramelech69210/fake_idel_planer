@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   def picture_url
     if self.photo.attached?
-      Rails.application.routes.url_helpers.rails_blob_patch(photo, only: true)
+      photo.url
     else
       "https://ui-avatars.com/api/?name=#{first_name} #{last_name}&size=64"
     end
