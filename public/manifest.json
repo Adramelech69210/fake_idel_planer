@@ -5,5 +5,6 @@
   "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#F4F4F4",
-  "theme_color": "#F4F4F4"
+  "theme_color": "#F4F4F4",
+  "permissions": ["geolocation"]
 }
