@@ -8,8 +8,19 @@ class PatientsController < ApplicationController
   def new
     @patient = Patient.new
   end
+  
 
   def show
+     if @patient.geocoded? # Vérifie si le patient est géocodé
+      @marker = {
+        lat: @patient.latitude,
+        lng: @patient.longitude,
+        info_marker_html: render_to_string(partial: "info_marker_patient", locals: { patient: @patient }),
+        marker_html: render_to_string(partial: "marker")
+      }
+    else
+      @marker = nil # Si le patient n'est pas géocodé, pas de marqueur
+    end
   end
 
   def create

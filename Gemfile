@@ -18,6 +18,9 @@ gem "puma", ">= 5.0"
 #gem "importmap-rails"
 gem "importmap-rails", "~> 1.2.3"
 
+# gedocoder pour localisation
+gem "geocoder"
+
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 
