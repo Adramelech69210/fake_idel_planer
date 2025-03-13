@@ -15,4 +15,6 @@ Rails.application.routes.draw do
     resources :notes
     resources :pathologies
   end
+
+  get "profile" => "users#profile"
 end
