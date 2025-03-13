@@ -2,7 +2,17 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:edit, :update, :destroy]
 
   def index
-    @appointments = Appointment.where(user: current_user, start_date: Date.today.all_day)
+    case params[:display]
+    when 'month'
+    when 'week'
+      @appointments = Appointment.where(user: current_user, start_date: Date.today.beginning_of_week(:monday)..Date.today.end_of_week(:monday))
+    when 'day'
+      @day = Date.jd(params[:jd].to_i)
+      @appointments = Appointment.where(user: current_user, start_date: @day.all_day)
+    else
+      @day = Date.today
+      @appointments = Appointment.where(user: current_user, start_date: @day.all_day)
+    end
   end
 
   def new

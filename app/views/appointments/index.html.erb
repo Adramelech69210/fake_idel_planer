@@ -1,5 +1,16 @@
-<div>
-  <%= render 'mcalandar' %>
-</div>
+<%= link_to 'Day', request.params.merge(display: "day", jd: Date.today.jd) %>
+<%= link_to 'Week', request.params.merge(display: "week") %>
+<%= link_to 'Month', request.params.merge(display: "month") %>
+
+<% case params[:display] %>
+<% when 'month' %>
+  <%# <%= render "appointments/show_month" %> %>
+<% when 'week' %>
+  <%= render "appointments/show_week" %>
+<% when 'day' %>
+  <%= render "appointments/show_day" %>
+<% else %>
+  <%= render "appointments/show_day" %>
+<% end %>
 
 <%= link_to '+', new_appointment_path, class: "btn btn-info rounded-circle calendar-pos" %>
