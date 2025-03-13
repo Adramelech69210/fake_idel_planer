@@ -1,0 +1,9 @@
+<div class="calendar">
+  <% 14.times do |hour| %>
+    <%= render "appointments/hour", hour: (hour + 6) %>
+  <% end %>
+
+  <% @appointments.each do |appointment| %>
+    <%= render "appointments/appointment", appointment: appointment %>
+  <% end %>
+</div>

@@ -1,0 +1,33 @@
+.hour_container {
+  width: 100%;
+  height: 60px;
+  background-color: #262626;
+  color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+  .half_hour {
+    height: 50%;
+  }
+
+  .half_hour_top {
+    border-bottom: 1px dotted black;
+  }
+
+  h2, p {
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 0.7rem;
+  }
+}
+
+.calendar {
+  position: relative;
+}
+
+.calendar-pos {
+  position: fixed;
+  top: 80%;
+  right: 10%;
+  z-index: 50;
+}
