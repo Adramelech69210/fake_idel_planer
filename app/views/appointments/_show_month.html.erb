@@ -1,0 +1,43 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <% prev_month = @current_month << 1 %>
+    <% next_month = @current_month >> 1 %>
+
+    <%= link_to '❮', appointments_path(display: 'month', month: prev_month.month, year: prev_month.year), class: "calendar-button" %>
+    <h2><%= I18n.l(@current_month, format: '%B %Y', locale: :fr) %></h2>
+    <%= link_to '❯', appointments_path(display: 'month', month: next_month.month, year: next_month.year), class: "calendar-button" %>
+  </div>
+
+  <div class="calendar-days">
+    <div class="day-name">Dim</div>
+    <div class="day-name">Lun</div>
+    <div class="day-name">Mar</div>
+    <div class="day-name">Mer</div>
+    <div class="day-name">Jeu</div>
+    <div class="day-name">Ven</div>
+    <div class="day-name">Sam</div>
+
+    <%# Calcul du premier et dernier jour du mois %>
+    <% @current_month ||= Date.new(params[:year].to_i || Date.today.year, params[:month].to_i || Date.today.month, 1) %>
+    <% days_in_month = @current_month.end_of_month.day %>
+    <% first_day_of_week = @current_month.beginning_of_month.wday %>
+
+    <%# les cases vides debut du mois%>
+    <% first_day_of_week.times do %>
+      <div class="day empty"></div>
+    <% end %>
+
+    <%# les jours dans le callendrier %>
+    <% (1..days_in_month).each do |day| %>
+      <% date = @current_month.beginning_of_month + (day - 1).days %>
+      <div class="day <%= 'today' if date == Date.today %>">
+        <%= link_to day, appointments_path(display: 'day', jd: date.jd), class: "day-link" %>
+      </div>
+    <% end %>
+
+    <%# les cases vides fin du mois%>
+    <% (7 - ((days_in_month + first_day_of_week) % 7)).times do %>
+      <div class="day empty"></div>
+    <% end %>
+  </div>
+</div>
