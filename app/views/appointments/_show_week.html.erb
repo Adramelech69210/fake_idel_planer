@@ -1,3 +1,11 @@
-<div>
-  <h1>Week Vue</h1>
+<%= render "appointments/appointments" %>
+
+
+
+<div class="days-display">
+  <% @days.each do |day| %>
+    <p><%= day.strftime("%a") %></p>
+  <% end %>
 </div>
+
+<%= render "appointments/hours" %>

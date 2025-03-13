@@ -1,0 +1,5 @@
+<div class="hours">
+  <% 14.times do |hour| %>
+    <%= render "appointments/hour", hour: (hour + 6) %>
+  <% end %>
+</div>
