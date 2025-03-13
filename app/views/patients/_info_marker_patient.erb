@@ -1,0 +1,9 @@
+<div class="mapbox-info-marker">
+  <div class="title-icon-container">
+    <%= link_to patient_path(patient), class: "patient-title-link" do %>
+      <%= patient.first_name %> <%= patient.last_name %>
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    <% end %>
+  </div>
+  <p><%= patient.address %></p>
+</div>

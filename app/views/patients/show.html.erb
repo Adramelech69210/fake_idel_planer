@@ -28,12 +28,12 @@
 </div>
 
 <div class="container p-3">
-  <p style="font-size: 0.9rem" class="ms-3 me-3"><%= @patient.address %></p>
-  <div class="bluecolor text-white pt-5 pb-5 mt-3  ms-3 me-3">
-   <p class="d-flex justify-content-center">Map</p>
-  </div>
+  <p style="font-size: 0.9rem"><%= @patient.address %></p>
+  <div style="width: 100%; height: 350px;"
+  data-controller="map"
+  data-map-marker-value="<%= @marker.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 </div>
-
 <div class="container p-3">
   <div class="mt-4 ms-3 me-3">
     <div class="mb-4">

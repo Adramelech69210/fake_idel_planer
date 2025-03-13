@@ -48,6 +48,9 @@ $noir-950: #262626;
 @import "components/index";
 @import "pages/index";
 
+//Mise en place de la carte Mapbox
+@import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
+
 body {
   display: flex;
   flex-direction: column;
