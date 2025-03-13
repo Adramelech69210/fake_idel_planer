@@ -4,6 +4,8 @@ Appointment.destroy_all
 User.destroy_all
 Patient.destroy_all
 Group.destroy_all
+Pathology.destroy_all
+Note.destroy_all
 
 group_1 = Group.create!
 
@@ -71,5 +73,56 @@ puts "creating appointments"
   Appointment.create!(start_date: start_datetime, end_date: final_datetime, user: User.all.sample, patient: Patient.all.sample, reason: reasons.sample, summary: summaries.sample)
 end
 
+puts "creating pathologies"
+pathologies_list = [
+  "Hypertension artérielle",
+  "Diabète de type 2",
+  "Asthme chronique",
+  "Arthrite rhumatoïde",
+  "Allergie saisonnière",
+  "Insuffisance cardiaque",
+  "Hypothyroïdie",
+  "Cholestérol élevé",
+  "Troubles digestifs",
+  "Problèmes rénaux",
+  "Sclérose en plaques",
+  "Maladie de Crohn",
+  "Antécédent de crise cardiaque",
+  "Bronchite chronique",
+  "Migraines fréquentes",
+  "Eczéma"
+]
+
+Patient.all.each do |patient|
+  rand(1..3).times do
+    Pathology.create!(
+      patient: patient,
+      description: pathologies_list.sample
+    )
+  end
+end
+
+puts "creating notes"
+notes_content = [
+  "RAS",
+  "Prévoir un suivi médical après la prochaine visite.",
+  "Patient améliore bien suite au dernier traitement.",
+  "Attention au régime alimentaire indiqué.",
+  "A subi une intervention récente, vigilance sur les points de suture.",
+  "Constat d'une augmentation de la tension artérielle.",
+  "Pas de nouvelles observations lors de cette visite.",
+  "Patient nécessite une attention accrue pour ses médicaments.",
+  "Problèmes de déplacement notés, assistance possible.",
+  "A signalé une douleur au niveau du bas du dos ; à surveiller."
+]
+
+Patient.all.each do |patient|
+  rand(2..5).times do
+    Note.create!(
+      patient: patient,
+      text: notes_content.sample
+    )
+  end
+end
 
 puts "finished"

@@ -19,10 +19,18 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+     <%= render "shared/navbar" %>
+     <% end %>
 
     <%= render "shared/flashes" %>
-
+<div class="main-content">
     <%= yield %>
+</div>
+<footer>
+    <% if user_signed_in? %>
     <%= render "shared/navbar_pwa" %>
+    <% end %>
+</footer>
   </body>
 </html>

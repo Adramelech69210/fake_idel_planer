@@ -51,3 +51,14 @@ $noir-950: #262626;
 
 //Mise en place de la carte Mapbox
 @import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.main-content {
+  flex: 1;
+}

@@ -2,7 +2,7 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:edit, :update, :destroy]
 
   def index
-    @appointments = Appointment.all
+    @appointments = Appointment.where(user: current_user, start_date: Date.today.all_day)
   end
 
   def new
@@ -11,6 +11,7 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(appointment_params)
+    @appointment.user = current_user
     if @appointment.save
       redirect_to appointments_path, notice: "Rendez-vous crée!"
     else
@@ -41,6 +42,6 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:start_date, :end_date, :summary)
+    params.require(:appointment).permit(:start_date, :end_date, :reason, :patient_id, :user_id)
   end
 end
