@@ -3,20 +3,19 @@
     <div class="col-12 col-md-9">
       <div class="d-flex justify-content-between align-items-start mb-1">
         <div>
-        <p class="fw-bold ms-3 me-3" style="font-size: 1.2rem; margin-bottom: 0;">
-          <%= @patient.last_name %>
-        </p>
-
-      <p class="fw-bold ms-3 me-3" style="font-size: 1.2rem; margin-bottom: 0;">
-        <%= @patient.first_name %>
-      </p>
-      </div>
-      <div class="me-3 mt-1">
-        <p style="font-size: 1rem;">
-          <%= @patient.date_of_birth %>
-        </p>
+          <p class="fw-bold ms-3 me-3" style="font-size: 1.2rem; margin-bottom: 0;" contenteditable="true" data-patient-id="<%= @patient.id %>" data-field="last_name">
+            <%= @patient.last_name %>
+          </p>
+          <p class="fw-bold ms-3 me-3" style="font-size: 1.2rem; margin-bottom: 0;" contenteditable="true" data-patient-id="<%= @patient.id %>" data-field="first_name">
+            <%= @patient.first_name %>
+          </p>
         </div>
-         </div>
+       <div class="me-3 mt-1 d-flex flex-column align-items-end">
+        <p style="font-size: 1rem;" contenteditable="true" data-patient-id="<%= @patient.id %>" data-field="date_of_birth">
+        <%= @patient.date_of_birth.strftime('%d/%m/%Y') %>
+        </p>
+      </div>
+      </div>
       <p class="mb-1 ms-3 me-3">
         <%= @patient.social_security_number || "Numéro SS non renseigné" %>
       </p>
@@ -37,7 +36,7 @@
 <div class="container p-3">
   <div class="mt-4 ms-3 me-3">
     <div class="mb-4">
-    <h5 class="fw-bold">Informations complémentaires</h5>
+      <h5 class="fw-bold">Informations complémentaires</h5>
     </div>
     <textarea class="form-control" rows="6" placeholder="Veuillez indiquer toute information qui vous semble importante à souligner"></textarea>
   </div>
@@ -54,11 +53,11 @@
         <div class="collapse" id="pathologieDropdown">
           <div class="card card-body">
             <div class="d-flex align-items-center">
-                <h5 class="fw-bold">Nouvelle pathologie</h5>
+              <h5 class="fw-bold">Nouvelle pathologie</h5>
               <%= link_to patient_pathologies_path(@patient), class: "" do %>
                 <i class="fa-solid fa-plus position_plus"></i>
               <% end %>
-              </div>
+            </div>
             <% if @patient.pathologies.present? %>
               <% @patient.pathologies.each do |pathology| %>
                 <p class="mb-0">⚕︎ <%= pathology.description %></p>
@@ -96,14 +95,14 @@
             <%= form_with(model: @patient, url: upload_ordonnance_patient_path(@patient), method: :post, local: true, html: { multipart: true }) do |form| %>
               <div class="mb-3">
                 <%= form.label :ordonnances, "Ajouter une ou plusieurs ordonnances", class: "form-label" %>
-                  <div data-controller="file-upload" class="custom-file-upload">
-                    <%= form.file_field :ordonnances,
-                         multiple: true,
-                         class: "file-input-hidden",
-                         data: {
-                           file_upload_target: "input",
-                           action: "change->file-upload#updateFileInfo"
-                         } %>
+                <div data-controller="file-upload" class="custom-file-upload">
+                  <%= form.file_field :ordonnances,
+                       multiple: true,
+                       class: "file-input-hidden",
+                       data: {
+                         file_upload_target: "input",
+                         action: "change->file-upload#updateFileInfo"
+                       } %>
 
                   <button type="button"
                     class="btn-file-custom"
@@ -118,20 +117,19 @@
                 </div>
               </div>
 
-  <%= form.submit "Uploader", class: "btn m-3 bluecolor" %>
-<% end %>
-
+              <%= form.submit "Télécharger", class: "btn m-3 bluecolor" %>
+            <% end %>
 
             <ul class="mt-3">
               <% if @patient.ordonnances.attached? %>
                 <% @patient.ordonnances.each do |ordonnance| %>
                   <li>
                     <%= link_to ordonnance.filename.to_s, rails_blob_path(ordonnance), target: "_blank", class: "text-primary" %>
-                    (<%= link_to "Supprimer", destroy_ordonnance_patient_path(id: @patient.id, ordonnance_id: ordonnance.id), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette ordonnance ?" }, class: "text-danger" %>)
+                    <%= link_to "Supprimer", destroy_ordonnance_patient_path(id: @patient.id, ordonnance_id: ordonnance.id), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette ordonnance ?" }, class: "text-danger" %>)
                   </li>
                 <% end %>
               <% else %>
-                <li>Aucune ordonnance uploadée.</li>
+                <li>Aucune ordonnance téléchargée.</li>
               <% end %>
             </ul>
           </div>
@@ -142,11 +140,14 @@
 </div>
 
 <div class="container p-3">
-  <div class="d-flex align-items-center ps-3">
-  <h5 class="fw-bold">Notes</h5>
+  <div class="d-flex justify-content-between align-items-center ps-3">
+    <h5 class="fw-bold">Notes</h5>
+    <%= link_to patient_path(@patient), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" }, class: "text-danger", aria_label: "Supprimer le patient" do %>
+      <i class="fa-solid fa-user-slash"></i>&nbsp; Supprimer le patient
+    <% end %>
     <%= link_to new_patient_note_path(@patient), class: "" do %>
-<i class="fa-solid fa-plus position_plus"></i>
-  <% end %>
+      <i class="fa-solid fa-plus position_plus"></i>
+    <% end %>
   </div>
   <div class="list-group">
     <% if @patient.notes.any? %>

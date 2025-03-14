@@ -1,0 +1,16 @@
+<%= simple_form_for(@patient) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :address %>
+    <%= f.input :date_of_birth, as: :date, start_year: 1910, end_year: Date.today.year %>
+    <%= f.input :social_security_number %>
+    <%= f.input :mutual %>
+    <%= f.input :referring_doctor %>
+    <%= f.input :ordonnances, as: :file, input_html: { multiple: true } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Créer le patient et uploader les ordonnances", button_html: { class: 'btn btn-secondary' } %>
+  </div>
+<% end %>
