@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:edit, :update, :destroy]
+  before_action :set_appointment, only: [:edit, :update, :destroy, :show]
 
   def index
     @day = params[:jd].present? ? Date.jd(params[:jd].to_i) : Date.today
@@ -17,6 +17,13 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def show
+    @appointment = Appointment.find(params[:id])
+    @patient = @appointment.patient
+    @editing_summary = params[:editing_summary] == "true"
+    @editing_details = params[:editing_details] == "true"
+  end
+
   def new
     @appointment = Appointment.new
   end
@@ -25,7 +32,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     @appointment.user = current_user
     if @appointment.save
-      redirect_to appointments_path, notice: "Rendez-vous crée!"
+      redirect_to appointments_path, notice: "Rendez-vous créé !"
     else
       render :new, status: :unprocessable_entity
     end
@@ -35,8 +42,10 @@ class AppointmentsController < ApplicationController
   end
 
   def update
+    @appointment = Appointment.find(params[:id])
+
     if @appointment.update(appointment_params)
-      redirect_to appointments_path, notice: "Rendez-vous modifié!"
+      redirect_to appointment_path(@appointment), notice: "Modification réussie !"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -44,7 +53,7 @@ class AppointmentsController < ApplicationController
 
   def destroy
     @appointment.destroy
-    redirect_to appointments_path, notice: "Rendez-vous supprimé!"
+    redirect_to appointments_path, notice: "Rendez-vous supprimé !"
   end
 
   private
@@ -54,6 +63,6 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:start_date, :end_date, :reason, :patient_id, :user_id)
+    params.require(:appointment).permit(:start_date, :end_date, :reason, :summary, :patient_id)
   end
 end
