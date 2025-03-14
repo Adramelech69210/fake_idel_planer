@@ -72,7 +72,19 @@
   }
 }
 
-.calendar-pos {
+.hour-content {
+  width: 91%;
+}
+
+.half_hour {
+  height: 50%;
+}
+
+.half_hour_top {
+  border-bottom: 1px dotted black;
+}
+
+.add-appointment {
   position: fixed;
   bottom: 100px;
   right: 30px;
@@ -116,4 +128,4 @@
       color: $bleu-500;
     }
   }
-} 
+}

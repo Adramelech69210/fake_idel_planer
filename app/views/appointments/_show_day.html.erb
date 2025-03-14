@@ -4,7 +4,6 @@
     <%= link_to t('pagination.previous'), request.params.merge(jd: (@day - 1.day).jd), class: 'btn' %>
     <%= link_to t('pagination.today'), request.params.merge(jd: Date.today.jd), class: 'btn' %>
     <%= link_to t('pagination.next'), request.params.merge(jd: (@day + 1.day).jd), class: 'btn' %>
-
   </div>
 </div>
 

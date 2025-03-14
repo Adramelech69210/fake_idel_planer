@@ -1,0 +1,26 @@
+<% if params[:display] == 'week' %>
+
+  <% @appointments.each do |appointment| %>
+    <div class="appointment" style="
+      top: <%= ((appointment.start_date.hour - 6) * 60 + appointment.start_date.min) + 10 %>px;
+      height: <%= (appointment.end_date - appointment.start_date).to_i/60 %>px;
+      left: <%= number_in_week(appointment.start_date) * 13 + 9 %>%;
+      width: 13%;">
+    </div>
+  <% end %>
+
+<% else %>
+
+  <% @appointments.each do |appointment| %>
+    <div class="appointment" style="
+      top: <%= ((appointment.start_date.hour - 6) * 60 + appointment.start_date.min) + 10 %>px;
+      height: <%= (appointment.end_date - appointment.start_date).to_i/60 %>px;">
+      <p class="time"><%= appointment.start_date.strftime("%H:%M") %> - <%= appointment.end_date.strftime("%H:%M") %></p>
+
+      <div class="d-flex justify-items-center align-items-center">
+        <p><strong><%= appointment.patient.first_name %> | </strong><%= appointment.reason %></p>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>
