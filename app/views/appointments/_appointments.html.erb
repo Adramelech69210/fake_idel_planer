@@ -6,7 +6,6 @@
       height: <%= (appointment.end_date - appointment.start_date).to_i/60 %>px;
       left: <%= number_in_week(appointment.start_date) * 13 + 9 %>%;
       width: 13%;">
-      <p class="time"><%= appointment.start_date.strftime("%a:%M") %> - <%= appointment.end_date.strftime("%H:%M") %></p>
     </div>
   <% end %>
 
