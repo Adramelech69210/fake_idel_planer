@@ -29,3 +29,9 @@
 
 en:
   hello: "Hello world"
+
+en:
+  pagination:
+    previous: "«"
+    today: "Today"
+    next: "»"
