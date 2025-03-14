@@ -7,13 +7,5 @@
   </div>
 </div>
 
-<div class="calendar">
-  <% 14.times do |hour| %>
-    <%= render "appointments/hour", hour: (hour + 6) %>
-  <% end %>
-  <% @appointments.each do |appointment| %>
-  <%= link_to appointment_path(appointment), class: "no-link-appearance" do %>
-    <%= render "appointments/appointment", appointment: appointment %>
-  <% end %>
-<% end %>
-</div>
+
+<%= render "appointments/calendar" %>
