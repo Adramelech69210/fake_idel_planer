@@ -1,18 +1,27 @@
-<div class="navbar_pwa d-flex justify-content-around align-items-center">
-  <div>
-     <%= link_to "/patients", class: "navbar-brand" do %>
-    <i class="fa-solid fa-users"></i>
-    <% end %>
-  </div>
-  <div>
-     <%= link_to "/appointments", class: "navbar-brand" do %>
-<i class="fa-solid fa-calendar"></i>
+<nav class="navbar_pwa">
+  <div class="navbar_container">
+    <%= link_to "/patients", class: "nav-item #{'active' if current_page?('/patients')}" do %>
+      <div class="nav-icon-wrapper">
+        <i class="fa-solid fa-users"></i>
+        <div class="nav-indicator"></div>
+      </div>
+      <span class="nav-label">Patients</span>
     <% end %>
 
+    <%= link_to "/appointments", class: "nav-item #{'active' if current_page?('/appointments')}" do %>
+      <div class="nav-icon-wrapper">
+        <i class="fa-solid fa-calendar"></i>
+        <div class="nav-indicator"></div>
+      </div>
+      <span class="nav-label">Calendrier</span>
+    <% end %>
+
+    <%= link_to "#", class: "nav-item #{'active' if current_page?('#')}" do %>
+      <div class="nav-icon-wrapper">
+        <i class="fa-solid fa-file-medical"></i>
+        <div class="nav-indicator"></div>
+      </div>
+      <span class="nav-label">Relèves</span>
+    <% end %>
   </div>
-  <div>
-    <%= link_to "", class: "navbar-brand" do %>
-      <i class="fa-solid fa-file-medical"></i>
-      <% end %>
-  </div>
-</div>
+</nav>
