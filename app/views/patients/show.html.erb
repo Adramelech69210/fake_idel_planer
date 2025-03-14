@@ -16,7 +16,7 @@
           <%= @patient.date_of_birth %>
         </p>
         </div>
-         </div>
+        </div>
       <p class="mb-1 ms-3 me-3">
         <%= @patient.social_security_number || "Numéro SS non renseigné" %>
       </p>
@@ -103,12 +103,12 @@
                 <%= form.label :ordonnances, "Ajouter une ou plusieurs ordonnances", class: "form-label" %>
                   <div data-controller="file-upload" class="custom-file-upload">
                     <%= form.file_field :ordonnances,
-                         multiple: true,
-                         class: "file-input-hidden",
-                         data: {
-                           file_upload_target: "input",
-                           action: "change->file-upload#updateFileInfo"
-                         } %>
+                        multiple: true,
+                        class: "file-input-hidden",
+                        data: {
+                        file_upload_target: "input",
+                        action: "change->file-upload#updateFileInfo"
+                        } %>
 
                   <button type="button"
                     class="btn-file-custom"
@@ -156,8 +156,7 @@
   <div class="list-group">
     <% if @patient.notes.any? %>
       <% @patient.notes.each do |note| %>
-        <div class="list-group-item d-flex align-items-center p-3 mt-2 rounded-pill border">
-          <img src="https://via.placeholder.com/40" class="rounded-circle me-3" alt="IDEL">
+        <div class="list-group-item d-flex align-items-center p-3 mt-2 ms-3 me-3 border">
           <span><%= note.text %></span>
         </div>
       <% end %>
