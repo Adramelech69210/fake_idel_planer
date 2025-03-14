@@ -5,6 +5,8 @@
   <% end %>
 
   <% @appointments.each do |appointment| %>
+  <%= link_to appointment_path(appointment), class: "appointment-link no-link-appearance" do %>
     <%= render "appointments/appointment", appointment: appointment %>
+²²²<% end %>
   <% end %>
 </div>
