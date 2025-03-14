@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:edit, :update, :destroy, :show]
+  before_action :set_appointment, only: [:update, :destroy, :show]
 
   def index
     @day = params[:jd].present? ? Date.jd(params[:jd].to_i) : Date.today
@@ -36,9 +36,6 @@ class AppointmentsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update
