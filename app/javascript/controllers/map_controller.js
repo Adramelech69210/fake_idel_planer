@@ -153,17 +153,35 @@ export default class extends Controller {
       .catch(error => console.error("Erreur lors de la récupération de l'itinéraire:", error))
   }
 
-  //affiche les etapes de l'itineraire
   displayInstructions(steps) {
     let container = document.getElementById('route-instructions')
+    let toggleButton = document.getElementById('toggle-instructions-btn')
+
     if (!container) {
+      const buttonContainer = document.createElement('div')
+      buttonContainer.className = 'd-flex justify-content-center mt-3 mb-2'
+      this.element.parentNode.insertBefore(buttonContainer, this.element.nextSibling)
+
+      toggleButton = document.createElement('button')
+      toggleButton.id = 'toggle-instructions-btn'
+      toggleButton.className = 'btn btn-blue'
+      toggleButton.textContent = 'Afficher les instructions'
+      buttonContainer.appendChild(toggleButton)
+
       container = document.createElement('div')
       container.id = 'route-instructions'
       container.className = 'container p-3 mt-3 border rounded'
-      this.element.parentNode.insertBefore(container, this.element.nextSibling)
+      container.style.width = '100%'
+      container.style.display = 'none'
+      this.element.parentNode.insertBefore(container, buttonContainer.nextSibling)
+
+      toggleButton.addEventListener('click', () => {
+        const isHidden = container.style.display === 'none'
+        container.style.display = isHidden ? 'block' : 'none'
+        toggleButton.textContent = isHidden ? 'Masquer les instructions' : 'Afficher les instructions'
+      })
     }
 
-    //genere le html pour affichage
     let html = '<h5>Instructions de navigation:</h5><ol>'
     steps.forEach(step => {
       const distance = step.distance >= 1000 ?
@@ -174,6 +192,7 @@ export default class extends Controller {
     html += '</ol>'
     container.innerHTML = html
   }
+
 
   //affiche la duree du trajet
   displayDuration(seconds) {
