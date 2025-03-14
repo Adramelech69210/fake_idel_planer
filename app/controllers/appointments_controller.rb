@@ -10,7 +10,7 @@ class AppointmentsController < ApplicationController
       month = (params[:month].to_i if (1..12).include?(params[:month].to_i)) || Date.today.month
       @current_month = Date.new(year, month, 1)
     when 'week'
-      @days = @day.beginning_of_week(:monday)..@day.end_of_week(:monday)
+      @days = @day.beginning_of_week(:monday)..@day.end_of_week(:monday) + 1
       @appointments = Appointment.where(user: current_user, start_date: @days)
     else # when 'day' or default
       @appointments = Appointment.where(user: current_user, start_date: @day.all_day)
