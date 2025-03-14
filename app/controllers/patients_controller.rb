@@ -23,7 +23,7 @@ class PatientsController < ApplicationController
     end
     @appointments = @patient.appointments
     @past_appointments = @appointments.where('start_date < ?', Time.current).order(start_date: :desc)
-    @upcoming_appointments = @patient.appointments.where("start_date >= ?", Time.current).order(start_date: :asc)
+    @upcoming_appointments = @appointments.where("start_date >= ?", Time.current).order(start_date: :asc)
     @notes = @patient.notes.order(created_at: :desc)
     @pathologies = @patient.pathologies
   end
