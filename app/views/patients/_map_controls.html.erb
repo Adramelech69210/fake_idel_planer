@@ -1,0 +1,20 @@
+<div class="map-overlay-controls">
+  <button class="btn-route-toggle" data-action="click->map#toggleFullscreenDirections">
+    <i class="fas fa-directions"></i>
+  </button>
+</div>
+
+<div class="map-directions-panel">
+  <div class="directions-header">
+    <div class="direction-summary">
+      <span class="destination"><%= @patient.address %></span>
+      <span class="duration-info">-- min</span>
+    </div>
+    <button class="btn-close" data-action="click->map#toggleFullscreenDirections">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="directions-steps">
+    <!-- via js-->
+  </div>
+</div>

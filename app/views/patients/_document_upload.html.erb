@@ -1,0 +1,28 @@
+<div class="document-upload-card">
+  <h5>Ajouter une ordonnance</h5>
+  <div class="document-upload-form">
+    <%= form_with(model: patient, url: upload_ordonnance_patient_path(patient), method: :post, html: { multipart: true, class: "modern-form" }) do |form| %>
+      <div class="upload-area" data-controller="file-upload">
+        <label for="patient_ordonnances" class="upload-box">
+          <%= form.file_field :ordonnances,
+              multiple: true,
+              class: "hidden-file-input",
+              data: {
+                file_upload_target: "input",
+                action: "change->file-upload#handleFiles"
+              } %>
+
+          <div class="upload-icon">
+            <i class="fas fa-file-upload"></i>
+          </div>
+          <p class="upload-text">Cliquez pour ajouter un / des fichier(s)</p>
+          <p class="upload-subtext">Formats acceptés: PDF, JPG, PNG</p>
+        </label>
+
+        <div class="selected-files" data-file-upload-target="preview"></div>
+      </div>
+
+      <%= form.submit "Enregistrer", class: "btn upload-button" %>
+    <% end %>
+  </div>
+</div>

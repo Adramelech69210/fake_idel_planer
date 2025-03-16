@@ -1,0 +1,32 @@
+<div class="appointment-section" data-controller="collapsible">
+  <div class="section-header collapsible-header" data-action="click->collapsible#toggle">
+    <h5><%= title %></h5>
+    <div class="section-header-actions">
+      <span class="appointment-count"><%= appointments.count %></span>
+      <i class="fas fa-chevron-down" data-collapsible-target="icon"></i>
+    </div>
+  </div>
+  <div class="collapsible-content" data-collapsible-target="content">
+    <% if appointments.any? %>
+      <div class="appointments-timeline" data-controller="animation" data-animation-delay-value="50">
+        <% appointments.each_with_index do |appointment, index| %>
+          <div class="appointment-card <%= past ? 'past' : '' %>" data-animation-target="item" data-index="<%= index %>">
+            <div class="appointment-date <%= past ? 'past' : '' %>">
+              <div class="date-day"><%= appointment.start_date.strftime("%d") %></div>
+              <div class="date-month"><%= appointment.start_date.strftime("%b") %></div>
+            </div>
+            <div class="appointment-details">
+              <div class="appointment-time"><%= appointment.start_date.strftime("%H:%M") %></div>
+              <div class="appointment-reason"><%= appointment.reason %></div>
+              <%= link_to "Détails", appointment_path(appointment), class: "appointment-link" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <p>Aucun rendez-vous <%= past ? 'passé' : 'à venir' %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

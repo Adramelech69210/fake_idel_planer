@@ -1,0 +1,27 @@
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba($bleu-700, 0.1);
+  color: $bleu-700;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+
+  i {
+    font-size: 0.9rem;
+  }
+
+  &:hover {
+    background: $bleu-700;
+    color: $blanc-50;
+    transform: translateY(-1px);
+  }
+}
+
+.upload-button {
+  align-self: flex-end;
+}

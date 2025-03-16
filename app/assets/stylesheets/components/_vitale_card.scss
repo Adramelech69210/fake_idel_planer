@@ -1,0 +1,244 @@
+.vitale-card-container {
+  perspective: 1000px;
+  filter: drop-shadow(0 0 12px rgba(174, 255, 0, 0.4));
+  margin: 20px auto;
+  width: 300px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 8px;
+    right: 8px;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    filter: blur(16px);
+    border-radius: 50%;
+    z-index: -1;
+    transition: all 0.3s ease;
+  }
+
+  &:hover::after {
+    filter: blur(20px);
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+
+.vitale-card {
+  width: 300px;
+  height: 190px;
+  background: linear-gradient(135deg, #004d40 0%, #00796b 100%);
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transform-style: preserve-3d;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(60deg,
+      rgba(255,255,255,0) 20%,
+      rgba(255,255,255,0.1) 25%,
+      rgba(255,255,255,0) 30%);
+    transform: rotate(30deg);
+    animation: vitale-shine 8s infinite;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: rotateY(10deg) rotateX(5deg) scale(1.03);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+
+    .vitale-logo-text {
+      right: -78px;
+      text-shadow: 0 0 8px rgba(174, 255, 0, 0.7);
+    }
+
+    .vitale-photo-container {
+      transform: translateZ(8px);
+    }
+
+    .vitale-numero {
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+      transform: translateZ(4px) translateY(-2px);
+    }
+  }
+}
+
+.vitale-card-content {
+  padding: 16px;
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 12px;
+  transform-style: preserve-3d;
+}
+
+.vitale-photo-container {
+  width: 80px;
+  height: 96px;
+  background-color: $blanc-50;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+}
+
+.vitale-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05);
+}
+
+.vitale-info {
+  color: $blanc-50;
+  transform: translateZ(4px);
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+.vitale-name {
+  font-size: 18px;
+  margin: 0 0 4px 0;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    filter: blur(8px);
+    z-index: -1;
+  }
+}
+
+.vitale-infos {
+  font-size: 12px;
+  opacity: 0.8;
+  margin: 0 0 8px 0;
+  font-style: italic;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    filter: blur(8px);
+    z-index: -1;
+  }
+}
+
+.vitale-numero {
+  background-color: rgba(245, 245, 245, 0.95);
+  color: $blanc-100;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  transition: all 0.3s ease;
+  animation: vitale-pulse 3s infinite;
+  transform-style: preserve-3d;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  backdrop-filter: blur(5px);
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 10;
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 10px;
+    background: linear-gradient(90deg, #c9c9c9 0%, #e0e0e0 100%);
+    border-radius: 2px;
+    border: 1px solid #d0d0d0;
+  }
+}
+
+.vitale-logo-text {
+  position: absolute;
+  right: -80px;
+  bottom: 32px;
+  font-size: 66px;
+  font-weight: 900;
+  color: #aeff00;
+  transform: rotate(-270deg);
+  text-transform: uppercase;
+  opacity: 0.9;
+  transition: all 0.4s ease;
+  letter-spacing: -2px;
+  transform-style: preserve-3d;
+}
+
+@keyframes vitale-shine {
+  0% {
+    top: -100%;
+    left: -100%;
+  }
+  20% {
+    top: 100%;
+    left: 100%;
+  }
+  100% {
+    top: 100%;
+    left: 100%;
+  }
+}
+
+@keyframes vitale-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(174, 255, 0, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 4px rgba(174, 255, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(174, 255, 0, 0);
+  }
+}
