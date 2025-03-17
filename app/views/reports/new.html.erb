@@ -4,12 +4,12 @@
 
     <div class="mb-3">
       <%= f.label :start_date, "Date de début", class: "form-label" %>
-      <%= f.date_field :start_date, required: true, class: "form-control", data: { report_target: "startDate" } %>
+      <%= f.date_field :start_date, required: true, class: "form-control", data: { report_target: "startDate", controller: "datepicker" } %>
     </div>
 
     <div class="mb-3">
       <%= f.label :end_date, "Date de fin", class: "form-label" %>
-      <%= f.date_field :end_date, required: true, class: "form-control", data: { report_target: "endDate" } %>
+      <%= f.date_field :end_date, required: true, class: "form-control", data: { report_target: "endDate", controller: "datepicker" } %>
     </div>
 
     <div class="mb-3 text-center">
