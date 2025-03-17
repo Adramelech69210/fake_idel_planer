@@ -3,12 +3,45 @@
     <div class="vitale-card-content">
         <%= image_tag "ship.jpg", class: "vitale-ship" %>
       <div class="vitale-info">
-        <h2 class="vitale-name"><%= patient.last_name %>  <%= patient.first_name %></h2>
-        <p class="vitale-infos">Né(e) le <%= patient.date_of_birth.strftime("%d/%m/%Y") %></p>
-        <p class="vitale-infos"><%= patient.mutual %></p>
+         <h2 class="vitale-name d-flex">
+          <div data-controller="editable"
+              data-editable-url-value="<%= patient_path(@patient) %>"
+              data-editable-field-name-value="first_name"
+              class="me-1"> <div data-editable-target="field" contenteditable="true" data-action="dblclick->editable#edit blur->editable#update"><%= @patient.first_name %></div>
+          </div>
+          <div data-controller="editable"
+              data-editable-url-value="<%= patient_path(@patient) %>"
+              data-editable-field-name-value="last_name">
+            <div data-editable-target="field" contenteditable="true" data-action="dblclick->editable#edit blur->editable#update"><%= @patient.last_name %></div>
+          </div>
+        </h2>
+            <p class="vitale-infos">Né(e) le:
+          <span data-controller="editable"
+              data-editable-url-value="<%= patient_path(@patient) %>"
+              data-editable-field-name-value="date_of_birth"
+              data-editable-target="field" contenteditable="true" data-action="dblclick->editable#edit blur->editable#update"
+              >
+            <%= @patient.date_of_birth.strftime("%d/%m/%Y") %>
+          </span>
+          </p>
+        <p class="vitale-infos">
+          <span data-controller="editable"
+               data-editable-url-value="<%= patient_path(@patient) %>"
+               data-editable-field-name-value="mutual"
+               data-editable-target="field" contenteditable="true" data-action="dblclick->editable#edit blur->editable#update">
+            <%= @patient.mutual %>
+          </span>
+          </p>
       </div>
       <div class="vitale-logo-text">Vitale</div>
-      <div class="vitale-numero"><%= patient.social_security_number || "Numéro SS non renseigné" %></div>
+      <div class="vitale-numero">
+        <span data-controller="editable"
+               data-editable-url-value="<%= patient_path(@patient) %>"
+               data-editable-field-name-value="social_security_number"
+               data-editable-target="field" contenteditable="true" data-action="dblclick->editable#edit blur->editable#update">
+            <%= @patient.social_security_number || "Numéro SS non renseigné"%>
+        </span>
+      </div>
     </div>
   </div>
 </div>

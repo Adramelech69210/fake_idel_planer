@@ -23,6 +23,17 @@ class ReportsController < ApplicationController
     end
   end
 
+  def update
+    @report = Report.find(params[:id])
+
+    if @report.update(report_params)
+      redirect_to report_path(@report), notice: "Le rapport a été mis à jour avec succès."
+    else
+      flash.now[:alert] = "Erreur lors de la mise à jour du rapport."
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     if @report.destroy
       redirect_to reports_path, notice: "Le rapport a été supprimé avec succès."
@@ -32,24 +43,9 @@ class ReportsController < ApplicationController
   end
 
   def generate
-    date = params[:start_date].to_date.beginning_of_day
-    end_date = params[:end_date].to_date.end_of_day
-
-    appointments = Appointment.where(date: start_date..end_date, user: current_user)
-
-    report_text = "Relève du #{start_date.strftime("%d/%m/%Y")} au #{end_date.strftime("%d/%m/%Y")} :\n\n"
-
-    if appointments.any?
-      appointments.each do |appointment|
-        report_text += "Nom du patient : #{appointment.patient.first_name} #{appointment.patient.last_name}\n"
-        report_text += "Date : #{appointment.date.strftime("%d/%m à %Hh%M")}\n"
-        report_text += "Raison du rendez-vous : #{appointment.reason || 'Non spécifiée'}\n"
-        report_text += "Résumé : #{appointment.summary || 'Non spécifiée'}\n\n"
-      end
-    else
-      report_text += "Aucun rendez-vous trouvé pour la période sélectionnée.\n"
-    end
-
+    start_date = params[:start_date].to_date
+    end_date = params[:end_date].to_date
+    report_text = ReportGenerator.new(start_date, end_date, current_user).generate
 
     render json: { text: report_text }
   end
