@@ -28,7 +28,7 @@
 .vitale-card {
   width: 300px;
   height: 190px;
-  background: linear-gradient(135deg, #004d40 0%, #00796b 100%);
+  background: linear-gradient(135deg, $vert-400 0%, $vert-800 100%);
   border-radius: 14px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   transform-style: preserve-3d;
@@ -71,7 +71,7 @@
 
     .vitale-logo-text {
       right: -78px;
-      text-shadow: 0 0 8px rgba(174, 255, 0, 0.7);
+      text-shadow: 0 0 8px rgba(99, 197, 115, 0.7);
     }
 
     .vitale-photo-container {
@@ -186,19 +186,14 @@
   text-overflow: ellipsis;
   z-index: 10;
   white-space: nowrap;
+}
 
-  &::before {
-    content: '';
-    position: absolute;
-    left: -4px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 10px;
-    background: linear-gradient(90deg, #c9c9c9 0%, #e0e0e0 100%);
-    border-radius: 2px;
-    border: 1px solid #d0d0d0;
-  }
+.vitale-ship {
+  width: 30px;
+  position: absolute;
+  left: 16px;
+  bottom: 65px;
+  border-radius: 5px;
 }
 
 .vitale-logo-text {
@@ -207,7 +202,7 @@
   bottom: 32px;
   font-size: 66px;
   font-weight: 900;
-  color: #aeff00;
+  color: rgb(99, 197, 115);
   transform: rotate(-270deg);
   text-transform: uppercase;
   opacity: 0.9;
