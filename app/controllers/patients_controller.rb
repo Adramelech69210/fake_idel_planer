@@ -8,13 +8,9 @@ class PatientsController < ApplicationController
     end
   end
 
-
-
-
   def new
     @patient = Patient.new
   end
-
 
   def show
     if @patient.geocoded? # Vérifie si le patient est géocodé
