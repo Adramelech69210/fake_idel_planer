@@ -1,0 +1,12 @@
+<div class="patient-profile" data-controller="tabs">
+  <%= render 'patients/vitale_card', patient: @patient %>
+  <%= render 'patients/address_map', patient: @patient, marker: @marker %>
+  <%= render 'patients/tab_navigation' %>
+
+  <div class="tab-content">
+    <%= render 'patients/tab_info', patient: @patient %>
+    <%= render 'patients/tab_pathologies', patient: @patient %>
+    <%= render 'patients/tab_consultations', upcoming_appointments: @upcoming_appointments, past_appointments: @past_appointments %>
+    <%= render 'patients/tab_documents', patient: @patient %>
+  </div>
+</div>

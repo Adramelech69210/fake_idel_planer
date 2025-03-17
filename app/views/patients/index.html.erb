@@ -3,6 +3,21 @@
     <div class="new-patient-link">
       <%= link_to new_patient_path, class: "btn btn-secondary" do %>
         <i class="fa-solid fa-user-plus"></i>
+<div class="container">
+  <h1 class="title-patients text-center mb-4">Liste des Patients</h1>
+    <%= form_with url: patients_path, method: :get, class: "d-flex mb-3" do %>
+    <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "rechercher un patient"
+      %>
+    <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+  <% end %>
+  <% @patients.each do |patient| %>
+    <div class="card mb-3">
+      <%= link_to patient_path(patient), class: "card-body text-decoration-none" do %>
+        <h5 class="card-title"><%= patient.first_name %> <%= patient.last_name %></h5>
+        <p class="card-text"><%= patient.address %></p>
       <% end %>
     </div>
   </div>

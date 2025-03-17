@@ -1,5 +1,22 @@
-<div>
-  <%= render "appointments/show_day" %>
-</div>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <%= link_to 'Jour', request.params.merge(display: "day", jd: Date.today.jd), class: "nav-link #{params[:display] == 'day' || params[:display].nil? ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Semaine', request.params.merge(display: "week"), class: "nav-link #{params[:display] == 'week' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Mois', request.params.merge(display: "month"), class: "nav-link #{params[:display] == 'month' ? 'active' : ''}" %>
+  </li>
+</ul>
 
-<%= link_to '+', new_appointment_path, class: "btn btn-info rounded-circle calendar-pos" %>
+<% case params[:display] %>
+<% when 'month' %>
+  <%= render "appointments/show_month" %>
+<% when 'week' %>
+  <%= render "appointments/show_week" %>
+<% else %>
+  <%= render "appointments/show_day" %>
+<% end %>
+
+<%= link_to '+', new_appointment_path, class: "btn rounded-circle calendar-pos" %>

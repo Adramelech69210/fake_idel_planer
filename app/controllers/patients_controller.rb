@@ -4,15 +4,17 @@ class PatientsController < ApplicationController
 
   def index
     @patients = Patient.all
+    if params[:query].present?
+      @patients = @patients.where("first_name ILIKE :query OR last_name ILIKE :query", query: "%#{params[:query]}%")
+    end
   end
 
   def new
     @patient = Patient.new
   end
 
-
   def show
-     if @patient.geocoded? # Vérifie si le patient est géocodé
+    if @patient.geocoded? # Vérifie si le patient est géocodé
       @marker = {
         lat: @patient.latitude,
         lng: @patient.longitude,
@@ -23,7 +25,8 @@ class PatientsController < ApplicationController
       @marker = nil # Si le patient n'est pas géocodé, pas de marqueur
     end
     @appointments = @patient.appointments
-    @past_appointments = @appointments.where('end_date < ?', Time.current).order(end_date: :desc)
+    @past_appointments = @appointments.where('start_date < ?', Time.current).order(start_date: :desc)
+    @upcoming_appointments = @appointments.where("start_date >= ?", Time.current).order(start_date: :asc)
     @notes = @patient.notes.order(created_at: :desc)
     @pathologies = @patient.pathologies
   end

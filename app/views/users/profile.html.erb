@@ -1,0 +1,34 @@
+<div class="text-center mb-3">
+  <h1>Mon profil</h1>
+</div>
+
+  <div class="d-flex justify-content-center">
+    <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= render "shared/profil_picture" %>
+    </a>
+  </div>
+
+
+
+    <div id="profile-info">
+      <div class="card-body bg-light rounded mt-3 p-3">
+        <p><span class="fw-bold">Prénom :</span> <%= @user.first_name %></p>
+      </div>
+      <div class="card-body bg-light rounded mt-3 p-3">
+        <p><span class="fw-bold">Nom :</span> <%= @user.last_name %></p>
+      </div>
+      <div class="card-body bg-light rounded mt-3 p-3">
+        <p><span class="fw-bold">Courrier électronique :</span> <%= @user.email %></p>
+      </div>
+      <div class="card-body bg-light rounded mt-3 p-3">
+        <p><span class="fw-bold">Mot de passe :</span> <%= @user.password %></p>
+      </div>
+      <div class="text-center mt-3 mb-4">
+        <%= link_to "Modifier mon profil", edit_user_registration_path, class: "btn btn-dark" %>
+      </div>
+    </div>
+
+<%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+
+  </div>
+</div>

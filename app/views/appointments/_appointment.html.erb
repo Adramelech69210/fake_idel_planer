@@ -1,6 +1,0 @@
-<div class="appointment" style=
-  "top:<%= (appointment.start_date.hour - 6) * 60 + appointment.start_date.min %>px;
-  height: <%= (appointment.end_date - appointment.start_date)/60 %>px">
-  <h2><%= appointment.patient.first_name %></h2>
-  <p><%= appointment.reason %></p>
-</div>

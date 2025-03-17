@@ -1,0 +1,103 @@
+.documents-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.document-upload-card,
+.document-list-card {
+  background: $blanc-50;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.document-upload-form {
+  margin-top: 15px;
+}
+
+.document-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.document-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: $blanc-50;
+  border-radius: 8px;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: $blanc-50;
+  }
+
+  .document-icon {
+    font-size: 1.2rem;
+    color: $bleu-700;
+    margin-right: 12px;
+  }
+
+  .document-details {
+    flex: 1;
+
+    .document-title {
+      font-weight: 500;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 250px;
+    }
+
+    .document-meta {
+      font-size: 0.8rem;
+      color: $bleu-500;
+      margin-top: 3px;
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  .document-actions {
+    display: flex;
+    gap: 8px;
+
+    .document-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      color: $bleu-900;
+      transition: all 0.2s;
+
+      &.view {
+        background-color: rgba($bleu-900, 0.1);
+        color: $bleu-900;
+
+        &:hover {
+          background-color: $bleu-900;
+          color: $blanc-50;
+        }
+      }
+
+      &.delete {
+        background-color: rgba(#a83535, 0.1);
+        color: #a83535;
+
+        &:hover {
+          background-color: #a83535;
+          color: $blanc-50;
+        }
+      }
+    }
+  }
+}

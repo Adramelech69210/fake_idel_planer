@@ -1,22 +1,49 @@
 .container {
   margin: auto;
   padding: 20px;
+  max-width: 800px;
 }
 
 .card {
-  background-color: $bleu-100; //#f2fff2;
-  border: 5px solid $bleu-500;
-  border-radius: 0px;
+  background-color: $vert-50;
+  border: 3px solid $bleu-700;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 15px;
 }
 
 .card-title {
   font-size: 1.5rem;
   font-weight: bold;
+  color: $noir-950;
+  margin-bottom: 5px;
 }
 
 .card-text {
   font-size: 14px;
-  margin-bottom: 12px;
+  color: $noir-700;
+}
+
+a.card-body {
+  text-decoration: none;
+  display: block;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+h1 {
+  font-weight: bold;
+}
+
+.card {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .icon-button {
