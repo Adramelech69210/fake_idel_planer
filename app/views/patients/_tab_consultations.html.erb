@@ -1,0 +1,13 @@
+<div class="tab-pane" data-tabs-target="tabpane" data-tab-id="consultations">
+  <div class="appointments-container">
+    <%= render 'patients/appointment_section',
+              title: "Rendez-vous à venir",
+              appointments: upcoming_appointments,
+              past: false %>
+
+    <%= render 'patients/appointment_section',
+              title: "Historique des consultations",
+              appointments: past_appointments,
+              past: true %>
+  </div>
+</div>

@@ -16,22 +16,64 @@ export default class extends Controller {
 
     this.map.addControl(new mapboxgl.NavigationControl())
 
-    //attends que la carte soit chargée
+    //overlay map
+    this.directionsPanel = this.element.querySelector('.map-directions-panel')
+    this.directionsSteps = this.element.querySelector('.directions-steps')
+    this.durationInfo = this.element.querySelector('.duration-info')
+
+    //attends que la map soit chargee
     this.map.on('load', () => {
       this.addMarker()
       this.setupGeolocation()
-      this.addRouteLayer() //layer itineraire
+      this.addRouteLayer()
     })
-
-    //double clic pour fullscreen
-    this.element.addEventListener('dblclick', this.toggleFullscreen.bind(this))
   }
 
   disconnect() {
-    //nettoyage
     if (this.watchId) navigator.geolocation.clearWatch(this.watchId)
     if (this.map) this.map.remove()
   }
+
+  //vue plein ecran
+  toggleFullscreenDirections(event) {
+    event.preventDefault()
+
+    this.element.classList.toggle('fullscreen')
+
+    const isFullscreen = this.element.classList.contains('fullscreen')
+
+    if (isFullscreen) {
+      //empeche le scroll du body quand on est en fullscreen
+      document.body.style.overflow = 'hidden'
+
+      this.element.style.width = '100vw !important'
+      this.element.style.height = '100vh !important'
+      this.element.style.margin = '0 !important'
+      this.element.style.position = 'fixed'
+      this.element.style.top = '0'
+      this.element.style.left = '0'
+      this.element.style.zIndex = '9999'
+
+      if (this.userLocation) {
+        this.getDirections(this.userLocation)
+      }
+    } else {
+
+      document.body.style.overflow = ''
+
+      this.element.style = ""
+      this.element.style.width = '100%'
+      this.element.style.height = '350px'
+    }
+
+    setTimeout(() => {
+      this.map.resize()
+      if (this.userLocation) {
+        this.map.flyTo({ center: this.userLocation, duration: 1000 })
+      }
+    }, 100)
+  }
+
 
   //marqueur bruno
   addMarker() {
@@ -121,8 +163,8 @@ export default class extends Controller {
     this.userLocation = location
     this.userMarker.setLngLat(location)
 
-    //centre la carte
-    if (!this.isFullscreen && Math.random() > 0.8) {
+    //centre la carte si nécessaire
+    if (!this.element.classList.contains('fullscreen') && Math.random() > 0.8) {
       this.map.easeTo({ center: location, duration: 1000 })
     }
   }
@@ -153,95 +195,50 @@ export default class extends Controller {
       .catch(error => console.error("Erreur lors de la récupération de l'itinéraire:", error))
   }
 
+  //maj de displayInstructions
   displayInstructions(steps) {
-    let container = document.getElementById('route-instructions')
-    let toggleButton = document.getElementById('toggle-instructions-btn')
+    let html = ''
 
-    if (!container) {
-      const buttonContainer = document.createElement('div')
-      buttonContainer.className = 'd-flex justify-content-center mt-3 mb-2'
-      this.element.parentNode.insertBefore(buttonContainer, this.element.nextSibling)
-
-      toggleButton = document.createElement('button')
-      toggleButton.id = 'toggle-instructions-btn'
-      toggleButton.className = 'btn btn-blue'
-      toggleButton.textContent = 'Afficher les instructions'
-      buttonContainer.appendChild(toggleButton)
-
-      container = document.createElement('div')
-      container.id = 'route-instructions'
-      container.className = 'container p-3 mt-3 border rounded'
-      container.style.width = '100%'
-      container.style.display = 'none'
-      this.element.parentNode.insertBefore(container, buttonContainer.nextSibling)
-
-      toggleButton.addEventListener('click', () => {
-        const isHidden = container.style.display === 'none'
-        container.style.display = isHidden ? 'block' : 'none'
-        toggleButton.textContent = isHidden ? 'Masquer les instructions' : 'Afficher les instructions'
-      })
-    }
-
-    let html = '<h5>Instructions de navigation:</h5><ol>'
     steps.forEach(step => {
       const distance = step.distance >= 1000 ?
         `${(step.distance / 1000).toFixed(1)} km` :
         `${Math.round(step.distance)} m`
-      html += `<li>${step.maneuver.instruction} (${distance})</li>`
-    })
-    html += '</ol>'
-    container.innerHTML = html
-  }
 
-
-  //affiche la duree du trajet
-  displayDuration(seconds) {
-    let container = document.getElementById('route-duration')
-    if (!container) {
-      container = document.createElement('div')
-      container.id = 'route-duration'
-      container.className = 'container p-3 mt-3 border rounded'
-      this.element.parentNode.insertBefore(container, this.element.nextSibling)
-    }
-
-    const minutes = Math.floor(seconds / 60)
-    const remainingSeconds = Math.floor(seconds % 60)
-    container.innerHTML = `<h5>Durée du trajet : ${minutes} min ${(remainingSeconds < 10 ? '0' : '') + remainingSeconds} sec</h5>`
-  }
-
-  //plein ecran
-  toggleFullscreen(event) {
-    event.preventDefault()
-    event.stopPropagation()
-
-    this.isFullscreen = !this.isFullscreen
-
-    if (this.isFullscreen) {
-      this.originalStyle = {
-        width: this.element.style.width,
-        height: this.element.style.height,
-        position: this.element.style.position
+      //détermine 'icône à utiliser en fonction du type de direction
+      let icon = 'arrow-right'
+      if (step.maneuver.type.includes('turn')) {
+        if (step.maneuver.modifier.includes('right')) icon = 'arrow-right'
+        if (step.maneuver.modifier.includes('left')) icon = 'arrow-left'
       }
+      if (step.maneuver.type === 'depart') icon = 'play'
+      if (step.maneuver.type === 'arrive') icon = 'location-dot'
 
-      this.element.style.position = 'fixed'
-      this.element.style.top = '0'
-      this.element.style.left = '0'
-      this.element.style.width = '100vw'
-      this.element.style.height = '100vh'
-      this.element.style.zIndex = '9999'
+      html += `
+        <div class="step">
+          <span class="step-icon"><i class="fas fa-${icon}"></i></span>
+          <span class="step-instruction">${step.maneuver.instruction}</span>
+          <span class="step-distance">${distance}</span>
+        </div>
+      `
+    })
 
-      document.getElementById('route-instructions')?.classList.add('d-none')
-      document.getElementById('route-duration')?.classList.add('d-none')
-    } else {
-      Object.assign(this.element.style, this.originalStyle)
-
-      document.getElementById('route-instructions')?.classList.remove('d-none')
-      document.getElementById('route-duration')?.classList.remove('d-none')
-    }
-
-    this.map.resize()
-    if (this.userLocation) {
-      this.map.flyTo({ center: this.userLocation, duration: 1000 })
-    }
+    this.directionsSteps.innerHTML = html
   }
+
+//maj de displayDuration
+displayDuration(seconds) {
+  //arrondir au supérieur
+  const minutes = Math.ceil(seconds / 60);
+
+  //afficher seulement les minutes
+  if (minutes < 60) {
+    this.durationInfo.textContent = `${minutes} min`;
+  } else {
+    //pour les trajets de plus d'une heure
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    this.durationInfo.textContent = `${hours} h ${remainingMinutes > 0 ? remainingMinutes + ' min' : ''}`;
+  }
+}
+
 }

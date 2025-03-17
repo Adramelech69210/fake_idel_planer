@@ -1,0 +1,94 @@
+// Rendez-vous
+.appointments-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.appointment-section {
+  border-radius: 10px;
+  background: $blanc-50;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.appointments-timeline {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.appointment-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: rgba($bleu-700, 0.05);
+  border-radius: 8px;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+
+  &.past {
+    background-color: $blanc-50;
+  }
+
+  .appointment-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: $bleu-700;
+    color: $blanc-50;
+    border-radius: 8px;
+    text-align: center;
+    margin-right: 15px;
+
+    &.past {
+      background: $blanc-400;
+    }
+
+    .date-day {
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .date-month {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+  }
+
+  .appointment-details {
+    flex: 1;
+
+    .appointment-time {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: $bleu-700;
+    }
+
+    .appointment-reason {
+      font-size: 0.95rem;
+      color: $bleu-900;
+      margin: 2px 0 5px;
+    }
+
+    .appointment-link {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: $bleu-700;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<div class="tab-pane" data-tabs-target="tabpane" data-tab-id="notes">
+  <div class="notes-container">
+    <div class="section-header">
+      <h5>Informations complémentaires</h5>
+      <%= link_to new_patient_note_path(patient), class: "action-button" do %>
+        <i class="fa-solid fa-plus"></i>
+        <span>Ajouter</span>
+      <% end %>
+    </div>
+
+    <div class="notes-list" data-controller="animation" data-animation-delay-value="100">
+      <% if patient.notes.any? %>
+        <% patient.notes.each_with_index do |note, index| %>
+          <div class="note-card" data-animation-target="item" data-index="<%= index %>">
+            <div class="note-content"><%= note.text %></div>
+            <div class="note-meta">Ajoutée le <%= note.created_at.strftime("%d/%m/%Y à %H:%M") %></div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="empty-state" data-animation-target="item" data-index="0">
+          <div class="empty-state-icon"><i class="fas fa-sticky-note"></i></div>
+          <p>Aucune note n'a été ajoutée pour ce patient</p>
+          <%= link_to "Ajouter une note", new_patient_note_path(patient), class: "btn btn-primary btn-sm" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
