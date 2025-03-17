@@ -1,27 +1,21 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
 puts "cleaning database"
 
+Appointment.destroy_all
 User.destroy_all
 Patient.destroy_all
+Group.destroy_all
+Pathology.destroy_all
+Note.destroy_all
 
 group_1 = Group.create!
 
-puts "creating user"
+puts "creating users"
 User.create!(first_name: "Léo", last_name: "Martin",  email: "leo@gmail.com", password: "password", group: group_1)
 User.create!(first_name: "Clara", last_name: "Dupont",  email: "clara@gmail.com", password: "password", group: group_1)
 User.create!(first_name: "Hugo", last_name: "Lefevre",  email: "hugo@gmail.com", password: "password", group: group_1)
 
 
-puts "creating patient"
+puts "creating patients"
 Patient.create!(first_name: "Sophie", last_name:"Moreau", address: "5 Rue Centrale 69210 L'Arbresle", date_of_birth: "15/02/1983", social_security_number: "2 69 00 00 000 000 00", mutual: "Harmonie Mutuelle",referring_doctor:"Dr. Lucie Bernard", group: group_1)
 Patient.create!(first_name: "Alexandre", last_name:"Petit", address: "12 Avenue du Général de Gaulle 69160 Tassin-la-Demi-Lune", date_of_birth: "27/06/1965", social_security_number: "1 69 00 00 000 000 00", mutual: "MGEN",referring_doctor:"Dr. Pierre Lemoine", group: group_1)
 Patient.create!(first_name: "Marion", last_name:"Gauthier", address: "31 Avenue du Chater 69340 Francheville", date_of_birth: "03/11/1979", social_security_number: "2 69 00 00 000 000 00", mutual: "MAIF",referring_doctor:"Dr. Sophie Durand", group: group_1)
@@ -43,12 +37,9 @@ Patient.create!(first_name: "Benoit", last_name:"Gagnon", address: "7 Avenue Lam
 Patient.create!(first_name: "Claire", last_name:"Tanguy", address: "25 Route de Bordeaux 69570 Dardilly", date_of_birth: "30/01/1972", social_security_number: "2 69 00 00 000 000 00", mutual: "AESIO",referring_doctor:"Dr. Alice Mercier", group: group_1)
 Patient.create!(first_name: "Jérome", last_name:"Pires", address: "26 Route de Lyon 69280 Sainte-Consorce", date_of_birth: "24/11/1964", social_security_number: "1 69 00 00 000 000 00", mutual: "MGEN",referring_doctor:"Dr. David Girard", group: group_1)
 
-puts "finsished"
 
-users = User.all.to_a
-patients = Patient.all.to_a
 
-summaries = [
+reasons = [
   "Prise de sang",
   "Bas de contentions",
   "Vaccin covid",
@@ -58,6 +49,19 @@ summaries = [
   "Bandages"
 ]
 
+summaries = [
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "Tout est Ok, fin des rdvs programmés",
+  "Retour de l'infection, prévoir rdv médecin traitant",
+  "Bandages a prévoir moins serrés",
+]
+
+puts "creating appointments"
 50.times do
   start_datetime = rand(Time.now..(Time.now + 3.months))
   start_datetime = start_datetime.change(min: (start_datetime.min / 10) * 10)
@@ -66,5 +70,59 @@ summaries = [
 
   final_datetime = start_datetime + duration
 
-  Appointment.create!(start_date: start_datetime, end_date: final_datetime, user_id: users.sample.id, patient_id: patients.sample.id, summary: summaries.sample)
+  Appointment.create!(start_date: start_datetime, end_date: final_datetime, user: User.all.sample, patient: Patient.all.sample, reason: reasons.sample, summary: summaries.sample)
 end
+
+puts "creating pathologies"
+pathologies_list = [
+  "Hypertension artérielle",
+  "Diabète de type 2",
+  "Asthme chronique",
+  "Arthrite rhumatoïde",
+  "Allergie saisonnière",
+  "Insuffisance cardiaque",
+  "Hypothyroïdie",
+  "Cholestérol élevé",
+  "Troubles digestifs",
+  "Problèmes rénaux",
+  "Sclérose en plaques",
+  "Maladie de Crohn",
+  "Antécédent de crise cardiaque",
+  "Bronchite chronique",
+  "Migraines fréquentes",
+  "Eczéma"
+]
+
+Patient.all.each do |patient|
+  rand(1..3).times do
+    Pathology.create!(
+      patient: patient,
+      description: pathologies_list.sample
+    )
+  end
+end
+
+puts "creating notes"
+notes_content = [
+  "RAS",
+  "Prévoir un suivi médical après la prochaine visite.",
+  "Patient améliore bien suite au dernier traitement.",
+  "Attention au régime alimentaire indiqué.",
+  "A subi une intervention récente, vigilance sur les points de suture.",
+  "Constat d'une augmentation de la tension artérielle.",
+  "Pas de nouvelles observations lors de cette visite.",
+  "Patient nécessite une attention accrue pour ses médicaments.",
+  "Problèmes de déplacement notés, assistance possible.",
+  "A signalé une douleur au niveau du bas du dos ; à surveiller."
+]
+
+Patient.all.each do |patient|
+  rand(2..5).times do
+    Note.create!(
+      patient: patient,
+      text: notes_content.sample
+    )
+  end
+end
+
+puts "finished"

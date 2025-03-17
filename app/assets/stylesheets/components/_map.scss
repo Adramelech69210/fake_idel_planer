@@ -1,0 +1,22 @@
+.mapbox-container {
+
+  height: 300px;
+  border-radius: 8px;
+}
+
+.instructions-container {
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.instruction-step:not(:last-child) {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.btn-blue {
+  background-color: $bleu-700;
+  color: $blanc-50;
+}

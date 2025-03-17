@@ -1,0 +1,131 @@
+.calendar {
+  position: relative;
+  background-color: #f5f7fa;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+
+  h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 600;
+    color: $noir-600;
+  }
+
+  .date-nav {
+    display: flex;
+    gap: 10px;
+
+    .btn {
+      background-color: $blanc-100;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: $blanc-100;
+      }
+    }
+  }
+}
+
+.hour_container {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  color: #444;
+  border-top: 1px solid $blanc-100;
+
+  &:last-child {
+    border-bottom: 1px solid $blanc-100;
+  }
+
+  .time-label {
+    width: 80px;
+    text-align: right;
+    padding-right: 15px;
+    font-size: 0.85rem;
+    color: $blanc-400;
+    font-weight: 500;
+  }
+
+  .hour-content {
+    flex: 1;
+    position: relative;
+  }
+
+  .half_hour {
+    height: 50%;
+
+    &.half_hour_top {
+      border-bottom: 1px dashed $blanc-100;
+    }
+  }
+}
+
+.hour-content {
+  width: 91%;
+}
+
+.half_hour {
+  height: 50%;
+}
+
+.half_hour_top {
+  border-bottom: 1px dotted black;
+}
+
+.add-appointment {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  z-index: 50;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: $bleu-900;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.nav-tabs {
+  border-bottom: 2px solid #e4e6eb;
+  margin-bottom: 20px;
+
+  .nav-link {
+    color: $blanc-400;
+    font-weight: 500;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+
+    &.active {
+      color: $bleu-500;
+      border-bottom: 3px solid $bleu-300;
+    }
+
+    &:hover {
+      border-color: transparent;
+      color: $bleu-500;
+    }
+  }
+}

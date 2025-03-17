@@ -6,4 +6,12 @@ class User < ApplicationRecord
 
   belongs_to :group, optional: true
   has_one_attached :photo
+
+  def picture_url
+    if self.photo.attached?
+      photo.url
+    else
+      "https://ui-avatars.com/api/?name=#{first_name} #{last_name}&size=64"
+    end
+  end
 end

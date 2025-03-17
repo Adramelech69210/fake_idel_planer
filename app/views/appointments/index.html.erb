@@ -1,2 +1,22 @@
-<h1>Appointments#index</h1>
-<p>Find me in app/views/appointments/index.html.erb</p>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <%= link_to 'Jour', request.params.merge(display: "day", jd: Date.today.jd), class: "nav-link #{params[:display] == 'day' || params[:display].nil? ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Semaine', request.params.merge(display: "week"), class: "nav-link #{params[:display] == 'week' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Mois', request.params.merge(display: "month"), class: "nav-link #{params[:display] == 'month' ? 'active' : ''}" %>
+  </li>
+</ul>
+
+<% case params[:display] %>
+<% when 'month' %>
+  <%= render "appointments/show_month" %>
+<% when 'week' %>
+  <%= render "appointments/show_week" %>
+<% else %>
+  <%= render "appointments/show_day" %>
+<% end %>
+
+<%= link_to '+', new_appointment_path, class: "btn rounded-circle calendar-pos" %>

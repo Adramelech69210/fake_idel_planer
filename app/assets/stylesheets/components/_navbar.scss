@@ -10,3 +10,21 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+.avatar_position {
+  margin: 12px;
+  position: fixed;
+  top: 0px;
+  z-index: 1;
+}
+
+.navbar_top {
+  background-color: #F4F4F4;
+  // position: bottom;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  height: 60px;
+  color: white;
+  z-index: 100;
+}

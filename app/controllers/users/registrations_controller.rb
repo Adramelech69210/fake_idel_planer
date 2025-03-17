@@ -20,9 +20,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super do |resource|
+      return redirect_to profile_path if resource.errors.empty?
+    end
+  end
 
   # DELETE /resource
   # def destroy

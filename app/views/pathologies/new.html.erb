@@ -1,0 +1,9 @@
+<h1>Nouvelle pathologie pour <%= @patient.last_name %> <%= @patient.first_name %></h1>
+<p>Ajouter une nouvelle pathologie pour le patient.</p>
+
+<%= simple_form_for([@patient, @pathology], url: patient_pathologies_path(@patient)) do |f| %>
+  <%= f.input :description, label: "Description de la pathologie" %>
+  <%= f.button :submit, "Créer la pathologie" %>
+<% end %>
+
+<%= link_to 'Retour au patient', patient_path(@patient) %>
