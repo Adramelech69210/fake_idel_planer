@@ -5,15 +5,33 @@
   padding: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
+  padding-top: 7rem;
+}
+
+.display-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  z-index: 1000;
+  background-color: white;
+  width: 100%;
+  padding-top: 20px;
 }
 
 .calendar-header {
+  padding: 1rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  margin-bottom: 15px;
-
+  .dates {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
   h2 {
     font-size: 1.5rem;
     margin: 0;
@@ -127,5 +145,35 @@
       border-color: transparent;
       color: $bleu-500;
     }
+  }
+}
+
+.stick {
+  position: fixed;
+  z-index: 1000;
+  background-color: white;
+  width: 100%;
+}
+
+.calendar-pos {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  z-index: 50;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: $bleu-900;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   }
 }
