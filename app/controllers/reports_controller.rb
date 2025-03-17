@@ -30,7 +30,7 @@ class ReportsController < ApplicationController
       redirect_to report_path(@report), notice: "Le rapport a été mis à jour avec succès."
     else
       flash.now[:alert] = "Erreur lors de la mise à jour du rapport."
-      render :show
+      render :show, status: :unprocessable_entity
     end
   end
 
