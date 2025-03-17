@@ -1,9 +1,7 @@
 <div class="vitale-card-container d-flex justify-content-center align-items-center">
   <div class="vitale-card">
     <div class="vitale-card-content">
-      <div class="vitale-photo-container">
-        <%= image_tag "seringue_bw.png", class: "vitale-photo" %>
-      </div>
+        <%= image_tag "ship", class: "vitale-ship" %>
       <div class="vitale-info">
         <h2 class="vitale-name"><%= patient.last_name %>  <%= patient.first_name %></h2>
         <p class="vitale-infos">Né(e) le <%= patient.date_of_birth.strftime("%d/%m/%Y") %></p>
