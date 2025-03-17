@@ -1,0 +1,5 @@
+# config/meta.yml
+meta_product_name: "Idel Planner"
+meta_title: "Idel Planner - Donner plus de temps à l'humain"
+meta_description: "IdelPlanner est une application web pour simplifier le quotidien des infirmières et infirmiers libérales / libéraux"
+meta_image: "seringue_bw.png" # should exist in `app/assets/images/`
