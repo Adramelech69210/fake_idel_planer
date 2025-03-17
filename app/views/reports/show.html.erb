@@ -1,0 +1,10 @@
+<h1>Rapport du <%= @report.start_date.strftime("%d/%m/%Y") %> au <%= @report.end_date.strftime("%d/%m/%Y") %></h1>
+
+<pre><%= @report.text %></pre>
+
+<div class="actions">
+  <%= link_to "Retour à la liste", reports_path, class: "btn btn-secondary" %>
+  <%= link_to 'Supprimer le rendez-vous', report_path(@report),
+              data: { turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr?' },
+              class: "btn btn-danger w-50" %>
+</div>

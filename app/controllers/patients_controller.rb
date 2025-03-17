@@ -1,6 +1,7 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy, :upload_ordonnance, :destroy_ordonnance]
 
+
   def index
     @patients = Patient.all
     if params[:query].present?
@@ -32,9 +33,12 @@ class PatientsController < ApplicationController
 
   def create
     @patient = Patient.new(patient_params)
-
+    @patient.group_id = current_user.group_id
     if @patient.save
-      redirect_to @patient, notice: "Patient was successfully created."
+      if params[:patient][:ordonnances].present? && params[:patient][:ordonnances] != [""]
+        @patient.ordonnances.attach(params[:patient][:ordonnances])
+      end
+      redirect_to @patient, notice: "Patient créé avec succès !"
     else
       render :new, status: :unprocessable_entity
     end
@@ -43,39 +47,46 @@ class PatientsController < ApplicationController
   def edit
   end
 
+  # def update
+  #   if @patient.update(patient_params)
+  #     redirect_to @patient, notice: "Le patient a été mis à jour avec succès.", status: :see_other
+  #   else
+  #     render :edit, status: :unprocessable_entity
+  #   end
+  # end
+
   def update
     if @patient.update(patient_params)
-      redirect_to @patient, notice: "Patient was successfully updated.", status: :see_other
+      render json: { success: true }
     else
-      render :edit, status: :unprocessable_entity
+      render json: { success: false, errors: @patient.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @patient.destroy!
-    redirect_to patients_url, notice: "Patient was successfully destroyed.", status: :see_other
+    redirect_to patients_url, notice: "Le patient a été détruit avec succès.", status: :see_other
   end
 
   def upload_ordonnance
-    if params[:patient].present? && params[:patient][:ordonnances].present? && params[:patient][:ordonnances]!=[""]
+    if params[:patient][:ordonnances].present? && params[:patient][:ordonnances] != [""]
       @patient.ordonnances.attach(params[:patient][:ordonnances])
-      redirect_to @patient, notice: "Ordonnance(s) uploadée(s) avec succès !"
+      redirect_to edit_patient_path(@patient), notice: "Ordonnance(s) téléchargée(s) avec succès !"
     else
-      redirect_to @patient, alert: "Aucune ordonnance à uploader."
+      redirect_to edit_patient_path(@patient), alert: "Aucune ordonnance à télécharger."
     end
   end
-
-
-
-
-
-
 
   def destroy_ordonnance
     ordonnance = @patient.ordonnances.find(params[:ordonnance_id])
     ordonnance.purge
-    redirect_to @patient, notice: "Ordonnance supprimée avec succès."
+    if request.referer&.include?("/edit")
+      redirect_to edit_patient_path(@patient), notice: "Ordonnance supprimée avec succès."
+    else
+      redirect_to @patient, notice: "Ordonnance supprimée avec succès."
+    end
   end
+
 
   private
 
@@ -84,6 +95,6 @@ class PatientsController < ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:first_name, :last_name, :address, :date_of_birth, :social_security_number, :mutual, :referring_doctor, ordonnances: [])
+    params.require(:patient).permit(:first_name, :last_name, :address, :date_of_birth, :social_security_number, :mutual, :referring_doctor, :group_id, :latitude, :longitude, ordonnances: [])
   end
 end

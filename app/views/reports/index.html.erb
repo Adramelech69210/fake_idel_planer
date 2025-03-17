@@ -1,0 +1,26 @@
+<h1>Liste des rapports</h1>
+
+<div>
+  <%= link_to "Créer un nouveau rapport", new_report_path, class: "btn btn-primary", style: "margin-bottom: 20px;" %>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Période</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reports.each do |report| %>
+      <tr>
+        <td><%= report.id %></td>
+        <td>Du <%= report.start_date.strftime("%d/%m/%Y") %> au <%= report.end_date.strftime("%d/%m/%Y") %></td>
+        <td>
+          <%= link_to "Voir", report_path(report), class: "btn btn-info" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

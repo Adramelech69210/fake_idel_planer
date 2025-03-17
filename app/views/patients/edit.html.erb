@@ -1,1 +1,43 @@
-<h1>EDIT</h1>
+<div class="container">
+  <h1>Modifier le patient</h1>
+
+  <%= simple_form_for(@patient) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :address %>
+      <%= f.input :date_of_birth, as: :date, html5: false, start_year: 1910, end_year: Date.today.year %>
+      <%= f.input :social_security_number %>
+      <%= f.input :mutual %>
+      <%= f.input :referring_doctor %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Mettre à jour le patient", class: "btn btn-primary" %>
+      <%= link_to "Retour", patient_path(@patient), class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+
+  <div class="mt-4">
+    <h2>Ordonnances</h2>
+
+    <%# Formulaire pour uploader des ordonnances %>
+    <%= form_with(model: @patient, url: upload_ordonnance_patient_path(@patient), method: :post, local: true) do |form| %>
+      <div class="mb-3">
+        <%= form.label :ordonnances, "Uploader une ordonnance" %>
+        <%= form.file_field :ordonnances, multiple: true, class: "form-control" %>
+      </div>
+      <%= form.submit "Uploader", class: "btn btn-success" %>
+    <% end %>
+
+    <%# Liste des ordonnances existantes %>
+    <ul class="list-group mt-3">
+      <% @patient.ordonnances.each do |ordonnance| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <%= link_to ordonnance.filename, rails_blob_path(ordonnance, disposition: "attachment"), target: "_blank" %>
+          <%= link_to "Supprimer", destroy_ordonnance_patient_path(@patient, ordonnance_id: ordonnance.id), data: {turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr?'}, class: "btn btn-danger btn-sm" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
