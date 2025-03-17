@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   root to: "appointments#index"
+
   resources :appointments, except: [:edit]
+
+  resources :reports, only: [:index, :new, :create, :show, :destroy] do
+    collection do
+      get :generate
+    end
+  end
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -8,13 +15,14 @@ Rails.application.routes.draw do
   }
 
   resources :patients do
-    resources :notes
-    resources :pathologies
+    resources :notes, only: [:index, :new, :create, :destroy]
+    resources :pathologies, only: [:index, :new, :create, :destroy]
+
     member do
       post :upload_ordonnance
       delete :destroy_ordonnance
     end
   end
 
-  get "profile" => "users#profile"
+  get "profile", to: "users#profile"
 end
