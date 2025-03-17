@@ -3,12 +3,16 @@
     <div class="col-12 col-md-9">
       <div class="d-flex justify-content-between align-items-start mb-1">
         <div>
-          <p class="fw-bold ms-3 me-3" style="font-size: 1.2rem; margin-bottom: 0;" contenteditable="true" data-patient-id="<%= @patient.id %>" data-field="last_name">
-            <%= @patient.last_name %>
-          </p>
-          <p class="fw-bold ms-3 me-3" style="font-size: 1.2rem; margin-bottom: 0;" contenteditable="true" data-patient-id="<%= @patient.id %>" data-field="first_name">
-            <%= @patient.first_name %>
-          </p>
+          <div data-controller="editable"
+            data-editable-url-value="<%= patient_path(@patient) %>"
+            data-editable-field-name-value="first_name">
+            <div data-editable-target="field" contenteditable="true" data-action="dblclick->editable#edit blur->editable#update"><%= @patient.first_name %></div>
+          </div>
+          <div data-controller="editable"
+              data-editable-url-value="<%= patient_path(@patient) %>"
+              data-editable-field-name-value="last_name">
+            <div data-editable-target="field" contenteditable="true" data-action="dblclick->editable#edit blur->editable#update"><%= @patient.last_name %></div>
+          </div>
         </div>
        <div class="me-3 mt-1 d-flex flex-column align-items-end">
         <p style="font-size: 1rem;" contenteditable="true" data-patient-id="<%= @patient.id %>" data-field="date_of_birth">
@@ -164,3 +168,8 @@
     <% end %>
   </div>
 </div>
+
+<script>scr="editable_fields"</script>
+
+
+<%# <%= javascript_include_tag 'editable_fields' %> %>

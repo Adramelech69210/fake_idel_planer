@@ -1,6 +1,7 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy, :upload_ordonnance, :destroy_ordonnance]
 
+
   def index
     @patients = Patient.all
   end
@@ -52,11 +53,10 @@ class PatientsController < ApplicationController
   # end
 
   def update
-    @patient = Patient.find(params[:id])
     if @patient.update(patient_params)
       render json: { success: true }
     else
-      render json: { success: false }, status: :unprocessable_entity
+      render json: { success: false, errors: @patient.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
