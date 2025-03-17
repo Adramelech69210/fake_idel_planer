@@ -1,0 +1,22 @@
+<%= form_with model: @report, local: true, data: { controller: "report" } do |f| %>
+  <div>
+    <%= f.label :start_date, "Date de début" %>
+    <%= f.date_field :start_date, required: true, data: { report_target: "startDate" } %>
+  </div>
+
+  <div>
+    <%= f.label :end_date, "Date de fin" %>
+    <%= f.date_field :end_date, required: true, data: { report_target: "endDate" } %>
+  </div>
+
+  <div>
+    <%= button_tag "Générer le rapport", type: "button", data: { action: "click->report#generateReport" } %>
+  </div>
+
+  <div>
+    <%= f.label :text, "Contenu du rapport" %>
+    <%= f.text_area :text, rows: 10, data: { report_target: "textArea" } %>
+  </div>
+
+  <%= f.submit "Sauvegarder le rapport", class: "btn btn-primary" %>
+<% end %>
