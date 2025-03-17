@@ -1,14 +1,16 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <%= link_to 'Jour', request.params.merge(display: "day", jd: Date.today.jd), class: "nav-link #{params[:display] == 'day' || params[:display].nil? ? 'active' : ''}" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to 'Semaine', request.params.merge(display: "week"), class: "nav-link #{params[:display] == 'week' ? 'active' : ''}" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to 'Mois', request.params.merge(display: "month"), class: "nav-link #{params[:display] == 'month' ? 'active' : ''}" %>
-  </li>
-</ul>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="d-flex align-items-center">
+  <a class="">
+      <%= link_to 'Jour', request.params.merge(display: "day", jd: Date.today.jd), class: "nav-link #{params[:display] == 'day' || params[:display].nil? ? 'active' : ''}" %>
+  </a>
+  <a class="">
+      <%= link_to 'Semaine', request.params.merge(display: "week"), class: "nav-link #{params[:display] == 'week' ? 'active' : ''}" %>
+  </a>
+  <a class="">
+       <%= link_to 'Mois', request.params.merge(display: "month"), class: "nav-link #{params[:display] == 'month' ? 'active' : ''}" %>
+  </a>
+  </div>
+</div>
 
 <% case params[:display] %>
 <% when 'month' %>
