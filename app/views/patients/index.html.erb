@@ -1,5 +1,5 @@
 <div class="container-patient bg-white">
-  <%= form_with url: patients_path, method: :get, class: "d-flex mb-3" do %>
+  <%= form_with url: patients_path, method: :get, class: "d-flex mb-3 search-bar" do %>
     <div class="input-group">
       <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher un patient" %>
       <button type="submit" class="btn btn-secondary">
@@ -9,12 +9,13 @@
   <% end %>
 
   <div class="patients-list">
+    <a href="/patients/new" class="btn rounded-circle calendar-pos">+</a>
     <% @patients.each_with_index do |patient, index| %>
       <div class="patient-card">
         <%= link_to patient_path(patient), class: "patient-link d-flex justify-content-between align-items-center text-decoration-none" do %>
           <div class="patient-info">
             <strong class="fw-bold"><%= patient.first_name.capitalize %> <%= patient.last_name.upcase %></strong>
-            <div class="text-muted small"><%= patient.address %></div>
+            <div class="text-muted small"><%= truncate(patient.address, length: 38, omission: '...') %></div>
           </div>
           <span class="text-muted symbol fa-solid fa-chevron-right"></span>
         <% end %>
