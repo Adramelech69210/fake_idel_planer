@@ -1,11 +1,3 @@
-<div class="calendar-header">
-  <h2><%= I18n.with_locale(:fr) { l(@day, format: :long) } %></h2>
-  <div class="date-nav">
-    <%= link_to t('pagination.previous'), request.params.merge(jd: (@day - 1.day).jd), class: 'btn' %>
-    <%= link_to t('pagination.today'), request.params.merge(jd: Date.today.jd), class: 'btn' %>
-    <%= link_to t('pagination.next'), request.params.merge(jd: (@day + 1.day).jd), class: 'btn' %>
-  </div>
-</div>
 
 
 <%= render "appointments/calendar" %>
