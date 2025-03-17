@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :appointments, except: [:edit]
 
-  resources :reports, only: [:index, :new, :create, :show, :destroy] do
+  resources :reports, only: [:index, :new, :create, :show, :update, :destroy] do
     collection do
       get :generate
     end

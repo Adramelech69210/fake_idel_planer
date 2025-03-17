@@ -1,6 +1,22 @@
 <h1>Rapport du <%= @report.start_date.strftime("%d/%m/%Y") %> au <%= @report.end_date.strftime("%d/%m/%Y") %></h1>
 
-<pre><%= @report.text %></pre>
+<%= turbo_frame_tag dom_id(@report, :text) do %>
+  <% if params[:editing] == "true" %>
+    <%= form_with(model: @report, url: report_path(@report), method: :patch, local: true) do |f| %>
+      <div class="mb-3">
+        <%= f.label :text, "Contenu du rapport", class: "form-label" %>
+        <%= f.text_area :text, class: "form-control", rows: 5 %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Enregistrer les modifications", class: "btn btn-success" %>
+        <%= link_to "Annuler", report_path(@report), class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  <% else %>
+    <pre><%= @report.text %></pre>
+    <%= link_to "Modifier", report_path(@report, editing: true), class: "btn btn-primary" %>
+  <% end %>
+<% end %>
 
 <div class="actions">
   <%= link_to "Retour à la liste", reports_path, class: "btn btn-secondary" %>
