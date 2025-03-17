@@ -11,9 +11,9 @@ class AppointmentsController < ApplicationController
       @current_month = Date.new(year, month, 1)
     when 'week'
       @days = @day.beginning_of_week(:monday)..@day.end_of_week(:monday) + 1
-      @appointments = Appointment.where(user: current_user, start_date: @days)
+      @appointments = Appointment.where(user: current_user, date: @days)
     else # when 'day' or default
-      @appointments = Appointment.where(user: current_user, start_date: @day.all_day)
+      @appointments = Appointment.where(user: current_user, date: @day.all_day)
     end
   end
 
@@ -31,8 +31,16 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params)
     @appointment.user = current_user
+    # if @appointment.save
+    #   redirect_to appointments_path, notice: "Rendez-vous créé !"
+    # else
+    #   render :new, status: :unprocessable_entity
+    # end
     if @appointment.save
-      redirect_to appointments_path, notice: "Rendez-vous créé !"
+      respond_to do |format|
+        format.html { redirect_to appointments_path, notice: "Rendez-vous créé !" }
+        format.turbo_stream
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -60,6 +68,6 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:start_date, :end_date, :reason, :summary, :patient_id)
+    params.require(:appointment).permit(:date, :start_time, :end_time, :reason, :summary, :patient_id)
   end
 end

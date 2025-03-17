@@ -1,29 +1,10 @@
 
-<div class="form-container">
-  <div class="form-wrapper">
-    <%= simple_form_for [@appointment] do |f| %>
-      <%= f.error_notification %>
-      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= turbo_frame_tag "new_appointment" do %>
+  <h1 class="h3 modal-header">
+    New appointment
+  </h1>
 
-      <div class="form-group">
-  <%= f.input :reason, label: "Raison", placeholder: "Entrez votre raison ici", input_html: { class: 'form-control' } %>
-      </div>
-<div class="form-group">
-  <%= f.input :start_date, label: "Date de début", placeholder: "Entrez votre heure de debut ici", input_html: { class: 'form-control' } %>
-      </div>
-      <div class="form-group">
-  <%= f.input :end_date, label: "Date de fin", placeholder: "Entrez votre heure de fin ici", input_html: { class: 'form-control' } %>
-      </div>
-
-      <div class="form-group">
-    <%= f.association :patient,
-
-                  include_blank: "-- Choisir Patient --", label: "Patient", input_html: { class: 'form-control' } %>
-      </div>
-
-      <div class="form-group text-center">
-        <button class="button-85" type="submit">Ajouter le commentaire</button>
-      </div>
-    <% end %>
+  <div class="modal-body">
+    <%= render "appointments/form", appointment: @appointment %>
   </div>
-</div>
+<% end %>

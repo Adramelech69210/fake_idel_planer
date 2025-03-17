@@ -20,3 +20,9 @@
 <% end %>
 
 <%= link_to '+', new_appointment_path, class: "btn rounded-circle calendar-pos" %>
+
+<%= link_to "New appointment",
+                  new_appointment_path,
+                  class: "btn btn-primary",
+                  data: { turbo_frame: "new_appointment" } %>
+<%= turbo_frame_tag "new_appointment" %>

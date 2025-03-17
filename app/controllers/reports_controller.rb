@@ -32,17 +32,17 @@ class ReportsController < ApplicationController
   end
 
   def generate
-    start_date = params[:start_date].to_date.beginning_of_day
+    date = params[:start_date].to_date.beginning_of_day
     end_date = params[:end_date].to_date.end_of_day
 
-    appointments = Appointment.where(start_date: start_date..end_date, user: current_user)
+    appointments = Appointment.where(date: start_date..end_date, user: current_user)
 
     report_text = "Relève du #{start_date.strftime("%d/%m/%Y")} au #{end_date.strftime("%d/%m/%Y")} :\n\n"
 
     if appointments.any?
       appointments.each do |appointment|
         report_text += "Nom du patient : #{appointment.patient.first_name} #{appointment.patient.last_name}\n"
-        report_text += "Date : #{appointment.start_date.strftime("%d/%m à %Hh%M")}\n"
+        report_text += "Date : #{appointment.date.strftime("%d/%m à %Hh%M")}\n"
         report_text += "Raison du rendez-vous : #{appointment.reason || 'Non spécifiée'}\n"
         report_text += "Résumé : #{appointment.summary || 'Non spécifiée'}\n\n"
       end
