@@ -1,16 +1,27 @@
-<%= simple_form_for(@patient) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :address %>
-    <%= f.input :date_of_birth, as: :date, start_year: 1910, end_year: Date.today.year %>
-    <%= f.input :social_security_number %>
-    <%= f.input :mutual %>
-    <%= f.input :referring_doctor %>
-    <%= f.input :ordonnances, as: :file, input_html: { multiple: true } %>
-  </div>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="englob-card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h2 class="patient-card-title text-center mb-4">Créer un patient</h2>
+          <%= simple_form_for(@patient, html: { multipart: true }) do |f| %>
+            <div class="form-inputs">
+              <%= f.input :first_name, label: 'Prénom' %>
+              <%= f.input :last_name, label: 'Nom de famille' %>
+              <%= f.input :address, label: 'Adresse' %>
+              <%= f.input :date_of_birth, as: :date, start_year: 1910, end_year: Date.today.year, label: "Date de naissance" %>
+              <%= f.input :social_security_number, label: 'Numéro de sécurité sociale' %>
+              <%= f.input :mutual, label: 'Mutuelle' %>
+              <%= f.input :referring_doctor, label: 'Médecin référent' %>
+              <%= f.input :ordonnances, as: :file, input_html: { multiple: true }, label: 'Uploader les ordonnances' %>
+            </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Créer le patient et uploader les ordonnances", button_html: { class: 'btn btn-secondary' } %>
+            <div class="form-actions text-center mt-4">
+              <%= f.button :submit, "Créer le patient", class: 'btn btn-secondary w-100' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>
