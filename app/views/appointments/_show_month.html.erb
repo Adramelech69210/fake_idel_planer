@@ -1,13 +1,4 @@
 <div class="calendar-container" data-action="click->calendar#close">
-  <div class="calendar-header">
-    <% prev_month = @current_month << 1 %>
-    <% next_month = @current_month >> 1 %>
-
-    <%= link_to '❮', appointments_path(display: 'month', month: prev_month.month, year: prev_month.year), class: "calendar-button" %>
-    <h2><%= I18n.l(@current_month, format: '%B %Y', locale: :fr) %></h2>
-    <%= link_to '❯', appointments_path(display: 'month', month: next_month.month, year: next_month.year), class: "calendar-button" %>
-  </div>
-
   <div class="calendar-days">
     <% # Obtenir les jours dans l'ordre Lundi à Dimanche %>
     <% days_order = I18n.t("date.abbr_day_names", locale: :fr).rotate %>
