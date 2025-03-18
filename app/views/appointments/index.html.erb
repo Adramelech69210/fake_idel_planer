@@ -1,4 +1,3 @@
-
     <div class="calendar-header stick">
       <div class="dates">
         <h2><%= I18n.with_locale(:fr) { l(@day, format: :long) } %></h2>
@@ -8,17 +7,17 @@
           <%= link_to t('pagination.next'), request.params.merge(jd: (@day + 1.day).jd), class: 'btn' %>
         </div>
       </div>
-          <div class="display-buttons">
-      <button class="button-60">
-        <%= link_to 'Journée', request.params.merge(display: "day", jd: Date.today.jd), class: "nav-link #{params[:display] == 'day' || params[:display].nil? ? 'active' : ''}" %>
-      </button>
-      <button class="button-60">
-        <%= link_to 'Semaine', request.params.merge(display: "week"), class: "nav-link #{params[:display] == 'week' ? 'active' : ''}" %>
-      </button>
-      <button class="button-60">
-        <%= link_to 'Mois', request.params.merge(display: "month"), class: "nav-link #{params[:display] == 'month' ? 'active' : ''}" %>
-      </button>
-    </div>
+        <div class="display-buttons">
+            <button class="button-60">
+              <%= link_to 'Journée', request.params.merge(display: "day", jd: Date.today.jd), class: "nav-link #{params[:display] == 'day' || params[:display].nil? ? 'active' : ''}" %>
+              </button>
+            <button class="button-60">
+              <%= link_to 'Semaine', request.params.merge(display: "week"), class: "nav-link #{params[:display] == 'week' ? 'active' : ''}" %>
+              </button>
+            <button class="button-60">
+              <%= link_to 'Mois', request.params.merge(display: "month"), class: "nav-link #{params[:display] == 'month' ? 'active' : ''}" %>
+              </button>
+        </div>
     </div>
 
 <% case params[:display] %>

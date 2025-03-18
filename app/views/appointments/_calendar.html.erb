@@ -1,7 +1,17 @@
 <div class="calendar">
+  <% if params[:display] == 'week' %>
+    <div class="week-grid">
+      <div class="empty-cell"></div>
+      <% %w[L M M J V S D].each do |letter| %>
+        <div class="day-cell"><%= letter %></div>
+      <% end %>
+    </div>
+   <% end %>
+
+
   <% 14.times do |hour| %>
     <%= render "appointments/hour", hour: (hour + 6) %>
   <% end %>
-  
+
   <%= render "appointments/appointments" %>
 </div>
