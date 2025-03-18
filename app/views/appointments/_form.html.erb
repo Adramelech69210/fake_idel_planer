@@ -25,19 +25,25 @@
         <%= f.input :start_time,
                 label: "Heure de début",
                 as: :string,
-                input_html: { data: {controller: "timepicker"} } %>
+                input_html: {
+                  value: @appointment.start_time.present? ? @appointment.start_time.strftime("%H:%M") : "",
+                  data: { controller: "timepicker" } }
+        %>
       </div>
 
       <div class="form-group">
         <%= f.input :end_time,
                 label: "Heure de fin",
                 as: :string,
-                input_html: { data: {controller: "timepicker"} } %>
+                input_html: {
+                  value: @appointment.end_time.present? ? @appointment.end_time.strftime("%H:%M") : "",
+                  data: {controller: "timepicker"} }
+        %>
       </div>
     </div>
 
     <div class="form-group text-center">
-      <button class="btn btn-primary" type="submit">Ajouter le rendez-vous</button>
+      <%= f.button :submit, "#{@editing_details ? "Modifier" : "Ajouter"} le rendez-vous", class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>

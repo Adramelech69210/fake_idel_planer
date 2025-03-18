@@ -56,8 +56,8 @@
     <%= render "appointments/show_day" %>
   <% end %>
 
-  <div class="overlay" data-calendar-target="overlay">
-    <%= render "appointments/form", appointment: @appointment %>
+  <div class="overlay <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlay">
+    <%= render "appointments/form" %>
   </div>
 
   <button data-action="click->calendar#open" class="btn rounded-circle calendar-pos">+</button>

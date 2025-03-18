@@ -4,6 +4,7 @@ class Appointment < ApplicationRecord
 
   belongs_to :report, optional: true
 
-  validates :date, :start_time, :end_time, presence: true
-  validates :start_time, comparison: { less_than: :end_time }
+  validates :date, presence: true
+  validates :start_time, presence: true
+  validates :end_time, presence: true, comparison: { greater_than: :start_time }
 end
