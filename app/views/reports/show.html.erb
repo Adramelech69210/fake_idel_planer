@@ -15,7 +15,7 @@
           </div>
         <% end %>
       <% else %>
-        <pre class="border rounded p-3 bg-light"><%= @report.text.html_safe %></pre>
+        <pre class="border rounded p-3 bg-light"><%= @report.text&.html_safe %></pre>
         <div class="text-end mt-3">
           <%= link_to "Modifier", report_path(@report, editing: true), class: "btn btn-primary", data: { turbo_frame: "_top" } %>
         </div>

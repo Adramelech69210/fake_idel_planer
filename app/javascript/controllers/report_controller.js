@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["startDate", "endDate", "text"];
+  static targets = ["startDate", "endDate", "text", "input"];
 
   generateReport() {
     const startDate = this.startDateTarget.value;
@@ -16,6 +16,7 @@ export default class extends Controller {
       .then(response => response.json())
       .then(data => {
         this.textTarget.innerHTML = data.text;
+        this.inputTarget.value = data.text;
       })
       .catch(error => console.error("Erreur:", error));
   }

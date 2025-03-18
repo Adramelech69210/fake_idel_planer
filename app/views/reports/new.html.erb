@@ -18,8 +18,9 @@
 
     <div class="mb-3">
         <h2>Contenu du rapport</h2>
+        <%= f.hidden_field :text, data: { report_target: "input" } %>
         <div class="scroll_report">
-        <p data-report-target="text"></p>
+          <p data-report-target="text"></p>
         </div>
     </div>
 
