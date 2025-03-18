@@ -15,8 +15,8 @@
     <% else %>
 
       <div class="appointment" style="
-        top: <%= ((appointment.start_time.hour - 6) * 60 + appointment.start_time.min) + 10 %>px;
-        height: <%= (appointment.end_time - appointment.start_time).to_i/60 %>px;">
+        top: calc(<%= ((appointment.start_time.hour - 6) * 60 + appointment.start_time.min) %>px + 9.5rem);
+        height: <%= (appointment.end_time - appointment.start_time).to_i / 60 %>px">
         <p class="time"><%= appointment.start_time.strftime("%H:%M") %> - <%= appointment.end_time.strftime("%H:%M") %></p>
 
         <div class="d-flex justify-items-center align-items-center">
