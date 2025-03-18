@@ -12,11 +12,11 @@
         <% appointments.each_with_index do |appointment, index| %>
           <div class="appointment-card <%= past ? 'past' : '' %>" data-animation-target="item" data-index="<%= index %>">
             <div class="appointment-date <%= past ? 'past' : '' %>">
-              <div class="date-day"><%= appointment.start_date.strftime("%d") %></div>
-              <div class="date-month"><%= appointment.start_date.strftime("%b") %></div>
+              <div class="date-day"><%= appointment.date.strftime("%d") %></div>
+              <div class="date-month"><%= appointment.date.strftime("%b") %></div>
             </div>
             <div class="appointment-details">
-              <div class="appointment-time"><%= appointment.start_date.strftime("%H:%M") %></div>
+              <div class="appointment-time"><%= appointment.start_time.strftime("%H:%M") %>-<%= appointment.end_time.strftime("%H:%M") %> </div>
               <div class="appointment-reason"><%= appointment.reason %></div>
               <%= link_to "Détails", appointment_path(appointment), class: "appointment-link" %>
             </div>
