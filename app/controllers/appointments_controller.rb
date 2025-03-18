@@ -3,6 +3,8 @@ class AppointmentsController < ApplicationController
 
   def index
     @day = params[:jd].present? ? Date.jd(params[:jd].to_i) : Date.today
+    @appointment = Appointment.new
+
 
     case params[:display]
     when 'month'
@@ -37,10 +39,7 @@ class AppointmentsController < ApplicationController
     #   render :new, status: :unprocessable_entity
     # end
     if @appointment.save
-      respond_to do |format|
-        format.html { redirect_to appointments_path, notice: "Rendez-vous créé !" }
-        format.turbo_stream
-      end
+      redirect_to appointments_path, notice: "Rendez-vous créé !"
     else
       render :new, status: :unprocessable_entity
     end
@@ -58,7 +57,7 @@ class AppointmentsController < ApplicationController
 
   def destroy
     @appointment.destroy
-    redirect_to appointments_path, notice: "Rendez-vous supprimé !"
+    redirect_to appointments_path, notice: "Rendez-vous supprimé !"
   end
 
   private
