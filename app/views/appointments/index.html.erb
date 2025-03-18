@@ -37,13 +37,19 @@
   </div>
 </div>
 
-<% case params[:display] %>
-<% when 'month' %>
-  <%= render "appointments/show_month" %>
-<% when 'week' %>
-  <%= render "appointments/show_week" %>
-<% else %>
-  <%= render "appointments/show_day" %>
-<% end %>
+<div data-controller="calendar">
+  <% case params[:display] %>
+  <% when 'month' %>
+    <%= render "appointments/show_month" %>
+  <% when 'week' %>
+    <%= render "appointments/show_week" %>
+  <% else %>
+    <%= render "appointments/show_day" %>
+  <% end %>
 
-<%= link_to '+', new_appointment_path, class: "btn rounded-circle calendar-pos" %>
+  <div class="overlay" data-calendar-target="overlay">
+    <%= render "appointments/form", appointment: @appointment %>
+  </div>
+
+  <button data-action="click->calendar#open" class="btn rounded-circle calendar-pos">+</button>
+</div>

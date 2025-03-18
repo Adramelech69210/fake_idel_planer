@@ -1,4 +1,4 @@
-<div class="calendar-container">
+<div class="calendar-container" data-action="click->calendar#close">
   <div class="calendar-days">
     <% # Obtenir les jours dans l'ordre Lundi à Dimanche %>
     <% days_order = I18n.t("date.abbr_day_names", locale: :fr).rotate %>
