@@ -4,24 +4,33 @@
       <h2><%= I18n.l(@current_month, format: '%B %Y', locale: :fr) %></h2>
       <% prev_date = @current_month << 1 %>
       <% next_date = @current_month >> 1 %>
+
+    <% elsif params[:display] == 'week' %>
+      <% start_of_week = @day.beginning_of_week(:monday) %>
+      <% end_of_week = start_of_week + 6.days %>
+      <h2><%= I18n.l(start_of_week, format: '%d') %> - <%= I18n.l(end_of_week, format: '%d %B', locale: :fr) %></h2>
+      <% prev_date = start_of_week - 7.days %>
+      <% next_date = start_of_week + 7.days %>
+
     <% else %>
       <h2><%= I18n.l(@day, format: :long, locale: :fr) %></h2>
       <% prev_date = @day - 1.day %>
       <% next_date = @day + 1.day %>
     <% end %>
 
-  <div class="date-nav">
-  <%= link_to t('pagination.previous'), request.params.merge(jd: prev_date.jd, month: prev_date.month, year: prev_date.year), class: 'btn' %>
+    <div class="date-nav">
+      <%= link_to t('pagination.previous'), request.params.merge(jd: prev_date.jd, month: prev_date.month, year: prev_date.year), class: 'btn' %>
 
-  <% if params[:display] == 'month' %>
-    <%= link_to "Mois en cours", request.params.merge(month: Date.today.month, year: Date.today.year), class: 'btn' %>
-  <% else %>
-    <%= link_to t('pagination.today'), request.params.merge(jd: Date.today.jd, month: Date.today.month, year: Date.today.year), class: 'btn' %>
-  <% end %>
+      <% if params[:display] == 'month' %>
+        <%= link_to "Aujourd'hui", request.params.merge(month: Date.today.month, year: Date.today.year), class: 'btn' %>
+      <% elsif params[:display] == 'week' %>
+        <%= link_to "Aujourd'hui", request.params.merge(jd: Date.today.jd, month: Date.today.month, year: Date.today.year), class: 'btn' %>
+      <% else %>
+        <%= link_to t('pagination.today'), request.params.merge(jd: Date.today.jd, month: Date.today.month, year: Date.today.year), class: 'btn' %>
+      <% end %>
 
-  <%= link_to t('pagination.next'), request.params.merge(jd: next_date.jd, month: next_date.month, year: next_date.year), class: 'btn' %>
-</div>
-
+      <%= link_to t('pagination.next'), request.params.merge(jd: next_date.jd, month: next_date.month, year: next_date.year), class: 'btn' %>
+    </div>
   </div>
 
   <div class="display-buttons">
@@ -29,7 +38,7 @@
       <%= link_to 'Journée', request.params.merge(display: "day", jd: Date.today.jd), class: "nav-link #{params[:display] == 'day' || params[:display].nil? ? 'active' : ''}" %>
     </button>
     <button class="button-60">
-      <%= link_to 'Semaine', request.params.merge(display: "week"), class: "nav-link #{params[:display] == 'week' ? 'active' : ''}" %>
+      <%= link_to 'Semaine', request.params.merge(display: "week", jd: Date.today.jd), class: "nav-link #{params[:display] == 'week' ? 'active' : ''}" %>
     </button>
     <button class="button-60">
       <%= link_to 'Mois', request.params.merge(display: "month", month: Date.today.month, year: Date.today.year), class: "nav-link #{params[:display] == 'month' ? 'active' : ''}" %>
