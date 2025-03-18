@@ -25,10 +25,14 @@ class ReportGenerator
 
   def format_appointment(appointment)
     <<~TEXT
-      Nom du patient : #{appointment.patient.first_name} #{appointment.patient.last_name}
-      Date : #{appointment.start_date.strftime("%d/%m à %Hh%M")}
-      Raison du rendez-vous : #{appointment.reason || 'Non spécifiée'}
-      Résumé : #{appointment.summary || 'Non spécifiée'}
+      <strong>Nom du patient :</strong>
+      <p>#{appointment.patient.first_name} #{appointment.patient.last_name}</p>
+      <strong>Date :</strong>
+      <p> #{appointment.start_date.strftime("%d/%m à %Hh%M")}</p>
+      <strong>Raison du rendez-vous :</strong>
+      <p> #{appointment.reason || 'Non spécifiée'}</p>
+      <strong>Résumé :</strong>
+      <p> #{appointment.summary || 'Non spécifiée'}</p>
 
     TEXT
   end

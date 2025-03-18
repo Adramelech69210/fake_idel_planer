@@ -17,9 +17,12 @@
     </div>
 
     <div class="mb-3">
-      <%= f.label :text, "Contenu du rapport", class: "form-label" %>
-      <%= f.text_area :text, rows: 10, class: "form-control", placeholder: "Entrez le contenu du rapport ici...", data: { report_target: "textArea" } %>
+        <h2>Contenu du rapport</h2>
+        <div class="">
+        <p data-report-target="text"></p>
+        </div>
     </div>
+
 
     <div class="text-center">
       <%= f.submit "Sauvegarder le rapport", class: "btn btn-primary btn-lg" %>
