@@ -25,8 +25,8 @@ class PatientsController < ApplicationController
       @marker = nil # Si le patient n'est pas géocodé, pas de marqueur
     end
     @appointments = @patient.appointments
-    @past_appointments = @appointments.where('start_date < ?', Time.current).order(start_date: :desc)
-    @upcoming_appointments = @appointments.where("start_date >= ?", Time.current).order(start_date: :asc)
+    @past_appointments = @appointments.where('date < ?', Time.current).order(date: :desc)
+    @upcoming_appointments = @appointments.where("date >= ?", Time.current).order(date: :asc)
     @notes = @patient.notes.order(created_at: :desc)
     @pathologies = @patient.pathologies
   end

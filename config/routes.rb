@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: "appointments#index"
 
-  resources :appointments, except: [:edit]
+  resources :appointments, except: [:edit, :new]
 
   resources :reports, only: [:index, :new, :create, :show, :update, :destroy] do
     collection do

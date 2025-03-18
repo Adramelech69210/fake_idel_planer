@@ -63,14 +63,14 @@ summaries = [
 
 puts "creating appointments"
 50.times do
-  start_datetime = rand(Time.now..(Time.now + 3.months))
-  start_datetime = start_datetime.change(min: (start_datetime.min / 10) * 10)
+  random_date = Date.today + rand(0..90)
+  random_time = Time.new.change(hour: rand(6..18), min: rand(0..59), sec: 0)
 
   duration = [20, 30, 40, 50, 60].sample.minutes
 
-  final_datetime = start_datetime + duration
+  final_time = random_time + duration
 
-  Appointment.create!(start_date: start_datetime, end_date: final_datetime, user: User.all.sample, patient: Patient.all.sample, reason: reasons.sample, summary: summaries.sample)
+  Appointment.create!(date: random_date, start_time: random_time, end_time: final_time, user: User.all.sample, patient: Patient.all.sample, reason: reasons.sample, summary: summaries.sample)
 end
 
 puts "creating pathologies"

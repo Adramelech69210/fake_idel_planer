@@ -6,7 +6,7 @@ class ReportGenerator
   end
 
   def generate
-    appointments = Appointment.where(start_date: @start_date..@end_date, user: @user)
+    appointments = Appointment.where(date: @start_date..@end_date, user: @user)
 
     report_text = "Relève du #{@start_date.strftime('%d/%m/%Y')} au #{@end_date.strftime('%d/%m/%Y')} :\n\n"
 
@@ -26,14 +26,13 @@ class ReportGenerator
   def format_appointment(appointment)
     <<~TEXT
       <strong>Nom du patient :</strong>
-      <p>#{appointment.patient.first_name} #{appointment.patient.last_name}</p>
+      <p> #{appointment.patient.name} </p>
       <strong>Date :</strong>
-      <p> #{appointment.start_date.strftime("%d/%m à %Hh%M")}</p>
+      <p> #{appointment.date.strftime("%d/%m")} à #{appointment.start_time.strftime("%Hh%M")} </p>
       <strong>Raison du rendez-vous :</strong>
-      <p> #{appointment.reason || 'Non spécifiée'}</p>
+      <p> #{appointment.reason || 'Non spécifiée'} </p>
       <strong>Résumé :</strong>
-      <p> #{appointment.summary || 'Non spécifiée'}</p>
-
+      <p> #{appointment.summary || 'Non spécifiée'} </p>
     TEXT
   end
 end

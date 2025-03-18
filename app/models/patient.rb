@@ -8,4 +8,8 @@ class Patient < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end
