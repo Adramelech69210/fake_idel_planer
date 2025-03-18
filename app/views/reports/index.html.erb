@@ -1,26 +1,16 @@
-<div class="container mt-5">
-  <h1 class="mb-4 text-center textcolor">Relèves</h1>
-
-  <div class="scroll_report_index">
-    <table class="table table-striped table-hover align-middle">
-      <thead class="table-dark">
-        <tr>
-          <th class="text-center">Période</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @reports.each do |report| %>
-          <tr>
-            <td class="text-center">
-              <%= link_to "Du #{report.start_date.strftime('%d/%m/%Y')} au #{report.end_date.strftime('%d/%m/%Y')}", report_path(report), class: "text-decoration-none text-dark fw-bold" %>
-            </td>
-          </tr>
+<div class="container-patient bg-white">
+    <a href="<%= new_report_path %>" class="btn rounded-circle calendar-pos">+</a>
+    <% @reports.each_with_index do |report, index| %>
+      <div class="patient-card">
+        <%= link_to report_path(report), class: "patient-link d-flex justify-content-between align-items-center text-decoration-none" do %>
+          <div class="patient-info">
+            <strong class="fw-bold">Du <%= report.start_date.strftime('%d/%m/%Y') %> au <%= report.end_date.strftime('%d/%m/%Y') %></strong>
+          </div>
+          <span class="text-muted symbol fa-solid fa-chevron-right"></span>
         <% end %>
-      </tbody>
-    </table>
-  </div>
-      <div class="text-center mt-2 mb-4">
-    <%= link_to "+", new_report_path, class: "btn button-67 p-2" %>
-  </div>
+      </div>
+      <% if index != @reports.length - 1 %>
+        <hr class="patient-separator">
+      <% end %>
+    <% end %>
 </div>
