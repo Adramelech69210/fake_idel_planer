@@ -11,10 +11,12 @@
     <div class="notes-list" data-controller="animation" data-animation-delay-value="100">
       <% if patient.notes.any? %>
         <% patient.notes.each_with_index do |note, index| %>
-          <div class="note-card" data-animation-target="item" data-index="<%= index %>">
-            <div class="note-content"><%= note.text %></div>
-            <div class="note-meta">Ajoutée le <%= note.created_at.strftime("%d/%m/%Y à %H:%M") %></div>
-          </div>
+          <%= link_to patient_note_path(patient, note), class: "text-decoration-none" do %>
+            <div class="note-card" data-animation-target="item" data-index="<%= index %>">
+              <div class="note-content"><%= note.text %></div>
+              <div class="note-meta">Ajoutée le <%= note.created_at.strftime("%d/%m/%Y à %H:%M") %></div>
+            </div>
+          <% end %>
         <% end %>
       <% else %>
         <div class="empty-state" data-animation-target="item" data-index="0">

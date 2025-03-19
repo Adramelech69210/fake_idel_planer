@@ -1,0 +1,90 @@
+.date-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  background: $blanc-50;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  gap: 15px; 
+}
+
+.nav-arrow {
+  text-decoration: none;
+  color: $bleu-950;
+  font-size: 1.3rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-arrow:active {
+  transform: translateY(0px);
+}
+
+.current-date {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: $noir-800;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  min-width: 180px;
+  text-align: center;
+  position: relative;
+  margin: 0 10px;
+}
+
+.calendar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: #eeee;
+  padding: 5px;
+  border-radius: 20px;
+  width: 90px;
+}
+
+.calendar-toggle-btn {
+  flex: 1;
+  height: 40px;
+  border-radius: 12px;
+  background-color: transparent;
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.calendar-toggle-btn.active {
+  background-color: white;
+}
+
+.calendar-toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 576px) {
+  .calendar-toggle {
+    width: 80px;
+  }
+
+  .calendar-toggle-btn {
+    height: 36px;
+    font-size: 14px;
+  }
+}

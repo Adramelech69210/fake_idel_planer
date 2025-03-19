@@ -1,32 +1,34 @@
-<div class="container mt-4">
-  <div class="p-4 border rounded shadow-sm bg-white">
-    <h2 class="mb-3 text-primary">Rapport du <%= @report.start_date.strftime("%d/%m/%Y") %> au <%= @report.end_date.strftime("%d/%m/%Y") %></h2>
+<div class="container mt-3">
+  <div class="card shadow-sm border-0 report-card">
+    <div class="card-header text-center py-3">
+      <h5 class="mb-0 text-dark fw-bold"></h5>
+    </div>
 
-    <%= turbo_frame_tag dom_id(@report, :text) do %>
-      <% if params[:editing] == "true" %>
-        <%= form_with(model: @report, url: report_path(@report), method: :patch, local: false) do |f| %>
-          <div class="mb-3">
-            <%= f.label :text, "Contenu du rapport", class: "form-label fw-bold" %>
-            <%= f.text_area :text, class: "form-control", rows: 6 %>
-          </div>
-          <div class="d-flex justify-content-between">
-            <%= f.submit "Enregistrer", class: "btn btn-success" %>
-            <%= link_to "Annuler", report_path(@report), class: "btn btn-outline-secondary", data: { turbo_frame: "_top" } %>
+    <div class="card-body">
+      <%= turbo_frame_tag dom_id(@report, :text) do %>
+        <% if params[:editing] == "true" %>
+          <%= form_with(model: @report, url: report_path(@report), method: :patch, local: false) do |f| %>
+            <div class="mb-3">
+              <%= f.label :text, "Contenu du rapport", class: "form-label fw-bold text-muted" %>
+              <%= f.text_area :text, class: "form-control text-area", rows: 8 %>
+            </div>
+            <div class="d-flex justify-content-center gap-2">
+              <%= f.submit "Enregistrer", class: "edit-patient w-50" %>
+              <%= link_to "Annuler", report_path(@report), class: "annuler-edit-patient d-flex align-items-center justify-content-center text-decoration-none w-50", data: { turbo_frame: "_top" } %>
+            </div>
+          <% end %>
+        <% else %>
+          <pre class="report-text"><%= @report.text&.html_safe %></pre>
+          <div class="text-center mt-3">
+            <%= link_to "Modifier", report_path(@report, editing: true), class: "edit-patient d-flex align-items-center justify-content-center text-decoration-none w-100", data: { turbo_frame: "_top" } %>
           </div>
         <% end %>
-      <% else %>
-        <pre class="border rounded p-3 bg-light"><%= @report.text&.html_safe %></pre>
-        <div class="text-end mt-3">
-          <%= link_to "Modifier", report_path(@report, editing: true), class: "btn btn-primary", data: { turbo_frame: "_top" } %>
-        </div>
       <% end %>
-    <% end %>
-
-    <div class="d-flex justify-content-between mt-4">
-      <%= link_to "Retour à la liste", reports_path, class: "btn btn-outline-secondary" %>
-      <%= link_to 'Supprimer le rapport', report_path(@report),
+      <div class="text-center mt-3">
+      <%= link_to 'Supprimer', report_path(@report),
                   data: { turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr de vouloir supprimer ce rapport ?' },
-                  class: "btn btn-danger" %>
+                  class: "delete-reports d-flex align-items-center justify-content-center text-decoration-none w-100" %>
+    </div>
     </div>
   </div>
 </div>

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>IdelPlanner</title>
-    <link rel="manifest" href="/manifest.json">
-
-    <meta name="viewport" content="width=device-width; initial-scale=1; viewport-fit=cover">
+<title><%= meta_title %></title>
+<meta name="description" content="<%= meta_description %>">
+<%= favicon_link_tag %>
+<meta name="viewport"
+    content="width=device-width; initial-scale=1; viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -12,7 +14,6 @@
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <%= javascript_importmap_tags %>

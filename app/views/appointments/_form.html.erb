@@ -6,12 +6,11 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
     <div class="form-group">
-      <%= f.input :reason, label: "Motif", placeholder: "Motif du rdv", input_html: { class: 'form-control' } %>
+      <%= f.input :reason, label: "Motif", placeholder: "Motif du rendez-vous", input_html: { class: 'form-control' } %>
     </div>
 
     <div class="form-group">
-      <%= f.association :patient,
-      include_blank: "Choix du patient", label: "Patient", input_html: { class: 'form-control' } %>
+      <%= f.association :patient, include_blank: "Choix du patient", label: "Patient", input_html: { class: 'form-control' } %>
     </div>
 
     <div class="form-group">
@@ -20,24 +19,31 @@
               input_html: { data: {controller: "datepicker"} } %>
     </div>
 
-    <div class="d-flex">
+    <div class="josianne">
       <div class="form-group">
         <%= f.input :start_time,
                 label: "Heure de début",
                 as: :string,
-                input_html: { data: {controller: "timepicker"} } %>
+                input_html: {
+                  value: @appointment.start_time.present? ? @appointment.start_time.strftime("%H:%M") : "6:00",
+                  data: { controller: "timepicker" } }
+        %>
       </div>
 
       <div class="form-group">
         <%= f.input :end_time,
-                label: "Heure de fin",
+                label: "Heure de la fin",
                 as: :string,
-                input_html: { data: {controller: "timepicker"} } %>
+                input_html: {
+                  value: @appointment.end_time.present? ? @appointment.end_time.strftime("%H:%M") : "7:00",
+                  data: { controller: "timepicker" }
+                }
+        %>
       </div>
     </div>
 
-    <div class="form-group text-center">
-      <button class="btn btn-primary" type="submit">Ajouter le rendez-vous</button>
+    <div class="form-group text-center pt-4">
+      <%= f.button :submit, "#{@editing_details ? "Modifier" : "Ajouter"} le rendez-vous", class: "btn btn-dark" %>
     </div>
   <% end %>
 </div>

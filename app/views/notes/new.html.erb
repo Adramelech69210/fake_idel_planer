@@ -1,8 +1,16 @@
-<h1>Nouvelle note pour <%= @patient.last_name %> <%= @patient.first_name %></h1>
+<div class="mb-3 p-2">
+  <%= link_to patient_path(@patient), class: "text-decoration-none" do %>
+    <i class="text-muted symbol fa-solid fa-reply"></i>
+  <% end %>
+</div>
 
-<%= simple_form_for([@patient, @note], url: patient_notes_path(@patient)) do |f| %>
-  <%= f.input :text, label: "Texte de la note:" %>
-  <%= f.button :submit, "Créer la note" %>
-<% end %>
+<div class="container">
+  <h5>Nouvelle note pour <%= @patient.last_name %> <%= @patient.first_name %></h5>
 
-<%= link_to 'Retour au patient', patient_path(@patient) %>
+  <%= simple_form_for [@patient, @note] do |f| %>
+    <%= f.input :text, label: "Texte de la note:" %>
+    <div class="text-end">
+      <%= f.button :submit, "Créer la note", class: "btn btn-primary" %>
+      </div>
+  <% end %>
+</div>

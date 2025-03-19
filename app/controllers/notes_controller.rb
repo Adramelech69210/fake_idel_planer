@@ -10,13 +10,12 @@ class NotesController < ApplicationController
     @note = @patient.notes.new
   end
 
-
   def create
     @note = @patient.notes.new(note_params)
     if @note.save
-      redirect_to patient_notes_path(@patient), notice: 'Note créée avec succès.'
+      redirect_to patient_path(@patient), notice: 'Note créée avec succès.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -28,15 +27,15 @@ class NotesController < ApplicationController
 
   def update
     if @note.update(note_params)
-      redirect_to patient_notes_path(@patient), notice: 'Note mise à jour avec succès.'
+      redirect_to patient_path(@patient), notice: 'Note mise à jour avec succès.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @note.destroy
-    redirect_to patient_notes_path(@patient), notice: 'Note supprimée avec succès.'
+    redirect_to patient_path(@patient), notice: 'Note supprimée avec succès.'
   end
 
   private
@@ -46,7 +45,7 @@ class NotesController < ApplicationController
   end
 
   def set_note
-    @note = @patient.notes.find(params[:id])
+    @note = Note.find(params[:id])
   end
 
   def note_params
