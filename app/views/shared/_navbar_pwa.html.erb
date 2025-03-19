@@ -3,7 +3,7 @@
     <%= link_to "/patients", class: "nav-item #{'active' if current_page?('/patients')}" do %>
       <div class="nav-icon-wrapper">
         <i class="fa-solid fa-users"></i>
-        <div class="nav-indicator"></div>
+
       </div>
       <span class="nav-label">Patients</span>
     <% end %>
@@ -11,7 +11,7 @@
     <%= link_to "/appointments", class: "nav-item #{'active' if current_page?('/appointments')}" do %>
       <div class="nav-icon-wrapper">
         <i class="fa-solid fa-calendar"></i>
-        <div class="nav-indicator"></div>
+
       </div>
       <span class="nav-label">Calendrier</span>
     <% end %>
@@ -19,7 +19,7 @@
     <%= link_to "/reports", class: "nav-item #{'active' if current_page?('/reports')}" do %>
       <div class="nav-icon-wrapper">
         <i class="fa-solid fa-file-medical"></i>
-        <div class="nav-indicator"></div>
+
       </div>
       <span class="nav-label">Relèves</span>
     <% end %>
@@ -27,7 +27,7 @@
    <%= link_to "/profile", class: "nav-item #{'active' if current_page?('/profile')}" do %>
       <div class="nav-icon-wrapper">
         <img src='<%= current_user.picture_url %>', class='avatar' alt='icon' />
-        <div class="nav-indicator"></div>
+
       </div>
       <span class="nav-label">Profil</span>
     <% end %>
