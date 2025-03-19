@@ -1,8 +1,0 @@
-<h1>Modifier la pathologie</h1>
-
-<%= simple_form_for([@patient, @pathology], url: patient_pathology_path(@patient, @pathology), method: :patch) do |f| %>
-  <%= f.input :description, label: "Description de la pathologie" %>
-  <%= f.button :submit, "Mettre à jour la pathologie" %>
-<% end %>
-
-<%= link_to 'Retour aux pathologies', patient_pathologies_path(@patient) %>
