@@ -59,7 +59,7 @@
   <% else %>
     <%= render "appointments/show_day" %>
   <% end %>
-  <div class="overlay-filter" data-calendar-target="overlayFilter" data-action="click->calendar#close"></div>
+  <div class="overlay-filter <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlayFilter" data-action="click->calendar#close"></div>
   <div class="overlay <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlay">
     <%= render "appointments/form" %>
   </div>
