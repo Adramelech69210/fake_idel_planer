@@ -7,4 +7,7 @@ class Appointment < ApplicationRecord
   validates :date, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true, comparison: { greater_than: :start_time }
+
+  DAY_NAMES = %w[L M M J V S D]
+
 end
