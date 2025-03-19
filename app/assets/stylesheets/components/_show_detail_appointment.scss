@@ -1,0 +1,117 @@
+.appointment-show {
+  padding-top: 3rem;
+  max-width: 600px;
+  margin: auto;
+
+  h3 {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    margin: 0;
+  }
+
+  .btn-light.rounded-circle {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      font-size: 1rem;
+    }
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card {
+    border: none;
+    border-radius: 15px;
+  }
+
+  .card.bg-light {
+    background-color: #e3f1fb !important;
+    border-left: 3px solid $bleu-700;
+    width: 98%;
+  }
+
+  .appointment-reason {
+    margin-top: 1.5rem;
+  }
+
+  .btn {
+    border-radius: 0.75rem !important;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+  }
+
+  .btn-primary {
+    background-color: #147db5;
+    border-color: #147db5;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    margin: 10px auto;
+  }
+
+  .btn-secondary {
+    background-color: #6d6d6d;
+    border-color: #6d6d6d;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    margin: 10px auto;
+  }
+
+  .btn-success {
+    background-color: #2e8b3d;
+    border-color: #2e8b3d;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    margin: 10px auto;
+  }
+
+  .btn-danger {
+    background-color: #ff4d4d;
+    color: #fff;
+    margin: 10px auto;
+  }
+
+  .btn-sm.icon-button {
+    width: 25px;
+    height: 25px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    i {
+      font-size: 0.8rem;
+    }
+  }
+
+  form {
+    .form-label {
+      font-weight: 600;
+    }
+  }
+
+  .text-center.mb-4 {
+    margin-top: 2rem;
+  }
+
+  .appointment-summary-header {
+    margin-top: 2rem;
+    h5 {
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+    }
+  }
+
+}

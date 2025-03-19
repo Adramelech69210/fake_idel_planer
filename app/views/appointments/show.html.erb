@@ -1,52 +1,84 @@
-<div class="card shadow-sm mb-4" style="height: auto; padding: 15px;"> <!-- Ajustement de la hauteur -->
-  <div class="card-body" style="padding: 20px;"> <!-- Ajustement du padding -->
-    <% if @editing_details || !@appointment.valid? %>
-      <h5 class="mb-3">Modifier les détails du rendez-vous</h5>
-      <%= render "appointments/form" %>
-      <%= link_to "Annuler", appointment_path(@appointment, editing_details: false), class: "btn btn-secondary flex-grow-1" %>
-    <% else %>
-      <h5 class="card-title fw-bold mb-3">
-        Patient : <%= @patient.last_name %> <%= @patient.first_name %>
-        <%= link_to appointment_path(@appointment, editing_details: true), class: "btn btn-sm icon-button ms-2 text-primary" do %>
-          <i class="fa-solid fa-pencil"></i>
+<div class="appointment-show container">
+  <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+    <%= link_to appointments_path(jd: @appointment.date.jd), class: "btn btn-light rounded-circle", title: "Retour au calendrier" do %>
+      <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+    <h3 class="fw-bold ms">DÉTAIL DU RENDEZ-VOUS</h3>
+  </div>
+
+  <div class="text-left ms-2">
+    <p class="fs-5 mb-1">
+      <span class="form-label fw-bold">Patient :</span> <%= @patient.last_name %> <%= @patient.first_name %>
+      <%= link_to appointment_path(@appointment, editing_details: true), class: "btn btn-sm btn-light ms-2 rounded-circle", title: "Modifier les détails" do %>
+        <i class="fa-solid fa-pencil"></i>
+      <% end %>
+    </p>
+
+    <% if @editing_details %>
+      <div class="card p-4 shadow-sm mt-4">
+        <h5 class="fw-bold mb-3">Modifier les détails du rendez-vous</h5>
+        <%= form_with model: @appointment, url: appointment_path(@appointment), method: :patch, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :date, "Date", class: "form-label fw-bold" %>
+            <%= form.date_field :date, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :start_time, "Heure de début", class: "form-label fw-bold" %>
+            <%= form.time_field :start_time, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :end_time, "Heure de fin", class: "form-label fw-bold" %>
+            <%= form.time_field :end_time, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :reason, "Raison du rendez-vous", class: "form-label fw-bold" %>
+            <%= form.text_field :reason, class: "form-control" %>
+          </div>
+          <div class="d-flex gap-3">
+            <%= link_to "Annuler", appointment_path(@appointment, editing_details: false), class: "btn btn-secondary w-100" %>
+            <%= form.submit "Enregistrer", class: "btn btn-success w-100" %>
+          </div>
         <% end %>
-      </h5>
-      <p class="card-text" style="margin-bottom: 10px;"> <!-- Ajustement du style -->
-        <strong>Date :</strong> <%= @appointment.date.strftime('%d/%m/%Y') %><br>
-        <strong>Heure de début :</strong> <%= @appointment.start_time.strftime('%H:%M') %><br>
-        <strong>Heure de fin :</strong> <%= @appointment.end_time.strftime('%H:%M') %><br>
-        <strong>Motif :</strong> <%= @appointment.reason.present? ? @appointment.reason : "Non précisé" %>
+      </div>
+    <% else %>
+      <p><strong>Date :</strong> <%= @appointment.date.strftime('%d/%m/%Y') %></p>
+      <p>
+        <strong>Début :</strong> <%= @appointment.start_time.strftime('%H:%M') %> &nbsp;&nbsp;
+        <strong>Fin :</strong> <%= @appointment.end_time.strftime('%H:%M') %>
       </p>
+        <p><strong>Raison du rendez-vous :</strong> <%= @appointment.reason.present? ? @appointment.reason : "Non précisé" %></p>
     <% end %>
   </div>
-</div>
 
-<div class="card shadow-sm mb-4" style="height: auto; padding: 15px;"> <!-- Ajustement de la hauteur -->
-  <div class="card-body" style="padding: 20px;"> <!-- Ajustement du padding -->
-    <h5 class="card-title fw-bold mb-3">Compte rendu</h5>
+  <div class="section-header pb-0 mb-0 d-flex align-items-center justify-content-start mt-4">
+    <h5 >Compte rendu</h5>
+    <%= link_to appointment_path(@appointment, editing_summary: true), class: "btn btn-sm btn-light ms-2 rounded-circle" do %>
+      <i class="fa-solid fa-pencil" style="font-size: 0.8rem;"></i>
+    <% end %>
+  </div>
+
+  <div class="card p-4 shadow-sm mb-4 bg-light">
     <% if @editing_summary %>
       <%= form_with model: @appointment, url: appointment_path(@appointment), method: :patch, local: true do |form| %>
         <div class="mb-3">
           <%= form.label :summary, "Modifier le compte rendu", class: "form-label fw-bold" %>
           <%= form.text_area :summary, class: "form-control", rows: 5 %>
         </div>
-        <div class="d-flex justify-content-between">
-          <%= form.submit "Enregistrer", class: "btn btn-success flex-grow-1 me-2" %>
-          <%= link_to "Annuler", appointment_path(@appointment, editing_summary: false), class: "btn btn-secondary flex-grow-1" %>
+        <div class="d-flex gap-3">
+          <%= link_to "Annuler", appointment_path(@appointment, editing_summary: false), class: "btn btn-secondary w-100" %>
+          <%= form.submit "Enregistrer", class: "btn btn-success w-100" %>
         </div>
       <% end %>
     <% else %>
-      <p class="card-text" style="margin-bottom: 10px;"> <!-- Ajustement du style -->
-        <%= @appointment.summary.present? ? @appointment.summary : "Aucun compte rendu n'a encore été renseigné." %>
+      <p class="text-left mb-4">
+        <%= @appointment.summary.present? ? @appointment.summary : "Aucun compte rendu n’a encore été renseigné." %>
       </p>
-      <%= link_to "Modifier le compte rendu", appointment_path(@appointment, editing_summary: true), class: "btn btn-primary" %>
     <% end %>
   </div>
-</div>
 
-<div class="d-flex justify-content-between mt-4">
-  <%= link_to "Retour au profil patient", patient_path(@patient), class: "btn btn-secondary w-50 me-2" %>
-  <%= link_to 'Supprimer le rendez-vous', appointment_path(@appointment),
-              data: { turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr?' },
-              class: "btn btn-danger w-50" %>
+  <div class="d-flex gap-3 mt-4">
+    <%= link_to 'Supprimer le RDV', appointment_path(@appointment),
+                data: { turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr ?' },
+                class: "btn btn-danger w-100" %>
+  </div>
 </div>
