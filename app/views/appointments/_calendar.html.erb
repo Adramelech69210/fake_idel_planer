@@ -1,4 +1,4 @@
-<div class="calendar">
+  <div class="calendar">
   <% if params[:display] == 'week' %>
     <div class="week-dates">
       <div class="empty-cell"></div>
@@ -29,5 +29,8 @@
   <% end %>
 
   <%= render "appointments/appointments" %>
-    <div data-time-indicator-target="line" class="current-time-indicator"></div>
+
+<% if params[:display] != 'week' && is_today?(@day) %>
+  <div data-time-indicator-target="line" class="current-time-indicator"></div>
+<% end %>
 </div>
