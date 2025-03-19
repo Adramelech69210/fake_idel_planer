@@ -8,6 +8,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+  gap: 15px; /* Ajout d'un espacement entre les éléments */
 }
 
 .nav-arrow {
@@ -42,36 +43,16 @@
   margin: 0 10px;
 }
 
-.active-view {
-  background-color: $blanc-50;
-  font-weight: 600;
-}
-
-.view-transition {
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 576px) {
-  .date-navigation {
-    padding: 8px;
-    width: 95%;
-    margin: 15px auto;
-  }
-
-  .current-date {
-    min-width: 140px;
-    font-size: 1rem;
-  }
+.view-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; 
 }
 
 .view-toggle-circle {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: $bleu-900;
   color: white;
@@ -94,6 +75,35 @@
   color: white;
 }
 
+.view-toggle-circle.active {
+  background-color: $bleu-700;
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+  font-weight: bold;
+}
+
 .view-toggle-circle:active {
   transform: scale(0.95);
+}
+
+@media (max-width: 576px) {
+  .date-navigation {
+    padding: 8px;
+    width: 95%;
+    margin: 15px auto;
+  }
+
+  .current-date {
+    min-width: 140px;
+    font-size: 1rem;
+  }
+
+  .view-toggle {
+    gap: 10px;
+  }
+
+  .view-toggle-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
 }

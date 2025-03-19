@@ -41,14 +41,21 @@
       <% end %>
 
       <% if params[:display] != 'month' %>
-        <a href="<%= url_for(params.permit!.merge(display: params[:display] == 'week' ? 'day' : 'week')) %>" class="view-toggle-circle">
-          <%= params[:display] == 'week' ? 'S' : 'J' %>
-        </a>
+        <div class="view-toggle">
+          <a href="<%= url_for(params.permit!.merge(display: 'day')) %>"
+            class="view-toggle-circle <%= 'active' if params[:display] == 'day' %>">
+            J
+          </a>
+
+          <a href="<%= url_for(params.permit!.merge(display: 'week')) %>"
+            class="view-toggle-circle <%= 'active' if params[:display] == 'week' %>">
+            S
+          </a>
+        </div>
       <% end %>
     </div>
   </div>
 </div>
-
 
 <div data-controller="calendar">
   <% case params[:display] %>
