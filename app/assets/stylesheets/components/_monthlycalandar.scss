@@ -14,6 +14,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  background-color: $blanc-50;
+  margin-bottom: 20px;
 }
 
 .day-link {
@@ -44,7 +46,7 @@
 }
 
 .day.today {
-  background: #007BFF;
+  background: $bleu-900;
   color: white;
   font-weight: bold;
 }
