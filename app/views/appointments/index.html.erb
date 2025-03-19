@@ -1,50 +1,54 @@
-<div class="calendar-header stick">
-  <div class="dates">
-    <% if params[:display] == 'month' %>
-      <h2><%= I18n.l(@current_month, format: '%B %Y', locale: :fr) %></h2>
-      <% prev_date = @current_month << 1 %>
-      <% next_date = @current_month >> 1 %>
+<div class="calendar-header stick" data-controller="calendar">
+  <div class="dates d-flex justify-content-center">
 
-    <% elsif params[:display] == 'week' %>
-      <% start_of_week = @day.beginning_of_week(:monday) %>
-      <% end_of_week = start_of_week + 6.days %>
-      <h2><%= I18n.l(start_of_week, format: '%d') %> - <%= I18n.l(end_of_week, format: '%d %B', locale: :fr) %></h2>
-      <% prev_date = start_of_week - 7.days %>
-      <% next_date = start_of_week + 7.days %>
-
-    <% else %>
-      <h2><%= I18n.l(@day, format: :long, locale: :fr) %></h2>
-      <% prev_date = @day - 1.day %>
-      <% next_date = @day + 1.day %>
-    <% end %>
-
-    <div class="date-nav">
-      <%= link_to t('pagination.previous'), request.params.merge(jd: prev_date.jd, month: prev_date.month, year: prev_date.year), class: 'btn' %>
-
+    <div class="date-navigation">
       <% if params[:display] == 'month' %>
-        <%= link_to "Aujourd'hui", request.params.merge(month: Date.today.month, year: Date.today.year), class: 'btn' %>
+        <% prev_date = @current_month << 1 %>
+        <% next_date = @current_month >> 1 %>
+        <%= link_to '<', request.params.merge(month: prev_date.month, year: prev_date.year), class: 'nav-arrow' %>
+
+        <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
+          <%= l(@current_month, format: '%B %Y').capitalize %>
+        </a>
+
+        <%= link_to '>', request.params.merge(month: next_date.month, year: next_date.year), class: 'nav-arrow' %>
+
       <% elsif params[:display] == 'week' %>
-        <%= link_to "Aujourd'hui", request.params.merge(jd: Date.today.jd, month: Date.today.month, year: Date.today.year), class: 'btn' %>
+        <% start_of_week = @day.beginning_of_week(:monday) %>
+        <% end_of_week = start_of_week + 6.days %>
+        <% prev_date = start_of_week - 7.days %>
+        <% next_date = start_of_week + 7.days %>
+
+        <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
+
+        <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
+          <%= "#{l(start_of_week, format: '%d')} - #{l(end_of_week, format: '%d %B')}" %>
+        </a>
+
+        <%= link_to '>', request.params.merge(jd: next_date.jd), class: 'nav-arrow' %>
+
       <% else %>
-        <%= link_to t('pagination.today'), request.params.merge(jd: Date.today.jd, month: Date.today.month, year: Date.today.year), class: 'btn' %>
+        <% prev_date = @day - 1.day %>
+        <% next_date = @day + 1.day %>
+
+        <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
+
+        <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
+          <%= l(@day, format: '%d %B %Y').sub(/^\d+\s+(\w+)/) { |m| m.sub($1, $1.capitalize) } %>
+        </a>
+
+        <%= link_to '>', request.params.merge(jd: next_date.jd), class: 'nav-arrow' %>
       <% end %>
 
-      <%= link_to t('pagination.next'), request.params.merge(jd: next_date.jd, month: next_date.month, year: next_date.year), class: 'btn' %>
+      <% if params[:display] != 'month' %>
+        <a href="<%= url_for(params.permit!.merge(display: params[:display] == 'week' ? 'day' : 'week')) %>" class="view-toggle-circle">
+          <%= params[:display] == 'week' ? 'S' : 'J' %>
+        </a>
+      <% end %>
     </div>
   </div>
-
-  <div class="display-buttons">
-    <button class="button-60">
-      <%= link_to 'Journée', request.params.merge(display: "day", jd: Date.today.jd), class: "nav-link #{params[:display] == 'day' || params[:display].nil? ? 'active' : ''}" %>
-    </button>
-    <button class="button-60">
-      <%= link_to 'Semaine', request.params.merge(display: "week", jd: Date.today.jd), class: "nav-link #{params[:display] == 'week' ? 'active' : ''}" %>
-    </button>
-    <button class="button-60">
-      <%= link_to 'Mois', request.params.merge(display: "month", month: Date.today.month, year: Date.today.year), class: "nav-link #{params[:display] == 'month' ? 'active' : ''}" %>
-    </button>
-  </div>
 </div>
+
 
 <div data-controller="calendar">
   <% case params[:display] %>
@@ -55,7 +59,7 @@
   <% else %>
     <%= render "appointments/show_day" %>
   <% end %>
-
+  <div class="overlay-filter" data-calendar-target="overlayFilter" data-action="click->calendar#close"></div>
   <div class="overlay <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlay">
     <%= render "appointments/form" %>
   </div>

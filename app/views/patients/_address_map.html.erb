@@ -1,6 +1,8 @@
 <div class="container p-3">
   <p class="address-animate">
-    <i class="fa-solid fa-phone"></i>
+    <%= phone_to patient.phone_number, class:"text-decoration-none" do %>
+      <i class="fa-solid fa-phone"></i>
+    <% end %>
     <span class="address-text"><%= patient.phone_number %></span>
   </p>
   <p class="address-animate">

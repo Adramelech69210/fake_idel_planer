@@ -4,9 +4,95 @@
   border-radius: 10px;
   padding: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  margin-top: 7rem;
+  padding-top: 9.5rem;
 }
+
+/* ajout bruno */
+
+.week-dates {
+  display: grid;
+  grid-template-columns: 9% repeat(7, 1fr);
+  width: 100%;
+  position: fixed;
+  top: 180px;
+  left: 10px;
+  background-color: #f5f7fa;
+  z-index: 99;
+  text-align: center;
+}
+
+.empty-cell {
+  background-color: #f5f7fa;
+}
+
+.date-cell {
+  padding: 5px 0;
+  font-size: 0.9em;
+  background-color: #f5f7fa;
+}
+
+.date-cell.today {
+  font-weight: bold;
+  color: #154865;
+  font-size: 1em;
+}
+
+.week-grid .day-cell.today .day-circle {
+  border-color: #154865;
+  background-color: rgba(21, 72, 101, 0.2);
+  color: #154865;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.week-grid .day-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #154865;
+  color: #154865;
+  font-size: 0.8em;
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: 10% repeat(7, 1fr);
+  background-color: #f5f7fa;
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  top: 130px;
+  z-index: 100;
+  align-items: end;
+  text-align: center;
+}
+
+.week-grid .day-cell {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 5px;
+}
+
+/* Ajout pour les rendez-vous */
+
+.appointment-wrapper {
+  padding-left: 5px; /* Ajoute 2 pixels de padding autour de chaque rendez-vous */
+}
+
+.appointment {
+  background-color: white; /* Assurez-vous que les rendez-vous ont un fond visible */
+  border-radius: 5px; /* Pour un aspect arrondi */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère pour la séparation */
+  position: absolute; /* Important pour le positionnement des rendez-vous */
+  /* Les styles top, height, left, et width sont déjà définis dans le code ERB */
+}
+
+
+// fin ajout bruno
 
 .display-buttons {
   display: flex;
@@ -159,7 +245,7 @@
   position: fixed;
   bottom: 100px;
   right: 30px;
-  z-index: 50;
+  z-index: 300;
   width: 60px;
   height: 60px;
   display: flex;
