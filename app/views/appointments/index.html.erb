@@ -19,6 +19,7 @@
         <% prev_date = start_of_week - 7.days %>
         <% next_date = start_of_week + 7.days %>
 
+
         <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
 
         <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
@@ -42,7 +43,7 @@
 
       <% if params[:display] != 'month' %>
         <a href="<%= url_for(params.permit!.merge(display: params[:display] == 'week' ? 'day' : 'week')) %>" class="view-toggle-circle">
-          <%= params[:display] == 'week' ? 'S' : 'J' %>
+        <%= params[:display] == 'week' ? 'S' : 'J' %>
         </a>
       <% end %>
     </div>
