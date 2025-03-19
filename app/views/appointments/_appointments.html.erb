@@ -1,21 +1,29 @@
+
+
 <% @appointments.each do |appointment| %>
-  <div class="appointment-wrapper"> <%= link_to appointment_path(appointment), class: "no-link-appearance" do %>
-      <% if params[:display] == 'week' %>
-        <div class="appointment" style="
-          top: <%= ((appointment.start_date.hour - 6) * 60 + appointment.start_date.min) + 10 + (10.125*16) - 10 %>px;
-          height: <%= (appointment.end_date - appointment.start_date).to_i/60 %>px;
-          left: <%= number_in_week(appointment.start_date) * 13 + 9 %>%;
-          width: 13%;">
+  <%= link_to appointment_path(appointment), class: "no-link-appearance" do %>
+
+    <% if params[:display] == 'week' %>
+
+    <div class="appointment_2" style="
+        top: calc(<%= ((appointment.start_time.hour - 6) * 60 + appointment.start_time.min) %>px + 9.5rem);
+        height: <%= (appointment.end_time - appointment.start_time).to_i / 60 %>px;
+        left: <%= number_in_week(appointment.date) * 13 + 9 %>%;
+        width: 6%;">
+      </div>
+
+    <% else %>
+
+      <div class="appointment" style="
+        top: calc(<%= ((appointment.start_time.hour - 6) * 60 + appointment.start_time.min) %>px + 9.5rem);
+        height: <%= (appointment.end_time - appointment.start_time).to_i / 60 %>px">
+        <p class="time"><%= appointment.start_time.strftime("%H:%M") %> - <%= appointment.end_time.strftime("%H:%M") %></p>
+
+        <div class="d-flex justify-items-center align-items-center">
+          <p><strong><%= appointment.patient.first_name %> | </strong><%= appointment.reason %></p>
         </div>
-      <% else %>
-        <div class="appointment" style="
-          top: <%= ((appointment.start_date.hour - 6) * 60 + appointment.start_date.min) + 10 + (10.125*16) - 10 %>px;
-          height: <%= (appointment.end_date - appointment.start_date).to_i/60 %>px;">
-          <p class="time"><%= appointment.start_date.strftime("%H:%M") %> - <%= appointment.end_date.strftime("%H:%M") %></p>
-          <div class="d-flex justify-items-center align-items-center">
-            <p><strong><%= appointment.patient.first_name %> | </strong><%= appointment.reason %></p>
-          </div>
-        </div>
-      <% end %>
+      </div>
     <% end %>
-  </div> <% end %>
+
+  <% end %>
+<% end %>

@@ -6,6 +6,7 @@
   border-radius: 10px;
   background: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 150px;
 }
 
 .calendar-header {
@@ -13,18 +14,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-}
-
-.calendar-header h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.calendar-button {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #333;
+  background-color: $blanc-50;
+  margin-bottom: 20px;
 }
 
 .day-link {
@@ -55,7 +46,7 @@
 }
 
 .day.today {
-  background: #007BFF;
+  background: $bleu-900;
   color: white;
   font-weight: bold;
 }

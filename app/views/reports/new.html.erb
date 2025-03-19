@@ -4,12 +4,12 @@
 
     <div class="mb-3">
       <%= f.label :start_date, "Date de début", class: "form-label" %>
-      <%= f.date_field :start_date, required: true, class: "form-control", data: { report_target: "startDate" } %>
+      <%= f.date_field :start_date, required: true, class: "form-control", data: { report_target: "startDate", controller: "datepicker" } %>
     </div>
 
     <div class="mb-3">
       <%= f.label :end_date, "Date de fin", class: "form-label" %>
-      <%= f.date_field :end_date, required: true, class: "form-control", data: { report_target: "endDate" } %>
+      <%= f.date_field :end_date, required: true, class: "form-control", data: { report_target: "endDate", controller: "datepicker" } %>
     </div>
 
     <div class="mb-3 text-center">
@@ -17,9 +17,13 @@
     </div>
 
     <div class="mb-3">
-      <%= f.label :text, "Contenu du rapport", class: "form-label" %>
-      <%= f.text_area :text, rows: 10, class: "form-control", placeholder: "Entrez le contenu du rapport ici...", data: { report_target: "textArea" } %>
+        <h2>Contenu du rapport</h2>
+        <%= f.hidden_field :text, data: { report_target: "input" } %>
+        <div class="scroll_report">
+          <p data-report-target="text"></p>
+        </div>
     </div>
+
 
     <div class="text-center">
       <%= f.submit "Sauvegarder le rapport", class: "btn btn-primary btn-lg" %>

@@ -1,0 +1,50 @@
+.scroll_report {
+  height: 300px;
+  overflow: scroll;
+}
+
+.scroll_report_index {
+  height: 530px;
+  overflow: scroll;
+}
+
+.special_text {
+  padding-bottom: 20px;
+}
+
+.button-67 {
+  background: #f5f5fa;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: -10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17;
+  box-sizing: border-box;
+  color: $noir-950;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bold;
+  position: relative;
+  text-align: left;
+  transition: .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: pre;
+  width: 64px;
+  height: 64px;
+  text-align: center;
+}
+
+.button-67:hover {
+  background: #f8f8ff;
+  box-shadow: -15px -15px 30px 0 #fff, 15px 15px 30px 0 #1d0dca17;
+}
+
+@media (min-width: 768px) {
+  .button-67 {
+    padding: 24px;
+  }
+}
+
+.textcolor {
+  color: $noir-950;
+}
