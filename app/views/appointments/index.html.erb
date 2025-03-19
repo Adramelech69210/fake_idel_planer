@@ -1,33 +1,68 @@
+<div class="calendar-header stick" data-controller="calendar">
+  <div class="dates d-flex justify-content-center">
 
-    <div class="calendar-header stick">
-      <div class="dates">
-        <h2><%= I18n.with_locale(:fr) { l(@day, format: :long) } %></h2>
-        <div class="date-nav">
-          <%= link_to t('pagination.previous'), request.params.merge(jd: (@day - 1.day).jd), class: 'btn' %>
-          <%= link_to t('pagination.today'), request.params.merge(jd: Date.today.jd), class: 'btn' %>
-          <%= link_to t('pagination.next'), request.params.merge(jd: (@day + 1.day).jd), class: 'btn' %>
-        </div>
-      </div>
-          <div class="display-buttons">
-      <button class="button-60">
-        <%= link_to 'Journée', request.params.merge(display: "day", jd: Date.today.jd), class: "nav-link #{params[:display] == 'day' || params[:display].nil? ? 'active' : ''}" %>
-      </button>
-      <button class="button-60">
-        <%= link_to 'Semaine', request.params.merge(display: "week"), class: "nav-link #{params[:display] == 'week' ? 'active' : ''}" %>
-      </button>
-      <button class="button-60">
-        <%= link_to 'Mois', request.params.merge(display: "month"), class: "nav-link #{params[:display] == 'month' ? 'active' : ''}" %>
-      </button>
+    <div class="date-navigation">
+      <% if params[:display] == 'month' %>
+        <% prev_date = @current_month << 1 %>
+        <% next_date = @current_month >> 1 %>
+        <%= link_to '<', request.params.merge(month: prev_date.month, year: prev_date.year), class: 'nav-arrow' %>
+
+        <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
+          <%= l(@current_month, format: '%B %Y').capitalize %>
+        </a>
+
+        <%= link_to '>', request.params.merge(month: next_date.month, year: next_date.year), class: 'nav-arrow' %>
+
+      <% elsif params[:display] == 'week' %>
+        <% start_of_week = @day.beginning_of_week(:monday) %>
+        <% end_of_week = start_of_week + 6.days %>
+        <% prev_date = start_of_week - 7.days %>
+        <% next_date = start_of_week + 7.days %>
+
+        <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
+
+        <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
+          <%= "#{l(start_of_week, format: '%d')} - #{l(end_of_week, format: '%d %B')}" %>
+        </a>
+
+        <%= link_to '>', request.params.merge(jd: next_date.jd), class: 'nav-arrow' %>
+
+      <% else %>
+        <% prev_date = @day - 1.day %>
+        <% next_date = @day + 1.day %>
+
+        <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
+
+        <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
+          <%= l(@day, format: '%d %B %Y').sub(/^\d+\s+(\w+)/) { |m| m.sub($1, $1.capitalize) } %>
+        </a>
+
+        <%= link_to '>', request.params.merge(jd: next_date.jd), class: 'nav-arrow' %>
+      <% end %>
+
+      <% if params[:display] != 'month' %>
+        <a href="<%= url_for(params.permit!.merge(display: params[:display] == 'week' ? 'day' : 'week')) %>" class="view-toggle-circle">
+          <%= params[:display] == 'week' ? 'S' : 'J' %>
+        </a>
+      <% end %>
     </div>
-    </div>
+  </div>
+</div>
 
-<% case params[:display] %>
-<% when 'month' %>
-  <%= render "appointments/show_month" %>
-<% when 'week' %>
-  <%= render "appointments/show_week" %>
-<% else %>
-  <%= render "appointments/show_day" %>
-<% end %>
 
-<%= link_to '+', new_appointment_path, class: "btn rounded-circle calendar-pos" %>
+<div data-controller="calendar">
+  <% case params[:display] %>
+  <% when 'month' %>
+    <%= render "appointments/show_month" %>
+  <% when 'week' %>
+    <%= render "appointments/show_week" %>
+  <% else %>
+    <%= render "appointments/show_day" %>
+  <% end %>
+  <div class="overlay-filter" data-calendar-target="overlayFilter" data-action="click->calendar#close"></div>
+  <div class="overlay <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlay">
+    <%= render "appointments/form" %>
+  </div>
+
+  <button data-action="click->calendar#open" class="btn rounded-circle calendar-pos">+</button>
+</div>

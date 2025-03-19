@@ -17,7 +17,10 @@
             <strong class="fw-bold"><%= patient.first_name.capitalize %> <%= patient.last_name.upcase %></strong>
             <div class="text-muted small"><%= truncate(patient.address, length: 38, omission: '...') %></div>
           </div>
-          <span class="text-muted symbol fa-solid fa-chevron-right"></span>
+          <span class="text-muted symbol fa-solid fa-chevron-right ms-5"></span>
+        <% end %>
+        <%= phone_to patient.phone_number, class:"text-decoration-none patient-phone" do %>
+          <span class="text-muted symbol fa-solid fa-phone"></span>
         <% end %>
       </div>
       <% if index != @patients.length - 1 %>
