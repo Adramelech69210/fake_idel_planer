@@ -20,10 +20,10 @@
         </div>
       <% end %>
     </div>
-   <% end %>
+  <% end %>
 
 
- <div class="calendar" data-controller="time-indicator">
+<div class="calendar" data-controller="time-indicator">
   <% 14.times do |hour| %>
     <%= render "appointments/hour", hour: (hour + 6) %>
   <% end %>
