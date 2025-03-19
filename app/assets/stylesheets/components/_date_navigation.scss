@@ -8,6 +8,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+  gap: 15px; 
 }
 
 .nav-arrow {
@@ -42,58 +43,48 @@
   margin: 0 10px;
 }
 
-.active-view {
-  background-color: $blanc-50;
-  font-weight: 600;
+.calendar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: #eeee;
+  padding: 5px;
+  border-radius: 20px;
+  width: 90px;
 }
 
-.view-transition {
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 576px) {
-  .date-navigation {
-    padding: 8px;
-    width: 95%;
-    margin: 15px auto;
-  }
-
-  .current-date {
-    min-width: 140px;
-    font-size: 1rem;
-  }
-}
-
-.view-toggle-circle {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: $bleu-900;
-  color: white;
-  border: none;
+.calendar-toggle-btn {
+  flex: 1;
+  height: 40px;
+  border-radius: 12px;
+  background-color: transparent;
+  color: #2c3e50;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  font-size: 14px;
-}
-
-.view-toggle-circle:hover {
-  background-color: $bleu-950;
-  transform: scale(1.05);
   text-decoration: none;
-  color: white;
 }
 
-.view-toggle-circle:active {
-  transform: scale(0.95);
+.calendar-toggle-btn.active {
+  background-color: white;
+}
+
+.calendar-toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 576px) {
+  .calendar-toggle {
+    width: 80px;
+  }
+
+  .calendar-toggle-btn {
+    height: 36px;
+    font-size: 14px;
+  }
 }
