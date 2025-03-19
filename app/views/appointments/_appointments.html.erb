@@ -6,7 +6,7 @@
     <% if params[:display] == 'week' %>
 
     <div class="appointment_2" style="
-        top: calc(<%= ((appointment.start_time.hour - 6) * 60 + appointment.start_time.min) %>px + 9.5rem);
+        top: calc(<%= ((appointment.start_time.hour - 6) * 60 + appointment.start_time.min) %>px + 6rem);
         height: <%= (appointment.end_time - appointment.start_time).to_i / 60 %>px;
         left: <%= number_in_week(appointment.date) * 13 + 12 %>%;
         width: 48px;">
@@ -15,7 +15,7 @@
     <% else %>
 
       <div class="appointment" style="
-        top: calc(<%= ((appointment.start_time.hour - 6) * 60 + appointment.start_time.min) %>px + 9.5rem);
+        top: calc(<%= ((appointment.start_time.hour - 6) * 60 + appointment.start_time.min) %>px + 6rem);
         height: <%= (appointment.end_time - appointment.start_time).to_i / 60 %>px">
         <p class="time"><%= appointment.start_time.strftime("%H:%M") %> - <%= appointment.end_time.strftime("%H:%M") %></p>
 

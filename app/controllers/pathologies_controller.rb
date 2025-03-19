@@ -11,13 +11,12 @@ class PathologiesController < ApplicationController
     @pathology = @patient.pathologies.new
   end
 
-
   def create
     @pathology = @patient.pathologies.new(pathology_params)
     if @pathology.save
-      redirect_to patient_pathologies_path(@patient), notice: 'Pathologie créée avec succès.'
+      redirect_to patient_path(@patient), notice: 'Pathologie créée avec succès.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -29,16 +28,15 @@ class PathologiesController < ApplicationController
 
   def update
     if @pathology.update(pathology_params)
-      redirect_to patient_pathologies_path(@patient), notice: 'Pathologie mise à jour avec succès.'
+      redirect_to patient_path(@patient), notice: 'Pathologie mise à jour avec succès.'
     else
-      puts @pathology.errors.full_messages
-      render :edit
+      render :show, status: :unprocessable_entity
     end
   end
 
   def destroy
     @pathology.destroy!
-    redirect_to patient_pathologies_path(@patient), notice: 'Pathologie supprimée avec succès.'
+    redirect_to patient_path(@patient), notice: 'Pathologie supprimée avec succès.'
   end
 
   private
@@ -48,7 +46,7 @@ class PathologiesController < ApplicationController
   end
 
   def set_pathology
-    @pathology = @patient.pathologies.find(params[:id])
+    @pathology = Pathology.find(params[:id])
   end
 
   def pathology_params
