@@ -8,8 +8,8 @@
     <div class="appointment_2" style="
         top: calc(<%= ((appointment.start_time.hour - 6) * 60 + appointment.start_time.min) %>px + 6rem);
         height: <%= (appointment.end_time - appointment.start_time).to_i / 60 %>px;
-        left: <%= number_in_week(appointment.date) * 13 + 9 %>%;
-        width: 6%;">
+        left: <%= number_in_week(appointment.date) * 13 + 12 %>%;
+        width: 48px;">
       </div>
 
     <% else %>
