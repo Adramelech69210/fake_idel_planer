@@ -10,8 +10,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.association :patient,
-      include_blank: "Choix du patient", label: "Patient", input_html: { class: 'form-control' } %>
+      <%= f.association :patient, include_blank: "Choix du patient", label: "Patient", input_html: { class: 'form-control' } %>
     </div>
 
     <div class="form-group">
@@ -26,7 +25,7 @@
                 label: "Heure de début",
                 as: :string,
                 input_html: {
-                  value: @appointment.start_time.present? ? @appointment.start_time.strftime("%H:%M") : "",
+                  value: @appointment.start_time.present? ? @appointment.start_time.strftime("%H:%M") : "6:00",
                   data: { controller: "timepicker" } }
         %>
       </div>
@@ -36,8 +35,9 @@
                 label: "Heure de la fin",
                 as: :string,
                 input_html: {
-                  value: @appointment.end_time.present? ? @appointment.end_time.strftime("%H:%M") : "",
-                  data: {controller: "timepicker"} }
+                  value: @appointment.end_time.present? ? @appointment.end_time.strftime("%H:%M") : "7:00",
+                  data: { controller: "timepicker" }
+                }
         %>
       </div>
     </div>
