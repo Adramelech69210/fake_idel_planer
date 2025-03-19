@@ -1,9 +1,16 @@
-<h1>Nouvelle pathologie pour <%= @patient.last_name %> <%= @patient.first_name %></h1>
-<p>Ajouter une nouvelle pathologie pour le patient.</p>
+<div class="mb-3 p-2">
+  <%= link_to patient_path(@patient), class: "text-decoration-none" do %>
+    <i class="text-muted symbol fa-solid fa-reply"></i>
+  <% end %>
+</div>
 
-<%= simple_form_for([@patient, @pathology], url: patient_pathologies_path(@patient)) do |f| %>
-  <%= f.input :description, label: "Description de la pathologie" %>
-  <%= f.button :submit, "Créer la pathologie" %>
-<% end %>
+<div class="container">
+  <h5>Nouvelle pathologie pour <%= @patient.name %></h5>
 
-<%= link_to 'Retour au patient', patient_path(@patient) %>
+  <%= simple_form_for [@patient, @pathology] do |f| %>
+    <%= f.input :description, label: "Description de la pathologie" %>
+    <div class="text-end">
+      <%= f.button :submit, "Créer la pathologie", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

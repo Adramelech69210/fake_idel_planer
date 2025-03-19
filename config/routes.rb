@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   }
 
   resources :patients do
-    resources :notes, only: [:index, :new, :create, :destroy]
-    resources :pathologies, only: [:index, :new, :create, :destroy]
+    resources :notes, only: [:show, :new, :create, :update, :destroy]
+    resources :pathologies, only: [:show, :new, :create, :update, :destroy]
 
     member do
       post :upload_ordonnance

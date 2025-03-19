@@ -1,8 +1,0 @@
-<h1>Modifier la note</h1>
-
-<%= simple_form_for([@patient, @note], url: patient_note_path(@patient, @note), method: :patch) do |f| %>
-  <%= f.input :text, label: "Note:" %>
-  <%= f.button :submit, "Mettre à jour la note" %>
-<% end %>
-
-<%= link_to 'Retour aux notes', patient_notes_path(@patient) %>

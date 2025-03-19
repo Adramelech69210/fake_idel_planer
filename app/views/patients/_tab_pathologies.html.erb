@@ -1,7 +1,7 @@
 <div class="tab-pane" data-tabs-target="tabpane" data-tab-id="pathologies">
   <div class="section-header">
     <h5>Pathologies</h5>
-    <%= link_to patient_pathologies_path(patient), class: "action-button" do %>
+    <%= link_to new_patient_pathology_path(patient), class: "action-button" do %>
       <i class="fa-solid fa-plus"></i>
       <span>Ajouter</span>
     <% end %>
@@ -10,19 +10,21 @@
   <div class="pathology-list" data-controller="animation" data-animation-delay-value="100">
     <% if patient.pathologies.present? %>
       <% patient.pathologies.each_with_index do |pathology, index| %>
-        <div class="pathology-item" data-animation-target="item" data-index="<%= index %>">
-          <div class="pathology-icon">⚕︎</div>
-          <div class="pathology-content">
-            <div class="pathology-text"><%= pathology.description %></div>
-            <div class="pathology-meta">Ajouté le <%= pathology.created_at.strftime("%d/%m/%Y") %></div>
+        <%= link_to patient_pathology_path(patient, pathology), class: "text-decoration-none" do %>
+          <div class="pathology-item" data-animation-target="item" data-index="<%= index %>">
+            <div class="pathology-icon">⚕︎</div>
+            <div class="pathology-content">
+              <div class="pathology-text"><%= pathology.description %></div>
+              <div class="pathology-meta">Ajouté le <%= pathology.created_at.strftime("%d/%m/%Y") %></div>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     <% else %>
       <div class="empty-state" data-animation-target="item" data-index="0">
         <div class="empty-state-icon"><i class="fas fa-clipboard-list"></i></div>
         <p>Aucune pathologie n'a été enregistrée pour ce patient</p>
-        <%= link_to "Ajouter une pathologie", patient_pathologies_path(patient), class: "btn btn-primary btn-sm" %>
+        <%= link_to "Ajouter une pathologie", new_patient_pathology_path(patient), class: "btn btn-primary btn-sm" %>
       </div>
     <% end %>
   </div>
