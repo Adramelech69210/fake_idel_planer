@@ -1,6 +1,5 @@
 <div class="calendar-header stick" data-controller="calendar">
   <div class="dates d-flex justify-content-center">
-
     <div class="date-navigation">
       <% if params[:display] == 'month' %>
         <% prev_date = @current_month << 1 %>
@@ -18,7 +17,6 @@
         <% end_of_week = start_of_week + 6.days %>
         <% prev_date = start_of_week - 7.days %>
         <% next_date = start_of_week + 7.days %>
-
 
         <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
 
@@ -42,19 +40,17 @@
       <% end %>
 
       <% if params[:display] != 'month' %>
-<div class="calendar-toggle">
-  <a href="<%= url_for(params.permit!.merge(display: 'day')) %>"
-     class="calendar-toggle-btn <%= 'active' if params[:display] == 'day' %>">
-    J
-  </a>
+        <div class="calendar-toggle">
+          <a href="<%= url_for(params.permit!.merge(display: 'day')) %>"
+            class="calendar-toggle-btn <%= 'active' if params[:display] == 'day' %>">
+            J
+          </a>
 
-  <a href="<%= url_for(params.permit!.merge(display: 'week')) %>"
-     class="calendar-toggle-btn <%= 'active' if params[:display] == 'week' %>">
-    S
-  </a>
-</div>
-
-
+          <a href="<%= url_for(params.permit!.merge(display: 'week')) %>"
+            class="calendar-toggle-btn <%= 'active' if params[:display] == 'week' %>">
+            S
+          </a>
+        </div>
       <% end %>
     </div>
   </div>
