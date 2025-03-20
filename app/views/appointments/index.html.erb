@@ -1,92 +1,81 @@
-<div class="calendar-header stick" data-controller="calendar">
-  <div class="dates d-flex justify-content-center">
-    <div class="date-navigation">
-      <% if params[:display] == 'month' %>
-        <% prev_date = @current_month << 1 %>
-        <% next_date = @current_month >> 1 %>
-        <%= link_to '<', request.params.merge(month: prev_date.month, year: prev_date.year), class: 'nav-arrow' %>
+<div data-controller="calendar">
+  <div class="calendar-header stick">
+    <div class="dates d-flex justify-content-center">
+      <div class="date-navigation">
+        <% if params[:display] == 'week' %>
+          <% start_of_week = @day.beginning_of_week(:monday) %>
+          <% end_of_week = start_of_week + 6.days %>
+          <% prev_date = start_of_week - 7.days %>
+          <% next_date = start_of_week + 7.days %>
 
-        <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
-          <%= l(@current_month, format: '%B %Y').capitalize %>
-        </a>
+          <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
 
-        <%= link_to '>', request.params.merge(month: next_date.month, year: next_date.year), class: 'nav-arrow' %>
+  <div class="current-date-container">
+          <a href="#" data-action="click->calendar#openMonth" class="current-date">
+            <%= "#{l(start_of_week, format: '%d')} - #{l(end_of_week, format: '%d %B')}" %>
+          </a>
+  </div>
+          <%= link_to '>', request.params.merge(jd: next_date.jd), class: 'nav-arrow' %>
 
-      <% elsif params[:display] == 'week' %>
-        <% start_of_week = @day.beginning_of_week(:monday) %>
-        <% end_of_week = start_of_week + 6.days %>
-        <% prev_date = start_of_week - 7.days %>
-        <% next_date = start_of_week + 7.days %>
+        <% else %>
+          <% prev_date = @day - 1.day %>
+          <% next_date = @day + 1.day %>
 
-        <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
-
-<div class="current-date-container">
-        <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
-          <%= "#{l(start_of_week, format: '%d')} - #{l(end_of_week, format: '%d %B')}" %>
-        </a>
-</div>
-        <%= link_to '>', request.params.merge(jd: next_date.jd), class: 'nav-arrow' %>
-
-      <% else %>
-        <% prev_date = @day - 1.day %>
-        <% next_date = @day + 1.day %>
-
-        <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
-<div class="current-date-container">
-  <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
-    <% formatted_date = l(@day, format: '%a %d %B %Y') %>  <!-- %a donne le jour abrégé -->
-    <% day_name, rest = formatted_date.split(' ', 2) %>
-    <% month_parts = rest.split(' ') %>
-    <% month_parts[1] = month_parts[1].capitalize if month_parts[1] %>
-    <%= day_name.capitalize + ' ' + month_parts.join(' ') %>
-  </a>
-</div>
+          <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
+  <div class="current-date-container">
+    <a href="#" data-action="click->calendar#openMonth" class="current-date">
+      <% formatted_date = l(@day, format: '%a %d %B %Y') %>  <!-- %a donne le jour abrégé -->
+      <% day_name, rest = formatted_date.split(' ', 2) %>
+      <% month_parts = rest.split(' ') %>
+      <% month_parts[1] = month_parts[1].capitalize if month_parts[1] %>
+      <%= day_name.capitalize + ' ' + month_parts.join(' ') %>
+    </a>
+  </div>
 
 
-        <%= link_to '>', request.params.merge(jd: next_date.jd), class: 'nav-arrow' %>
-      <% end %>
+          <%= link_to '>', request.params.merge(jd: next_date.jd), class: 'nav-arrow' %>
+        <% end %>
 
-      <% if params[:display] != 'month' %>
-      <div class="calendar-toggle">
-  <a href="<%= url_for(params.permit!.merge(display: 'day')) %>"
-    class="calendar-toggle-btn <%= 'active' if params[:display].nil? || params[:display] == 'day' %>">
-    J
-  </a>
+        <div class="calendar-toggle">
+    <a href="<%= url_for(params.permit!.merge(display: 'day')) %>"
+      class="calendar-toggle-btn <%= 'active' if params[:display].nil? || params[:display] == 'day' %>">
+      J
+    </a>
 
-  <a href="<%= url_for(params.permit!.merge(display: 'week')) %>"
-    class="calendar-toggle-btn <%= 'active' if params[:display] == 'week' %>">
-    S
-  </a>
-</div>
-      <% end %>
+    <a href="<%= url_for(params.permit!.merge(display: 'week')) %>"
+      class="calendar-toggle-btn <%= 'active' if params[:display] == 'week' %>">
+      S
+    </a>
+  </div>
+      </div>
     </div>
   </div>
-</div>
 
-<% if params[:display] != 'week' &&
-      (current_page?('/') ||
-       current_page?('/appointments') ||
-       params[:display] == 'day' ||
-       params[:jd].present?) %>
-<div class="appointment-counter">
-  <% appointment_count = Appointment.where(user: current_user, date: @day.all_day).count %>
-  <span class="count-number"><%= appointment_count %></span>
-  rendez-vous <%= appointment_count > 0 ? "prévus" : "prévu" %> aujourd'hui
-</div>
-<% end %>
-
-<div data-controller="calendar">
-    <div class="overlay-filter <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlayFilter" data-action="click->calendar#close"></div>
-<div class="overlay <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlay">
-    <%= render "appointments/form" %>
+  <% if params[:display] != 'week' &&
+        (current_page?('/') ||
+        current_page?('/appointments') ||
+        params[:display] == 'day' ||
+        params[:jd].present?) %>
+  <div class="appointment-counter">
+    <% appointment_count = Appointment.where(user: current_user, date: @day.all_day).count %>
+    <span class="count-number"><%= appointment_count %></span>
+    rendez-vous <%= appointment_count > 0 ? "prévus" : "prévu" %> aujourd'hui
   </div>
-  <button data-action="click->calendar#open" class="btn rounded-circle calendar-pos">+</button>
-  <% case params[:display] %>
-  <% when 'month' %>
-    <%= render "appointments/show_month" %>
-  <% when 'week' %>
-    <%= render "appointments/show_week" %>
-  <% else %>
-    <%= render "appointments/show_day" %>
   <% end %>
+
+  <div>
+    <div class="overlay-filter <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlayFilter" data-action="click->calendar#close"></div>
+    <div class="overlay <%= 'active' if @appointment.errors.any? %>" data-calendar-target="appointment">
+      <%= render "appointments/form" %>
+    </div>
+    <%= render "appointments/show_month" %>
+    <button data-action="click->calendar#openAppointment" class="btn rounded-circle calendar-pos">+</button>
+    <% case params[:display] %>
+    <% when 'week' %>
+      <%= render "appointments/show_week" %>
+    <% else %>
+      <%= render "appointments/show_day" %>
+    <% end %>
+  </div>
+
 </div>
