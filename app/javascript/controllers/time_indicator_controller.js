@@ -4,9 +4,10 @@ export default class extends Controller {
   static targets = ["line"]
 
   connect() {
-    this.updateTimeIndicator()
-    this.interval = setInterval(() => this.updateTimeIndicator(), 60000)
-    console.log("coucou")
+    if (this.hasLineTarget) {
+      this.updateTimeIndicator()
+      this.interval = setInterval(() => this.updateTimeIndicator(), 60000)
+    }
   }
 
   disconnect() {
@@ -14,6 +15,7 @@ export default class extends Controller {
   }
 
   updateTimeIndicator() {
+    if (!this.hasLineTarget) return
     const now = new Date()
     const hours = now.getHours()
     const minutes = now.getMinutes()
