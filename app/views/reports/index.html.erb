@@ -1,7 +1,8 @@
 <div class="container-patient bg-white">
-  <h1 class="text-center pt-3">Relèves</h1>
+  <h1 class="text-center pt-3 background_color_report">Relèves</h1>
   <a href="<%= new_report_path %>" class="btn rounded-circle calendar-pos">+</a>
 
+<div class="pt-5">
   <% names = ["Bruno Gavrel", "Yanis Dahmane"] %>
   <% @reports.each_with_index do |report, index| %>
     <div class="patient-card">
@@ -17,4 +18,5 @@
       <hr class="patient-separator">
     <% end %>
   <% end %>
+</div>
 </div>
