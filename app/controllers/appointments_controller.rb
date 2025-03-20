@@ -4,6 +4,7 @@ class AppointmentsController < ApplicationController
 
   def index
     @appointment = Appointment.new
+
   end
 
   def show
@@ -22,7 +23,8 @@ class AppointmentsController < ApplicationController
     @appointment.user = current_user
 
     if @appointment.save
-      redirect_to appointments_path, notice: "Rendez-vous créé !"
+      jd = @appointment.date.to_datetime.jd
+      redirect_to appointments_path(jd: jd, display: 'day'), notice: "Rendez-vous créé !"
     else
       render :index, status: :unprocessable_entity
     end
@@ -33,7 +35,8 @@ class AppointmentsController < ApplicationController
     @patient = @appointment.patient
 
     if @appointment.update(appointment_params)
-      redirect_to appointment_path(@appointment), notice: "Modification réussie !"
+      jd = @appointment.date.to_datetime.jd
+      redirect_to appointments_path(jd: jd, display: 'day'), notice: "Modification réussie !"
     else
       render :show, status: :unprocessable_entity
     end
