@@ -8,7 +8,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
-  gap: 15px;
+  gap: 0px;
 }
 
 .nav-arrow {
@@ -41,7 +41,15 @@
   text-align: center;
   position: relative;
   margin: 0 10px;
+  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  display: inline-block; /* Garde l'élément en bloc sur une ligne */
 }
+
+.current-date-container {
+  width: 230px; /* Largeur fixe à ajuster selon tes besoins */
+  text-align: center;
+}
+
 
 .calendar-toggle {
   display: flex;

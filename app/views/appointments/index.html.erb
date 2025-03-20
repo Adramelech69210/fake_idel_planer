@@ -20,10 +20,11 @@
 
         <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
 
+<div class="current-date-container">
         <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
           <%= "#{l(start_of_week, format: '%d')} - #{l(end_of_week, format: '%d %B')}" %>
         </a>
-
+</div>
         <%= link_to '>', request.params.merge(jd: next_date.jd), class: 'nav-arrow' %>
 
       <% else %>
@@ -31,10 +32,16 @@
         <% next_date = @day + 1.day %>
 
         <%= link_to '<', request.params.merge(jd: prev_date.jd), class: 'nav-arrow' %>
+<div class="current-date-container">
+  <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
+    <% formatted_date = l(@day, format: '%a %d %B %Y') %>  <!-- %a donne le jour abrégé -->
+    <% day_name, rest = formatted_date.split(' ', 2) %>
+    <% month_parts = rest.split(' ') %>
+    <% month_parts[1] = month_parts[1].capitalize if month_parts[1] %>
+    <%= day_name.capitalize + ' ' + month_parts.join(' ') %>
+  </a>
+</div>
 
-        <a href="#" data-action="click->calendar#toggleMonthView" class="current-date">
-          <%= l(@day, format: '%d %B %Y').sub(/^\d+\s+(\w+)/) { |m| m.sub($1, $1.capitalize) } %>
-        </a>
 
         <%= link_to '>', request.params.merge(jd: next_date.jd), class: 'nav-arrow' %>
       <% end %>
@@ -69,6 +76,11 @@
 <% end %>
 
 <div data-controller="calendar">
+    <div class="overlay-filter <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlayFilter" data-action="click->calendar#close"></div>
+<div class="overlay <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlay">
+    <%= render "appointments/form" %>
+  </div>
+  <button data-action="click->calendar#open" class="btn rounded-circle calendar-pos">+</button>
   <% case params[:display] %>
   <% when 'month' %>
     <%= render "appointments/show_month" %>
@@ -77,10 +89,4 @@
   <% else %>
     <%= render "appointments/show_day" %>
   <% end %>
-  <div class="overlay-filter <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlayFilter" data-action="click->calendar#close"></div>
-  <div class="overlay <%= 'active' if @appointment.errors.any? %>" data-calendar-target="overlay">
-    <%= render "appointments/form" %>
-  </div>
-
-  <button data-action="click->calendar#open" class="btn rounded-circle calendar-pos">+</button>
 </div>

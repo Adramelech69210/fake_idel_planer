@@ -16,9 +16,12 @@ export default class extends Controller {
   }
 
   open() {
+    console.log("Opening overlay");
+    console.log(this.overlayTarget);
     this.overlayTarget.classList.add("active");
     this.overlayFilterTarget.classList.add("active");
   }
+
 
   close() {
     this.overlayTarget.classList.remove("active");
