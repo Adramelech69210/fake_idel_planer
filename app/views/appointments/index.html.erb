@@ -56,6 +56,18 @@
   </div>
 </div>
 
+<% if params[:display] != 'week' &&
+      (current_page?('/') ||
+       current_page?('/appointments') ||
+       params[:display] == 'day' ||
+       params[:jd].present?) %>
+<div class="appointment-counter">
+  <% appointment_count = Appointment.where(user: current_user, date: @day.all_day).count %>
+  <span class="count-number"><%= appointment_count %></span>
+  rendez-vous <%= appointment_count > 0 ? "prévus" : "prévu" %> aujourd'hui
+</div>
+<% end %>
+
 <div data-controller="calendar">
   <% case params[:display] %>
   <% when 'month' %>
