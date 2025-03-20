@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["overlay", "overlayFilter"]
+  static targets = ["appointment", "month", "overlayFilter"]
   static values = {
     previousView: { type: String, default: "day" }
   }
@@ -10,45 +10,29 @@ export default class extends Controller {
     console.log("Calendar controller connected");
     const params = new URLSearchParams(window.location.search);
     const currentView = params.get('display');
-    if (currentView && currentView !== 'month') {
+    if (currentView) {
       this.previousViewValue = currentView;
     }
   }
 
-  open() {
-    console.log("Opening overlay");
-    console.log(this.overlayTarget);
-    this.overlayTarget.classList.add("active");
+  openAppointment() {
+    this.appointmentTarget.classList.add("active");
+    this.overlayFilterTarget.classList.add("active");
+  }
+
+  openMonth() {
+    this.monthTarget.classList.add("active");
     this.overlayFilterTarget.classList.add("active");
   }
 
 
   close() {
-    this.overlayTarget.classList.remove("active");
+    this.appointmentTarget.classList.remove("active");
+    this.monthTarget.classList.remove("active");
     this.overlayFilterTarget.classList.add("hidden");
 
     setTimeout(() => {
       this.overlayFilterTarget.classList.remove("active", "hidden");
     }, 200);
-  }
-
-  toggleMonthView(event) {
-    event.preventDefault();
-    const params = new URLSearchParams(window.location.search);
-    const currentDisplay = params.get('display') || 'day';
-
-    if (currentDisplay === 'month') {
-      params.set('display', this.previousViewValue);
-    } else {
-      this.previousViewValue = currentDisplay;
-      params.set('display', 'month');
-    }
-
-    if (params.has('jd')) {
-      const jd = params.get('jd');
-      params.set('jd', jd);
-    }
-
-    window.location.href = window.location.pathname + '?' + params.toString();
   }
 }

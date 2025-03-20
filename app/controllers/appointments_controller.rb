@@ -4,7 +4,10 @@ class AppointmentsController < ApplicationController
 
   def index
     @appointment = Appointment.new
-
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def show
@@ -51,12 +54,11 @@ class AppointmentsController < ApplicationController
 
   def set_params
     @day = params[:jd].present? ? Date.jd(params[:jd].to_i) : Date.today
+    year = (params[:year].to_i if params[:year].to_i.positive?) || Date.today.year
+    month = (params[:month].to_i if (1..12).include?(params[:month].to_i)) || Date.today.month
+    @current_month = Date.new(year, month, 1)
 
     case params[:display]
-    when 'month'
-      year = (params[:year].to_i if params[:year].to_i.positive?) || Date.today.year
-      month = (params[:month].to_i if (1..12).include?(params[:month].to_i)) || Date.today.month
-      @current_month = Date.new(year, month, 1)
     when 'week'
       @days = @day.beginning_of_week(:monday)..@day.end_of_week(:monday)
       @appointments = Appointment.where(user: current_user, date: @days)
@@ -66,7 +68,12 @@ class AppointmentsController < ApplicationController
   end
 
   def set_appointment
-    @appointment = Appointment.find(params[:id])
+    if Appointment.exists?(params[:id])
+      @appointment = Appointment.find params[:id]
+    else
+      redirect_to appointments_path
+      return
+    end
   end
 
   def appointment_params

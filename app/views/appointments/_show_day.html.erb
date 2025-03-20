@@ -1,3 +1,6 @@
 
-
+<div class="appointment-counter">
+  <span class="count-number"><%= @appointments.count %></span>
+  rendez-vous <%= @appointments.count > 1 ? "prévus" : "prévu" %> aujourd'hui
+</div>
 <%= render "appointments/calendar" %>
