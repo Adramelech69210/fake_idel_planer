@@ -17,15 +17,15 @@
     </div>
 
     <div class="mb-3">
-        <h2>Contenu du rapport</h2>
+        <h2 class="text">Contenu du rapport</h2>
         <%= f.hidden_field :text, data: { report_target: "input" } %>
         <div class="scroll_report">
-          <p data-report-target="text"></p>
+          <p data-report-target="text">Veuillez générer le rapport</p>
         </div>
     </div>
 
 
-    <div class="text-center">
+    <div class="text-center d-none" data-report-target='save'>
       <%= f.submit "Sauvegarder le rapport", class: "btn btn-primary btn-lg" %>
     </div>
   </div>
