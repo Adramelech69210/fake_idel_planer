@@ -4,12 +4,17 @@
   left: 20px;
 }
 
-.appointment {
+.appointment-container {
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.appointment {
+  width: calc(100% - 5px);
   z-index: 10;
-  right: 10px;
-  width: calc(100% - 95px);
-  //margin-left: 80px;
+  height: 100%;
   padding: 10px;
   border-radius: 8px;
   background-color: rgba(75, 108, 183, 0.1);
@@ -42,19 +47,4 @@
       font-size: 0.75rem;
     }
   }
-}
-
-.appointment_2 {
-  position: absolute;
-  z-index: 10;
-  right: 10px;
-  // margin-left: 24px;
-  width: calc(100% - 95px);
-  //margin-left: 80px;
-  border-radius: 8px;
-  background-color: rgba(75, 108, 183, 0.1);
-  border-left: 4px solid $bleu-400;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
-  overflow: hidden;
 }
