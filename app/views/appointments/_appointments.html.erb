@@ -20,7 +20,7 @@
         <p class="time"><%= appointment.start_time.strftime("%H:%M") %> - <%= appointment.end_time.strftime("%H:%M") %></p>
 
         <div class="d-flex justify-items-center align-items-center">
-          <p><strong><%= appointment.patient.first_name %> <%= appointment.patient.last_name.first %> | </strong><%= appointment.reason %></p>
+          <p><strong><%= appointment.patient.first_name %> <%= appointment.patient.last_name.first %>. | </strong><%= appointment.reason %></p>
         </div>
       </div>
     <% end %>
