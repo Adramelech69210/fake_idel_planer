@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["startDate", "endDate", "text", "input"];
+  static targets = ["startDate", "endDate", "text", "input", "save"];
 
   generateReport() {
     const startDate = this.startDateTarget.value;
@@ -19,5 +19,7 @@ export default class extends Controller {
         this.inputTarget.value = data.text;
       })
       .catch(error => console.error("Erreur:", error));
+
+      this.saveTarget.classList.remove("d-none");
   }
 }
