@@ -142,16 +142,15 @@ available_hours = [
   { start: [7, 40], end: [8, 30] },
   { start: [8, 40], end: [9, 30] },
   { start: [9, 45], end: [10, 45] },
-  { start: [10, 0], end: [11, 0] },
-  { start: [11, 10], end: [12, 0] },
-  { start: [12, 30], end: [13, 40] },
-  { start: [13, 0], end: [14, 10] },
-  { start: [14, 20], end: [15, 30] },
-  { start: [15, 45], end: [16, 45] },
+  { start: [11, 0], end: [12, 0] },
+  { start: [12, 10], end: [13, 0] },
+  { start: [13, 30], end: [14, 40] },
+  { start: [15, 0], end: [15, 50] },
   { start: [16, 0], end: [17, 0] },
-  { start: [17, 20], end: [18, 30] },
-  { start: [18, 45], end: [19, 45] },
-  { start: [19, 0], end: [20, 0] }
+  { start: [17, 10], end: [18, 0] },
+  { start: [18, 10], end: [19, 0] },
+  { start: [19, 10], end: [20, 0] },
+
 ]
 (start_date..end_date).each do |appointment_date|
 
