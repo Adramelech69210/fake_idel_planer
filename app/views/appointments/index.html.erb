@@ -40,17 +40,17 @@
       <% end %>
 
       <% if params[:display] != 'month' %>
-        <div class="calendar-toggle">
-          <a href="<%= url_for(params.permit!.merge(display: 'day')) %>"
-            class="calendar-toggle-btn <%= 'active' if params[:display] == 'day' %>">
-            J
-          </a>
+      <div class="calendar-toggle">
+  <a href="<%= url_for(params.permit!.merge(display: 'day')) %>"
+    class="calendar-toggle-btn <%= 'active' if params[:display].nil? || params[:display] == 'day' %>">
+    J
+  </a>
 
-          <a href="<%= url_for(params.permit!.merge(display: 'week')) %>"
-            class="calendar-toggle-btn <%= 'active' if params[:display] == 'week' %>">
-            S
-          </a>
-        </div>
+  <a href="<%= url_for(params.permit!.merge(display: 'week')) %>"
+    class="calendar-toggle-btn <%= 'active' if params[:display] == 'week' %>">
+    S
+  </a>
+</div>
       <% end %>
     </div>
   </div>

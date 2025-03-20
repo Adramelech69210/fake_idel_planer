@@ -1,31 +1,39 @@
-<div class="calendar">
-  <% if params[:display] == 'week' %>
-    <div class="week-dates">
-      <div class="empty-cell"></div>
-      <% 7.times do |i| %>
-        <div class="date-cell <%= 'today' if Date.today == Date.today.beginning_of_week + i.days %>">
-            <%= Appointment::DAY_NAMES[i] %>
-        </div>
-      <% end %>
-    </div>
-    <div class="week-grid">
-      <div class="empty-cell"></div>
-      <% 7.times do |i| %>
-        <div class="day-cell <%= 'today' if Date.today.wday == (i + 1) % 7 %>">
-          <div class="day-circle">
-          <% current_date = Date.today.beginning_of_week + i.days %>
-          <%= current_date.day %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-
   <div class="today-button">
     <%= link_to appointments_path(date: Date.today), class: 'color_button' do %>
       <i class="fa-solid fa-calendar-day"></i>
     <% end %>
   </div>
+
+<div class="calendar">
+  <% if params[:display] == 'week' %>
+    <% start_of_week = @day.beginning_of_week(:monday) %>
+
+    <div class="week-dates">
+      <div class="empty-cell"></div>
+      <% 7.times do |i| %>
+        <% current_day = start_of_week + i.days %>
+        <div class="date-cell <%= 'today' if Date.today == current_day %>">
+          <%= Appointment::DAY_NAMES[i] %>
+        </div>
+      <% end %>
+    </div>
+
+<div class="week-grid">
+  <div class="empty-cell"></div>
+    <% 7.times do |i| %>
+      <% current_day = start_of_week + i.days %>
+      <div class="day-cell <%= 'today' if Date.today == current_day %>">
+        <%= link_to appointments_path(jd: current_day.jd, display: 'day'), class: "day-link" do %>
+          <div class="day-circle">
+            <%= current_day.day %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+</div>
+
+  <% end %>
+</div>
 
   <div class="calendar" data-controller="time-indicator">
     <% 14.times do |hour| %>
