@@ -1,26 +1,30 @@
-  <div class="calendar">
+<div class="calendar">
   <% if params[:display] == 'week' %>
+    <% start_of_week = @day.beginning_of_week(:monday) %>
+
     <div class="week-dates">
       <div class="empty-cell"></div>
       <% 7.times do |i| %>
-        <div class="date-cell <%= 'today' if Date.today == Date.today.beginning_of_week + i.days %>">
-            <%= Appointment::DAY_NAMES[i] %>
+        <% current_day = start_of_week + i.days %>
+        <div class="date-cell <%= 'today' if Date.today == current_day %>">
+          <%= Appointment::DAY_NAMES[i] %>
         </div>
       <% end %>
     </div>
+
     <div class="week-grid">
       <div class="empty-cell"></div>
       <% 7.times do |i| %>
-        <div class="day-cell <%= 'today' if Date.today.wday == (i + 1) % 7 %>">
+        <% current_day = start_of_week + i.days %>
+        <div class="day-cell <%= 'today' if Date.today == current_day %>">
           <div class="day-circle">
-          <% current_date = Date.today.beginning_of_week + i.days %>
-          <%= current_date.day %>
+            <%= current_day.day %>
           </div>
         </div>
       <% end %>
     </div>
   <% end %>
-
+</div>
 
 <div class="calendar" data-controller="time-indicator">
   <% 14.times do |hour| %>
