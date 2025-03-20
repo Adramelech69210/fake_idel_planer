@@ -10,17 +10,18 @@
     <% if appointments.any? %>
       <div class="appointments-timeline" data-controller="animation" data-animation-delay-value="50">
         <% appointments.each_with_index do |appointment, index| %>
-          <div class="appointment-card <%= past ? 'past' : '' %>" data-animation-target="item" data-index="<%= index %>">
-            <div class="appointment-date <%= past ? 'past' : '' %>">
-              <div class="date-day"><%= appointment.date.strftime("%d") %></div>
-              <div class="date-month"><%= appointment.date.strftime("%b") %></div>
+          <%= link_to appointment_path(appointment), class: "text-decoration-none" do %>
+            <div class="appointment-card <%= past ? 'past' : '' %>" data-animation-target="item" data-index="<%= index %>">
+              <div class="appointment-date <%= past ? 'past' : '' %>">
+                <div class="date-day"><%= appointment.date.strftime("%d") %></div>
+                <div class="date-month"><%= appointment.date.strftime("%b") %></div>
+              </div>
+              <div class="appointment-details">
+                <div class="appointment-time"><%= appointment.start_time.strftime("%H:%M") %>-<%= appointment.end_time.strftime("%H:%M") %> </div>
+                <div class="appointment-reason"><%= appointment.reason %></div>
+              </div>
             </div>
-            <div class="appointment-details">
-              <div class="appointment-time"><%= appointment.start_time.strftime("%H:%M") %>-<%= appointment.end_time.strftime("%H:%M") %> </div>
-              <div class="appointment-reason"><%= appointment.reason %></div>
-              <%= link_to "Détails", appointment_path(appointment), class: "appointment-link" %>
-            </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
     <% else %>
