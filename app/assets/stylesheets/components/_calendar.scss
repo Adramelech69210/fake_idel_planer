@@ -76,23 +76,6 @@
   padding-bottom: 5px;
 }
 
-/* Ajout pour les rendez-vous */
-
-.appointment-wrapper {
-  padding-left: 5px; /* Ajoute 2 pixels de padding autour de chaque rendez-vous */
-}
-
-.appointment {
-  background-color: white; /* Assurez-vous que les rendez-vous ont un fond visible */
-  border-radius: 5px; /* Pour un aspect arrondi */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère pour la séparation */
-  position: absolute; /* Important pour le positionnement des rendez-vous */
-  /* Les styles top, height, left, et width sont déjà définis dans le code ERB */
-}
-
-
-// fin ajout bruno
-
 .display-buttons {
   display: flex;
   align-items: center;

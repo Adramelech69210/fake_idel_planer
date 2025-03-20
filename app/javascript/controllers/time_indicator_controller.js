@@ -19,7 +19,7 @@ export default class extends Controller {
     const minutes = now.getMinutes()
 
     if (hours >= 6 && hours < 20) {
-      const minutesSince6h = (hours - 6) * 60 + minutes
+      const minutesSince6h = (hours - 6) * 60 + minutes - 58
       this.lineTarget.style.top = `calc(${minutesSince6h}px + 9.5rem)`
       this.lineTarget.style.display = "block"
     } else {
