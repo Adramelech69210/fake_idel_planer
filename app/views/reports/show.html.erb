@@ -1,5 +1,5 @@
 <div class="card shadow-sm border-0 report-card">
-  <div class="card-body">
+  <div class="card-body height_cb">
     <%= turbo_frame_tag dom_id(@report, :text) do %>
       <% if params[:editing] == "true" %>
         <%= form_with(model: @report, url: report_path(@report), method: :patch, local: false) do |f| %>
