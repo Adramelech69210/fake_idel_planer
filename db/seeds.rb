@@ -1,3 +1,5 @@
+require 'faker'
+
 puts "cleaning database"
 
 Appointment.destroy_all
@@ -216,7 +218,8 @@ Patient.all.each do |patient|
   rand(1..3).times do
     Pathology.create!(
       patient: patient,
-      description: pathologies_list.sample
+      description: pathologies_list.sample,
+      created_at: Faker::Time.between(from: 1.year.ago, to: Time.now)
     )
   end
 end
@@ -266,7 +269,8 @@ Patient.all.each do |patient|
   rand(2..5).times do
     Note.create!(
       patient: patient,
-      text: notes_content.sample
+      text: notes_content.sample,
+      created_at: Faker::Time.between(from: 1.year.ago, to: Time.now)
     )
   end
 end
