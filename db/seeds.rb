@@ -138,17 +138,19 @@ start_date = Date.new(2025, 3, 10)
 end_date = Date.new(2025, 4, 27)
 
 available_hours = [
-  { start: [7, 30], end: [8, 30] },
+  { start: [6, 30], end: [7, 30] },
+  { start: [7, 40], end: [8, 30] },
   { start: [8, 40], end: [9, 30] },
-  { start: [9, 40], end: [10, 30] },
-  { start: [10, 45], end: [11, 45] },
-  { start: [12, 0], end: [13, 0] },
-  { start: [13, 10], end: [14, 0] },
-  { start: [14, 30], end: [15, 40] },
-  { start: [16, 0], end: [17, 10] },
-  { start: [17, 20], end: [18, 30] },
-  { start: [18, 45], end: [19, 45] },
-  { start: [20, 0], end: [21, 0] }
+  { start: [9, 45], end: [10, 45] },
+  { start: [11, 0], end: [12, 0] },
+  { start: [12, 10], end: [13, 0] },
+  { start: [13, 30], end: [14, 40] },
+  { start: [15, 0], end: [15, 50] },
+  { start: [16, 0], end: [17, 0] },
+  { start: [17, 10], end: [18, 0] },
+  { start: [18, 10], end: [19, 0] },
+  { start: [19, 10], end: [20, 0] },
+
 ]
 (start_date..end_date).each do |appointment_date|
 
