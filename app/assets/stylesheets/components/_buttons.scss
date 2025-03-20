@@ -115,3 +115,32 @@
   font-weight: bold;
   font-size: large;
 }
+
+
+.today-button {
+  border-radius: 50% !important;
+  background-color: $bleu-900;
+  padding: 0;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  box-shadow: rgba(0, 0, 0, .1) 0 -1px 7px; /* Ombre légère */
+
+  position: fixed;
+  top: 115px;
+  left: 4%;
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+}
+
+.color_button {
+ color: $blanc-50;
+display: flex;
+justify-content: center;
+align-items: center;
+}

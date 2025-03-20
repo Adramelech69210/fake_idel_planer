@@ -1,3 +1,9 @@
+  <div class="today-button">
+    <%= link_to appointments_path(date: Date.today), class: 'color_button' do %>
+      <i class="fa-solid fa-calendar-day"></i>
+    <% end %>
+  </div>
+
 <div class="calendar">
   <% if params[:display] == 'week' %>
     <% start_of_week = @day.beginning_of_week(:monday) %>
@@ -29,14 +35,15 @@
   <% end %>
 </div>
 
-<div class="calendar" data-controller="time-indicator">
-  <% 14.times do |hour| %>
-    <%= render "appointments/hour", hour: (hour + 6) %>
-  <% end %>
+  <div class="calendar" data-controller="time-indicator">
+    <% 14.times do |hour| %>
+      <%= render "appointments/hour", hour: (hour + 6) %>
+    <% end %>
 
-  <%= render "appointments/appointments" %>
+    <%= render "appointments/appointments" %>
 
-<% if params[:display] != 'week' && is_today?(@day) %>
-  <div data-time-indicator-target="line" class="current-time-indicator"></div>
-<% end %>
+    <% if params[:display] != 'week' && is_today?(@day) %>
+      <div data-time-indicator-target="line" class="current-time-indicator"></div>
+    <% end %>
+  </div>
 </div>
