@@ -6,8 +6,6 @@
   padding-top: 6rem;
 }
 
-/* ajout bruno */
-
 .week-dates {
   display: grid;
   grid-template-columns: 12% repeat(7, 1fr);
@@ -51,8 +49,8 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 1px solid #154865;
-  color: #154865;
+  border: 1px solid $bleu-900;
+  color: $bleu-900;
   font-size: 0.8em;
 }
 
@@ -68,6 +66,7 @@
   align-items: end;
   text-align: center;
 }
+
 
 .week-grid .day-cell {
   display: flex;
