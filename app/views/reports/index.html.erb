@@ -1,10 +1,12 @@
 <div class="container-patient bg-white">
+  <h1 class="text-center pt-4">Relèves</h1>
     <a href="<%= new_report_path %>" class="btn rounded-circle calendar-pos">+</a>
     <% @reports.each_with_index do |report, index| %>
       <div class="patient-card">
         <%= link_to report_path(report), class: "patient-link d-flex justify-content-between align-items-center text-decoration-none" do %>
           <div class="patient-info">
-            <strong class="fw-bold">Du <%= report.start_date.strftime('%d/%m/%Y') %> au <%= report.end_date.strftime('%d/%m/%Y') %></strong>
+            <strong class="fw-bold"><%= report.start_date.strftime('%d/%m/%Y') %> au <%= report.end_date.strftime('%d/%m/%Y') %></strong>
+            <p class="text-muted">Bruno Gavrel</p>
           </div>
           <span class="text-muted symbol fa-solid fa-chevron-right"></span>
         <% end %>

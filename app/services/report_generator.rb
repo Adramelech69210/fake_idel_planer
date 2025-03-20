@@ -34,8 +34,9 @@ class ReportGenerator
       <p>#{appointment.reason || 'Non spécifiée'}</p>
       <strong>Résumé</strong>
       <p>#{appointment.summary || 'Non spécifiée'}</p>
-      <p> --------------------------------------------</p>
+      <div class="line-continuous"></div>
       </div>
+      
     TEXT
   end
 end
