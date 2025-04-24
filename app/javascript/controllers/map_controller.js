@@ -9,7 +9,7 @@ export default class extends Controller {
     mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: 'mapbox://styles/acetonemapbox/cm7x93w99016u01sb6a5q9c5u',
+      style: 'mapbox://styles/brunogavrel/cm9v42nrp002y01s92lqka4ld',
       center: [this.markerValue.lng, this.markerValue.lat],
       zoom: 14
     })
